@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/ALLScene/Title.unity
+    guid: 3c100f6f8bc108042910535aee83679f
+  - enabled: 1
+    path: Assets/ALLScene/TitleSelect.unity
+    guid: 8e487cf8539c59e4d82e67b7594ddc59
+  - enabled: 1
+    path: Assets/ALLScene/StageSelect.unity
+    guid: 54d5e6ece7bbd6c40aafbb2cdc9eb81e
+  - enabled: 1
+    path: Assets/ALLScene/Stage1.unity
+    guid: e6c9b315c2688ea40a41ff7b5f3c1511
+  - enabled: 1
+    path: Assets/ALLScene/Stage2.unity
+    guid: 759593c89f0d0dd47a73d3d68cf5bffa
+  - enabled: 1
+    path: Assets/ALLScene/Stage3.unity
+    guid: 19644c425099e4e4a98a030bd3ae1ed0
+  - enabled: 1
+    path: Assets/ALLScene/GameRule.unity
+    guid: b4630df5e793e07489196be40de5fddc
+  - enabled: 1
+    path: Assets/ALLScene/GameCredit.unity
+    guid: 891250b2bc733084cb65c287168b045c
+  - enabled: 1
+    path: Assets/ALLScene/Result.unity
+    guid: e388c58cf560c7740abc13f963480b40
+  m_configObjects: {}
