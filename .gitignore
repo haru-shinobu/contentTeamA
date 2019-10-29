@@ -1,0 +1,59 @@
+＃この.gitignoreファイルは、Unityプロジェクトディレクトリのルートに配置する必要があります
+＃
+＃ https://github.com/github/gitignore/blob/master/Unity.gitignoreから最新の情報を取得します
+＃
+/ [ Ll ] ibrary /
+/ [ Tt ] emp /
+/ [ Oo ] bj /
+/ [ Bb ] uild /
+/ [ Bb ] uilds /
+/ [ Ll ] ogs /
+/ [ Mm ] emoryCaptures /
+
+＃アセットメタデータを無視しない
+！/ [ Aa ] ssets / ** / * .meta
+
+＃アセットストアツールプラグインを無視する場合は、この行のコメントを解除します
+＃ / [Aa] ssets / AssetStoreTools *
+
+＃自動生成されたJetbrains Riderプラグイン
+[ Aa ] ssets / プラグイン / エディター / JetBrains *
+
+＃ Visual Studioのキャッシュディレクトリ
+.vs /
+
+＃ Gradleのキャッシュディレクトリ
+.gradle /
+
+＃自動生成されたVS / MD / Consuloソリューションおよびプロジェクトファイル
+ExportedObj /
+.consulo /
+* .csproj
+* .unityproj
+* .sln
+* .suo
+* .tmp
+* .user
+* .userprefs
+* .pidb
+* .booproj
+* .svd
+* .pdb
+* .mdb
+* .opendb
+* .VC.db
+
+＃ Unity3Dが生成したメタファイル
+* .pidb.meta
+* .pdb.meta
+* .mdb.meta
+
+＃クラッシュレポートでUnity3Dが生成したファイル
+sysinfo.txt
+
+＃ビルド
+* .apk
+* .unitypackage
+
+＃ Crashlyticsは、ファイルを生成しました
+crashlytics-build.properties
