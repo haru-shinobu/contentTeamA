@@ -10,6 +10,9 @@ using UnityEngine.Rendering;
 
 public class GameStageSetting : MonoBehaviour
 {
+    //リセット能力及び画面外用
+    static public bool ResetFlag = false;
+    public bool ResetStatus;
     //プレイヤーの能力変更メニュー開くために必要な時間。０以上であること
     public float PlayerAbilityChengeMenuTime;
     //破壊能力及びリセット能力ペナルティー数。（秒）
@@ -26,10 +29,16 @@ public class GameStageSetting : MonoBehaviour
     public int Stage3TimeLimit;
     //ストームエリア加速度設定
     public float StormForce; //100で移動力と拮抗
+    //各種エフェクト
+    public GameObject Explotion;
+    public GameObject Warpload;
+    public GameObject Warpgeat;
 
     public static int ReLoadPlayerPos;
     void Start()
     {
+        ResetStatus = ResetFlag;
+        ResetFlag = false;
         //Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
         RenderSetting_Gradient();//環境光設定
         Ability();//能力設定
@@ -52,6 +61,10 @@ public class GameStageSetting : MonoBehaviour
     {
         transform.gameObject.GetComponent<RayAbility>().BreakAbilityPenaltyTime = BreakAbilityPenalty;
         transform.gameObject.GetComponent<RayAbility>().ResetAbilityPenaltyTime = ResetAbilityPenalty;
+        gameObject.GetComponent<RayAbility>().exploision = Explotion;
+        gameObject.GetComponent<RayAbility>().WarpLoad = Warpload;
+        gameObject.GetComponent<RayAbility>().WarpGeat = Warpgeat;
+
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         Player.gameObject.transform.localScale = new Vector3(PlayerSizeX, PlayerSizeY, PlayerSizeZ);
         Player.gameObject.GetComponent<PlayerController>().moveSpeed = MoveSpeed;
@@ -96,5 +109,25 @@ public class GameStageSetting : MonoBehaviour
             this.gameObject.GetComponent<RayAbility>().AbilityNum = 5;
         }
         
+    }
+
+    public void ReStartScene()
+    {
+        ResetFlag = ResetStatus;
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Sample_TeamA":
+                SceneManager.LoadScene("Sample_TeamA");
+                break;
+            case "Stage1":
+                SceneManager.LoadScene("Stage1");
+                break;
+            case "Stage2":
+                SceneManager.LoadScene("Stage2");
+                break;
+            case "Stage3":
+                SceneManager.LoadScene("Stage3");
+                break;
+        }
     }
 }

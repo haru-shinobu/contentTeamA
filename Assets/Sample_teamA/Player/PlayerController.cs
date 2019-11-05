@@ -23,11 +23,11 @@ public class PlayerController : MonoBehaviour
 
     //リセット能力用
     static Vector3 ResetPos;
-    static bool ReStartFlag = false;
     public bool ResetFlag = false;
-
+    GameStageSetting Setting;
     void Start()
     {
+        Setting = GameObject.Find("GameMaster").GetComponent<GameStageSetting>();
         tag = "Player";
         gameObject.AddComponent<Rigidbody>();
         GetComponent<BoxCollider>().isTrigger = true;
@@ -38,10 +38,9 @@ public class PlayerController : MonoBehaviour
         //PlayerScale　20と13になる…
         Speed = moveSpeed;
         PlayerAbility = false;
-        if (ReStartFlag)
+        if (Setting.ResetStatus)
         {
             gameObject.transform.position = ResetPos;
-            ReStartFlag = false;
         }
         else
         {
@@ -123,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
         //画面外落下でシーンリロード.ResetPosから再開
         if (transform.position.y < -50)
-            ReStartScene();
+            Setting.ReStartScene();
     }
 
     void LateUpdate()
@@ -204,26 +203,8 @@ public class PlayerController : MonoBehaviour
     private void ReStartPosMem()
     {
         ResetPos = transform.position + new Vector3(0, 5, 0);
-        ReStartFlag = true;
-        ReStartScene();
-    }
-    private void ReStartScene()
-    {
-        switch (SceneManager.GetActiveScene().name)
-        {
-            case "Sample_TeamA":
-                SceneManager.LoadScene("Sample_TeamA");
-                break;
-            case "Stage1":
-                SceneManager.LoadScene("Stage1");
-                break;
-            case "Stage2":
-                SceneManager.LoadScene("Stage2");
-                break;
-            case "Stage3":
-                SceneManager.LoadScene("Stage3");
-                break;
-        }
+        Setting.ResetStatus = !Setting.ResetStatus;
+        Setting.ReStartScene();
     }
 }
 

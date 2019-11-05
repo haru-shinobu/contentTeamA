@@ -16,6 +16,8 @@ TagManager:
   - door_right
   - door_left
   - Break&Wall
+  - Explosion
+  - Light
   layers:
   - Default
   - TransparentFX

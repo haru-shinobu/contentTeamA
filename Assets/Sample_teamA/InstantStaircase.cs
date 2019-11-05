@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class InstantStaircase : MonoBehaviour
 {
-    public float DestroyTimer;
-
-    void Update()
+    public GameObject RootStaircase;
+    void CollStop()
     {
-        DestroyTimer -= Time.deltaTime;
-        if (DestroyTimer < 0)
-            Destroy(this.gameObject);
+        RootStaircase.SendMessage("CollStop");
     }
 }

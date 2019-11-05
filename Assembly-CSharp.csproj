@@ -13,7 +13,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{0CA67A11-CDA3-DC6D-884F-9B6104E2459C}</ProjectGuid>
+    <ProjectGuid>{F8E21596-C568-4B0E-48CD-DE89C5AA65CD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -57,10 +57,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\meshEyeIcon.cs" />
     <Compile Include="Assets\RayAbility.cs" />
-    <Compile Include="Assets\RotateStaircaseScript.cs" />
-    <Compile Include="Assets\Sample_teamA\BeltConveyorscript.cs" />
     <Compile Include="Assets\Sample_teamA\breakwallscript.cs" />
+    <Compile Include="Assets\Sample_teamA\clockScript.cs" />
     <Compile Include="Assets\Sample_teamA\CursorColtroll.cs" />
     <Compile Include="Assets\Sample_teamA\Door\Doormove.cs" />
     <Compile Include="Assets\Sample_teamA\Door\DoorPassDiscrimination.cs" />
@@ -70,22 +70,24 @@
     <Compile Include="Assets\Sample_teamA\Elevator&amp;onewayfloor\OneWayFloorController.cs" />
     <Compile Include="Assets\Sample_teamA\Elevator&amp;onewayfloor\ParentMesh.cs" />
     <Compile Include="Assets\Sample_teamA\Elevator&amp;onewayfloor\WayTrigger.cs" />
-    <Compile Include="Assets\Sample_teamA\FallDown.cs" />
     <Compile Include="Assets\Sample_teamA\GameStageSetting.cs" />
     <Compile Include="Assets\Sample_teamA\GUIDE.cs" />
     <Compile Include="Assets\Sample_teamA\HandRotetion.cs" />
     <Compile Include="Assets\Sample_teamA\InstantStaircase.cs" />
+    <Compile Include="Assets\Sample_teamA\Materials\StormScript.cs" />
+    <Compile Include="Assets\Sample_teamA\moveObject\BeltConveyorscript.cs" />
+    <Compile Include="Assets\Sample_teamA\moveObject\FallDown.cs" />
+    <Compile Include="Assets\Sample_teamA\moveObject\rotate_horizonal.cs" />
+    <Compile Include="Assets\Sample_teamA\moveObject\rotate_vertical.cs" />
+    <Compile Include="Assets\Sample_teamA\moveObject\SeasawZ.cs" />
     <Compile Include="Assets\Sample_teamA\Pendulum\Pendulum.cs" />
     <Compile Include="Assets\Sample_teamA\Pendulum\Pendulumbody.cs" />
     <Compile Include="Assets\Sample_teamA\Pendulum\Pendulumbodyfloot.cs" />
     <Compile Include="Assets\Sample_teamA\Pendulum\PendulumShaft.cs" />
     <Compile Include="Assets\Sample_teamA\Player\FPSCameraController.cs" />
     <Compile Include="Assets\Sample_teamA\Player\PlayerController.cs" />
-    <Compile Include="Assets\Sample_teamA\rotate_horizonal.cs" />
-    <Compile Include="Assets\Sample_teamA\rotate_vertical.cs" />
-    <Compile Include="Assets\Sample_teamA\SeasawZ.cs" />
+    <Compile Include="Assets\Sample_teamA\RotateStaircaseScript.cs" />
     <Compile Include="Assets\Sample_teamA\StaircaseScript.cs" />
-    <Compile Include="Assets\Sample_teamA\StormScript.cs" />
     <Compile Include="Assets\SceneChengeScript\CreditScene.cs" />
     <Compile Include="Assets\SceneChengeScript\ResultScene.cs" />
     <Compile Include="Assets\SceneChengeScript\RuleScene.cs" />
@@ -95,67 +97,69 @@
     <Compile Include="Assets\SceneChengeScript\StageSelectScene.cs" />
     <Compile Include="Assets\SceneChengeScript\TitleScene.cs" />
     <Compile Include="Assets\SceneChengeScript\TitleSelectScene.cs" />
+    <Compile Include="Assets\Script\EffectDeleteScript.cs" />
     <Compile Include="Assets\Script\TimerScript\ClearTimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\Stage1TimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\Stage2TimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\Stage3TimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\TimeResetController.cs" />
+    <None Include="Assets\Script\DoubleSide.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -335,13 +339,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/rtamura/Desktop/TeamAContent/TeamAContent/TeamAContent/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

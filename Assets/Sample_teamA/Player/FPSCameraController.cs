@@ -5,7 +5,9 @@ using UnityEngine;
 public class FPSCameraController : MonoBehaviour
 {
     GameObject Player;
-    Vector3 targetPos, CameraPos,CameraEyePos;
+    Vector3 targetPos, CameraPos, CameraEyePos;
+    Camera cam;
+    bool SceneEndFlag;
     void Start()
     {
         Player = GameObject.Find("Player");
@@ -13,6 +15,8 @@ public class FPSCameraController : MonoBehaviour
         CameraEyePos = new Vector3(0, Player.transform.localScale.y * 0.4f, 0);
         targetPos = Player.transform.position;
         transform.position = Player.transform.position + CameraEyePos;
+        cam = GetComponent<Camera>();
+        
     }
     // Update is called once per frame
     void Update()
@@ -52,3 +56,4 @@ public class FPSCameraController : MonoBehaviour
         }
     }
 }
+

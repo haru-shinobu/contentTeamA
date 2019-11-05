@@ -6,43 +6,72 @@ public class StaircaseScript : MonoBehaviour
 {
     [SerializeField]
     private GameObject CreateStep;
-    [SerializeField]
-    private int CreateStepNum;//段数。２２．５で一周するイメージ。
-    private int Angle = 6;
+    
+    public int CreateStepNum;//段数。２２．５で一周するイメージ。
     bool Flag = true;
     Vector3 pos;
     private float Timer = 0;
     float R;
     public float RScale;//中心となる場所からの径
+    bool CountFlag;
+
+    List<GameObject> stepInstance = new List<GameObject>();
+
     void Start()
     {
-        tag = "Floor";
+        tag = "Floor&Stop";
+        name = "SpiralStep";
         CreateStep = gameObject;
         pos = transform.position + transform.forward * transform.localScale.z * RScale;
         R = transform.localScale.z * RScale;
         Timer = 0;
+        CountFlag = true;
+        transform.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
     }
-    void Update() { 
+    void Update()
+    {
         if (Flag)
         {
             Flag = false;
-            for (int num = 1; num < CreateStepNum; num++)
+            for (int num = 1; num < CreateStepNum + 1; num++)
             {
                 var PosX = Mathf.Sin(6 * num) * R;
                 var PosY = transform.localScale.y * num;
                 var PosZ = -Mathf.Cos(6 * num) * R;
-                Quaternion rote = Quaternion.Euler(0.0f, 16.22f*num, -3.0f);
+                Quaternion rote = Quaternion.Euler(0.0f, 16.22f * num, -3.0f);
                 GameObject Target = Instantiate(CreateStep, pos + new Vector3(PosX, PosY, PosZ), rote);
-                Target.transform.gameObject.AddComponent<InstantStaircase>().DestroyTimer = num;
+                Target.transform.gameObject.AddComponent<InstantStaircase>().RootStaircase = gameObject;
                 Destroy(Target.gameObject.GetComponent<StaircaseScript>());
-                Target.name = "SpiralStep";
+                stepInstance.Add(Target);
             }
         }
-        Timer += Time.deltaTime;
-        if(CreateStepNum + 5 < Timer)
+        if (CountFlag)
+            Timer += Time.deltaTime;
+        if (Timer < CreateStepNum)
+            Destroy(stepInstance[(int)Timer]);
+
+        if (CreateStepNum + 5 < Timer)
         {
             Timer = 0;
             Flag = true;
+            stepInstance.Clear();
+        }
+    }
+
+    void CollStop()
+    {
+        CountFlag = !CountFlag;
+        if (!CountFlag)
+        {
+            for (int i = (int)Timer + 1; i < CreateStepNum; i++)
+                stepInstance[i].gameObject.transform.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+            transform.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+        }
+        else
+        {
+            for (int i = (int)Timer + 1; i < CreateStepNum; i++)
+                stepInstance[i].gameObject.transform.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+            transform.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
         }
     }
 }

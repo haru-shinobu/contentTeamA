@@ -37,6 +37,6 @@ public class Pendulumbodyfloot : MonoBehaviour
     }
     void CollStop()
     {
-        transform.root.GetChild(0).gameObject.GetComponent<PendulumShaft>().StopFlag = !transform.root.GetChild(0).gameObject.GetComponent<PendulumShaft>().StopFlag;
+        transform.root.GetChild(0).gameObject.GetComponent<PendulumShaft>().StopActivity();
     }
 }

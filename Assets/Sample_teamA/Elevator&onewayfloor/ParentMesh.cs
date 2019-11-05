@@ -9,6 +9,7 @@ public class ParentMesh : MonoBehaviour
     void Start()
     {
         Parent = transform.parent.gameObject;
+        transform.gameObject.tag = Parent.tag;
     }
 
     void OnTriggerEnter(Collider col)
@@ -26,6 +27,9 @@ public class ParentMesh : MonoBehaviour
             Parent.SendMessage("OnChildTriggerExit_Parent", col);
         }
     }
-    
+    void CollStop()
+    {
+        Parent.SendMessage("CollStop");
+    }
 
 }

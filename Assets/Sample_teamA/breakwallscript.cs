@@ -5,7 +5,7 @@ using UnityEngine;
 public class breakwallscript : MonoBehaviour
 {
     bool Flag = false;
-    int Time = 0;
+    float Timer = 0;
     GameObject BreakFrame;
     void Start()
     {
@@ -16,12 +16,23 @@ public class breakwallscript : MonoBehaviour
         transform.GetChild(0).gameObject.transform.localScale *= 0.001f;
         transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
+    void Update()
+    {
+        if (Flag)
+        {
+            Timer -= Time.deltaTime;
+            if (Timer < 0) 
+            {
+                transform.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+                transform.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
 
+            }
+        }
+    }
     void CollBreak()
     {
-        //pa-thicleSystem coll
-        transform.gameObject.GetComponent<BoxCollider>().isTrigger = true;
-        transform.gameObject.GetComponent<MeshRenderer>().enabled = false;
-        transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
+        Flag = true;
+        Timer = 0.2f;
     }
 }

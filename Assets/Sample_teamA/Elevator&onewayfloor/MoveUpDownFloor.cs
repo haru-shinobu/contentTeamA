@@ -20,7 +20,7 @@ public class MoveUpDownFloor : MonoBehaviour
         Instantiate(WayTrigger, Create, Quaternion.identity,transform);
         transform.GetChild(0).gameObject.name = "OneWayBox";
         transform.GetChild(0).gameObject.transform.localScale = new Vector3(1,1,1);
-        transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
+        Destroy(transform.GetChild(0).gameObject.GetComponent<MeshRenderer>());
         transform.GetChild(0).gameObject.GetComponent<BoxCollider>().isTrigger = true;
         Destroy(transform.GetChild(0).gameObject.GetComponent<MoveUpDownFloor>());
         transform.GetChild(0).gameObject.AddComponent<WayTrigger>().call_enter = true;

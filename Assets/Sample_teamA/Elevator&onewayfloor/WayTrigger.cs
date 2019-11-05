@@ -20,4 +20,9 @@ public class WayTrigger : MonoBehaviour
             Parent.SendMessage("OnChildTriggerEnter", col);
         }
     }
+
+    void CollStop()
+    {
+        Parent.SendMessage("CollStop");
+    }
 }

@@ -10,11 +10,13 @@ public class PendulumShaft : MonoBehaviour
     public float Angle;
     bool Flag = false;
     public bool StopFlag;
+    bool EmittionFlag;
     void Start()
     {
         rot = transform.rotation.eulerAngles;
         time = 0;
         StopFlag = false;
+        EmittionFlag = false;
     }
 
     // Update is called once per frame
@@ -34,5 +36,25 @@ public class PendulumShaft : MonoBehaviour
 
             transform.eulerAngles = new Vector3(rot.x + Angle, rot.y, rot.z);
         }
+    }
+    public void StopActivity()
+    {
+        StopFlag = !StopFlag;
+        EmittionFlag = !EmittionFlag;
+        if (EmittionFlag)
+        {
+            gameObject.transform.root.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+            gameObject.transform.root.GetChild(1).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+            gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+            gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+        }
+        else
+        {
+            gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+            gameObject.transform.root.GetChild(1).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+            gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+            gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+        }
+
     }
 }

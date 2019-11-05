@@ -11,11 +11,16 @@ public class RayAbility : MonoBehaviour
     public GameObject reticleStop;  //カーソル用
     public GameObject reticleBreak; //カーソル用
     public GameObject reticleHand;  //カーソル用
+    public GameObject clock;
     public int BreakAbilityPenaltyTime;//ペナルティ用
     public int ResetAbilityPenaltyTime;//ペナルティ用
 
+    public GameObject exploision;
+    public GameObject WarpLoad;
+    public GameObject WarpGeat;
 
-    public float AbilityChengeMenuTime; //メニュー表示用。あとで画像とか…
+
+    public float AbilityChengeMenuTime; //メニュー表示用。あとで画像とかで表示するようにしないと…
     public int AbilityNum;              //能力いくつもってるか
     float KeyQTime = 0;                 //能力メニュー開くための長押し判定用
     Vector3 center;                     //視線をとるため
@@ -24,8 +29,9 @@ public class RayAbility : MonoBehaviour
     protected string StopObjectName;    //Stop能力で別オブジェクトが反応しないようにするため
     public int AbilityNow;              //現在発動中の能力0～5
     float NextUseTime = 0;//クールタイム用
-
-
+    bool WarpParticleFlag;
+    GameObject Instance;
+    GameObject InstanceGeat;
     void Start()
     {
         center = new Vector3(Screen.width / 2, Screen.height / 2);
@@ -37,6 +43,8 @@ public class RayAbility : MonoBehaviour
         reticleStop = GameObject.Find("StopImage");
         reticleBreak = GameObject.Find("BreakImage");
         reticleHand = GameObject.Find("HandImage");
+        clock = GameObject.Find("clock");
+        WarpParticleFlag = false;
     }
 
     // Update is called once per frame
@@ -45,6 +53,8 @@ public class RayAbility : MonoBehaviour
         AbilitycodeQ();
         AbilityAction();
     }
+
+
     void AbilitycodeQ()
     {
         //クールタイム用
@@ -113,7 +123,9 @@ public class RayAbility : MonoBehaviour
             RaycastHit hit;
             float raylong;
             if (5 == AbilityNow)
+            {
                 raylong = Player.transform.localScale.x * 2;
+            }
             else
             {
                 raylong = 1000f;
@@ -125,41 +137,70 @@ public class RayAbility : MonoBehaviour
                 //Debug.Log(hit.collider.gameObject.transform.position);
                 //Debug.Log((int)AbilityTriggerTime);
 
-                
                 reticleAction(hit.normal, hit.point);
-
+                if (AbilityNow != 1 && WarpParticleFlag)
+                {
+                    Destroy(Instance);
+                    Destroy(InstanceGeat);
+                }
                 switch (AbilityNow)
                 {
                     case 0: break;
                     case 1: //warp
+
                         if (hit.collider.gameObject.tag == "WarpPoint")
                         {
                             AbilityTriggerTime += Time.deltaTime;
+                            if (!WarpParticleFlag)
+                            {
+                                Instance = Instantiate(WarpLoad, Player.transform.position + new Vector3(0, Player.transform.localScale.y * 0.4f, 0), Camera.main.transform.rotation);
+                                InstanceGeat = Instantiate(WarpGeat, hit.point - Camera.main.transform.forward * 20, Camera.main.transform.rotation);
+                                WarpParticleFlag = true;
+                            }
+
                             if (3 <= AbilityTriggerTime)
                             {
-                                Player.gameObject.transform.position = hit.collider.gameObject.transform.position;
-                                AbilityNow = 0;
+                                if (Input.GetKeyDown(KeyCode.E))
+                                {
+                                    Player.gameObject.transform.position = hit.collider.gameObject.transform.position;
+                                    AbilityNow = 0;
+                                }
                             }
                         }
                         else
                         {
                             AbilityTriggerTime = 0;
+                            if (WarpParticleFlag)
+                            {
+                                WarpParticleFlag = false;
+                                Destroy(Instance);
+                                Destroy(InstanceGeat);
+                            }
                         }
                         break;
                     case 2: //stop
-                        if (StopObjectName == hit.collider.gameObject.name || StopObjectName == null)
+                        if (StopObjectName == hit.collider.gameObject.transform.root.name || StopObjectName == null)
                         {
                             if (hit.collider.gameObject.tag == "move&Stop")
                             {
                                 AbilityTriggerTime += Time.deltaTime;
                                 if (3 <= AbilityTriggerTime)
                                 {
-                                    hit.collider.gameObject.SendMessage("CollStop");
-                                    if (StopObjectName == null)
-                                        StopObjectName = hit.collider.gameObject.name;
-                                    else
-                                        StopObjectName = null;
-                                    AbilityNow = 0;
+                                    if (Input.GetKeyDown(KeyCode.E))
+                                    {
+                                        hit.collider.gameObject.SendMessage("CollStop");
+                                        if (StopObjectName == null)
+                                        {
+                                            StopObjectName = hit.collider.gameObject.transform.root.name;
+                                            hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                                        }
+                                        else
+                                        {
+                                            StopObjectName = null;
+                                            hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                                        }
+                                        AbilityNow = 0;
+                                    }
                                 }
                             }
                             else
@@ -168,12 +209,21 @@ public class RayAbility : MonoBehaviour
                                 AbilityTriggerTime += Time.deltaTime;
                                 if (3 <= AbilityTriggerTime)
                                 {
-                                    hit.collider.gameObject.SendMessage("CollStop");
-                                    if (StopObjectName == null)
-                                        StopObjectName = hit.collider.gameObject.name;
-                                    else
-                                        StopObjectName = null;
-                                    AbilityNow = 0;
+                                    if (Input.GetKeyDown(KeyCode.E))
+                                    {
+                                        hit.collider.gameObject.SendMessage("CollStop");
+                                        if (StopObjectName == null)
+                                        {
+                                            StopObjectName = hit.collider.gameObject.transform.root.name;
+                                            hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                                        }
+                                        else
+                                        {
+                                            StopObjectName = null;
+                                            hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                                        }
+                                        AbilityNow = 0;
+                                    }
                                 }
                             }
                             else
@@ -188,10 +238,14 @@ public class RayAbility : MonoBehaviour
                             AbilityTriggerTime += Time.deltaTime;
                             if (3 <= AbilityTriggerTime)
                             {
-                                hit.collider.gameObject.SendMessage("CollBreak");
-                                AbilityNow = 0;
-                                AbilityPenalty(BreakAbilityPenaltyTime);
-                                NextUseTime = 10;
+                                if (Input.GetKeyDown(KeyCode.E))
+                                {
+                                    hit.collider.gameObject.SendMessage("CollBreak");
+                                    AbilityNow = 0;
+                                    AbilityPenalty(BreakAbilityPenaltyTime);
+                                    NextUseTime = 10;
+                                    Instantiate(exploision, hit.point + (hit.normal * 3), Quaternion.identity);
+                                }
                             }
                         }
                         break;
@@ -199,10 +253,12 @@ public class RayAbility : MonoBehaviour
                         AbilityTriggerTime += Time.deltaTime;
                         if (3 <= AbilityTriggerTime)
                         {
-                            AbilityPenalty(ResetAbilityPenaltyTime);
-                            Player.GetComponent<PlayerController>().ResetFlag = true;
+                            if (Input.GetKeyDown(KeyCode.E))
+                            {
+                                AbilityPenalty(ResetAbilityPenaltyTime);
+                                Player.GetComponent<PlayerController>().ResetFlag = true;
+                            }
                         }
-
                         break;
                     case 5:
                         if (hit.collider.gameObject.tag == "Switch")
@@ -219,10 +275,16 @@ public class RayAbility : MonoBehaviour
             }
             else
             {
+                AbilityTriggerTime = 0;
                 reticleNoAction();
+                if (WarpParticleFlag)
+                {
+                    Destroy(Instance);
+                    Destroy(InstanceGeat);
+                }
+                WarpParticleFlag = false;
             }
-
-            Debug.DrawRay(ray.origin, ray.direction * raylong, Color.blue, 5);
+            //Debug.DrawRay(ray.origin, ray.direction * raylong, Color.blue, 5);
         }
     }
 
@@ -277,8 +339,9 @@ public class RayAbility : MonoBehaviour
         }
     }
     //能力発動時のペナルティー用
-    void AbilityPenalty(int time){
-        
+    void AbilityPenalty(int time)
+    {
+
         switch (SceneManager.GetActiveScene().name)
         {
             case "Stage1":
@@ -291,6 +354,6 @@ public class RayAbility : MonoBehaviour
                 Stage3TimeManager.PenaltyTime(time);
                 break;
         }
-        }
+    }
 }
 
