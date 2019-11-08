@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class RayAbility : MonoBehaviour
 {
-
+    bool MouseControl;
     public GameObject Player;
     public GameObject CircleWarp;  //チャージカーソル用
     public GameObject CircleStop;  //チャージカーソル用
@@ -15,19 +15,21 @@ public class RayAbility : MonoBehaviour
     public GameObject reticleWarp;  //カーソル用
     public GameObject reticleStop;  //カーソル用
     public GameObject reticleBreak; //カーソル用
-    public GameObject reticleHand;  //カーソル用
-    public GameObject clock;
+
     public int BreakAbilityPenaltyTime;//ペナルティ用
     public int ResetAbilityPenaltyTime;//ペナルティ用
+
+    clockScript col;//リセット能力の視界濁らせる用
 
     public GameObject exploision;
     public GameObject WarpLoad;
     public GameObject WarpGeat;
     CursorColtroll carsor;
 
-    public float AbilityChengeMenuTime; //メニュー表示用。あとで画像とかで表示するようにしないと…
+    public float AbilityChengeMenuTime; //メニュー表示用。
     public int AbilityNum;              //能力いくつもってるか
     float KeyQTime = 0;                 //能力メニュー開くための長押し判定用
+    public bool AbilityMenuOpenFlag;    //能力メニュー開示判定用。あとで画像とかで表示するようにしないと…
     Vector3 center;                     //視線をとるため
     bool AbilityFlag;                   //能力行使中か否か
     float AbilityTriggerTime = 0;       //各種能力発動までのカウント用
@@ -39,6 +41,8 @@ public class RayAbility : MonoBehaviour
     GameObject InstanceGeat;
     void Start()
     {
+        MouseControl = GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MouseMode;
+        col = GameObject.Find("clockCanvas").GetComponent<clockScript>();
         carsor = gameObject.transform.GetComponent<CursorColtroll>();
         center = new Vector3(Screen.width / 2, Screen.height / 2);
         Player = GameObject.Find("Player");
@@ -50,8 +54,8 @@ public class RayAbility : MonoBehaviour
         reticleWarp = GameObject.Find("WarpImage");
         reticleStop = GameObject.Find("StopImage");
         reticleBreak = GameObject.Find("BreakImage");
-        clock = GameObject.Find("clock");
         WarpParticleFlag = false;
+        AbilityMenuOpenFlag = false;
     }
 
     // Update is called once per frame
@@ -74,22 +78,44 @@ public class RayAbility : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
             KeyQTime += Time.deltaTime;
 
-        if (AbilityChengeMenuTime < KeyQTime)//MenuOpenしてるとき
+        if (AbilityChengeMenuTime < KeyQTime)//MenuOpenしてるときの処理
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            AbilityMenuOpenFlag = true;//MenuOpenフラグ
+            if (!MouseControl)
             {
-                AbilityNow--;
-                if (0 < NextUseTime)
-                    if (AbilityNow == 3)
-                        AbilityNow--;
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    AbilityNow--;
+                    if (0 < NextUseTime)
+                        if (AbilityNow == 3)
+                            AbilityNow--;
+                }
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    AbilityNow++;
+                    if (0 < NextUseTime)
+                        if (AbilityNow == 3)
+                            AbilityNow++;
+                }
             }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            else
             {
-                AbilityNow++;
-                if (0 < NextUseTime)
-                    if (AbilityNow == 3)
-                        AbilityNow++;
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    AbilityNow--;
+                    if (0 < NextUseTime)
+                        if (AbilityNow == 3)
+                            AbilityNow--;
+                }
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    AbilityNow++;
+                    if (0 < NextUseTime)
+                        if (AbilityNow == 3)
+                            AbilityNow++;
+                }
             }
+
         }
         else
         if (!Input.anyKey && KeyQTime != 0)
@@ -107,8 +133,11 @@ public class RayAbility : MonoBehaviour
 
 
         if (Input.GetKeyUp(KeyCode.Q))
+        {
+            KeyQTime = 0;
             AbilityTriggerTime = 0;
-
+            AbilityMenuOpenFlag = false;//MenuCloseフラグ
+        }
 
         if (AbilityNow != 0)
         {
@@ -126,24 +155,30 @@ public class RayAbility : MonoBehaviour
         //Ability4(リセット)
         if (AbilityNow == 4)
         {
-            AbilityTriggerTime += Time.deltaTime;
-            if (3 <= AbilityTriggerTime)
+            if (Input.GetKey(KeyCode.E))
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                AbilityTriggerTime += Time.deltaTime;
+
+                col.RayAbilityWhiteOut(AbilityTriggerTime, true, false);
+            }
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                if (3 <= AbilityTriggerTime)
                 {
                     AbilityPenalty(ResetAbilityPenaltyTime);
                     Player.GetComponent<PlayerController>().ResetFlag = true;
                 }
-            }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.E))
+                else
+                {
+                    col.RayAbilityWhiteOut(0, false, false);
                     AbilityTriggerTime = 0;
+                }
             }
         }
         //Ability0～3
         else
         {
+            col.RayAbilityWhiteOut(0,false, false);
             Ray ray = Camera.main.ScreenPointToRay(center);
             RaycastHit hit;
             float raylong;
@@ -154,6 +189,7 @@ public class RayAbility : MonoBehaviour
             else
             {
                 raylong = 1000f;
+                carsor.handflag = false;
             }
 
             if (Physics.Raycast(ray, out hit, raylong))
@@ -289,6 +325,10 @@ public class RayAbility : MonoBehaviour
                                     AbilityTriggerTime = 0;
                                 }
                             }
+                            else
+                            {
+                                AbilityTriggerTime = 0;
+                            }
                         }
                         break;
                     case 3: //break
@@ -333,7 +373,7 @@ public class RayAbility : MonoBehaviour
                 }
                 WarpParticleFlag = false;
             }
-            //Debug.DrawRay(ray.origin, ray.direction * raylong, Color.blue, 5);
+            Debug.DrawRay(ray.origin, ray.direction * raylong, Color.blue, 5);
         }
     }
     //レティクルがオブジェクトの上に表示される用。
@@ -342,8 +382,6 @@ public class RayAbility : MonoBehaviour
         switch (AbilityNow)
         {
             case 0:
-                //                reticleHand.transform.rotation = Quaternion.LookRotation(normal);
-                //                reticleHand.transform.position = point + (normal * 5);
                 break;
             case 1:
                 reticleWarp.transform.rotation = Quaternion.LookRotation(normal);
@@ -371,8 +409,6 @@ public class RayAbility : MonoBehaviour
         switch (AbilityNow)
         {
             case 0:
-//                reticleHand.transform.rotation = Camera.main.transform.rotation;
-//                reticleHand.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 100);
                 break;
             case 1:
                 reticleWarp.transform.rotation = Camera.main.transform.rotation;

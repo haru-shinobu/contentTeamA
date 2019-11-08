@@ -6,17 +6,21 @@ using System;
 public class PendulumShaft : MonoBehaviour
 {
     Vector3 rot;
-    int time;
+    int Count;
     public float Angle;
-    bool Flag = false;
     public bool StopFlag;
     bool EmittionFlag;
+    double [] Anglelist = new double[360];
     void Start()
     {
         rot = transform.rotation.eulerAngles;
-        time = 0;
+        Count = 0;
         StopFlag = false;
         EmittionFlag = false;
+        for (int i = 0; i < 360; i++)
+        {
+            Anglelist[i] = 20 * Math.Sin((2 * Mathf.PI / 180 * i));
+        }
     }
 
     // Update is called once per frame
@@ -24,16 +28,11 @@ public class PendulumShaft : MonoBehaviour
     {
         if (!StopFlag)
         {
-            time++;
-            if (180 <= time)
-            {
-                Flag = !Flag;
-                time = 0;
-            }
-
-            var sin = 20 * Math.Sin((2 * Mathf.PI / 180 * (time)));
-            Angle = (float)sin;
-
+            Count++;
+            if (180 <= Count)
+                Count = 0;
+            
+            Angle = (float)Anglelist[Count];
             transform.eulerAngles = new Vector3(rot.x + Angle, rot.y, rot.z);
         }
     }

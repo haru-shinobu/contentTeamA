@@ -10,6 +10,8 @@ using UnityEngine.Rendering;
 
 public class GameStageSetting : MonoBehaviour
 {
+    //マウス操作かキー操作か
+    public bool MouseMode;
     //リセット能力及び画面外用
     static public bool ResetFlag = false;
     public bool ResetStatus;
