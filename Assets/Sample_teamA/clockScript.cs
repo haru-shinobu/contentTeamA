@@ -10,6 +10,12 @@ public class clockScript : MonoBehaviour
     RectTransform clocker;
     RectTransform clockertop;
     RectTransform clockhand;
+    RectTransform EyeAbilityNormal;
+    RectTransform EyeAbilityWarp;
+    RectTransform EyeAbilityStop;
+    RectTransform EyeAbilityExplosion;
+    RectTransform EyeAbilityReset;
+
     GameObject clockParticleBlock;
     ParticleSystem clockside;
     Vector3 StartPos;
@@ -20,6 +26,7 @@ public class clockScript : MonoBehaviour
     static public bool ResetFlag = false;
     void Start()
     {
+        //clock関係
         col = transform.GetChild(1).gameObject.GetComponent<Image>();
 
         clockhand = GameObject.Find("ClockhandImage").GetComponent<RectTransform>();
@@ -42,12 +49,18 @@ public class clockScript : MonoBehaviour
         StartPos = clocker.localPosition;
         CountTimer = 0;
         ResetTimer = 0;
+        //Ability関係
+        EyeAbilityNormal = GameObject.Find("AImage").GetComponent<RectTransform>();
+        EyeAbilityWarp = GameObject.Find("AWImage").GetComponent<RectTransform>();
+        EyeAbilityStop = GameObject.Find("ASImage").GetComponent<RectTransform>();
+        EyeAbilityExplosion = GameObject.Find("AEImage").GetComponent<RectTransform>();
+        EyeAbilityReset = GameObject.Find("ARImage").GetComponent<RectTransform>();
     }
     
     void Update()
     {
      
-        if (Flag)//シーン読み込み
+        if (Flag)//シーン読み込み直後
         {
             col.color = new Color32(255, 255, 255, (byte)(255 - ResetTimer * 28));
             ResetTimer += Time.deltaTime;
@@ -70,7 +83,7 @@ public class clockScript : MonoBehaviour
                 }
             }
         }
-        else
+        else//通常
         {
             CountTimer += Time.deltaTime;
             if (CountTimer > 1)
@@ -80,6 +93,7 @@ public class clockScript : MonoBehaviour
             }
         }
         
+
     }
 
     void CallResetScene()

@@ -106,7 +106,7 @@ public class GameStageSetting : MonoBehaviour
         }
         else
         {
-            this.gameObject.GetComponent<RayAbility>().AbilityNum = 5;
+            this.gameObject.GetComponent<RayAbility>().AbilityNum = 4;
         }
         
     }
