@@ -33,7 +33,7 @@ public class Doormove : MonoBehaviour
         FixRot = transform.localRotation.eulerAngles;
         
         DoorCollide = Instantiate(transform.gameObject,transform.position,new Quaternion(0,0,0,0));
-        DoorCollide.transform.name = "wiv";
+        DoorCollide.transform.name = "Door";
         DoorCollide.gameObject.GetComponent<MeshRenderer>().enabled = false;
         DoorCollide.gameObject.transform.GetComponent<BoxCollider>().isTrigger = true;
         DoorCollide.transform.localScale = transform.localScale;

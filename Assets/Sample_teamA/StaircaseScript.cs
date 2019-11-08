@@ -27,34 +27,42 @@ public class StaircaseScript : MonoBehaviour
         Timer = 0;
         CountFlag = true;
         transform.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+
+        for (int num = 1; num < CreateStepNum + 1; num++)
+        {
+            var PosX = Mathf.Sin(6 * num) * R;
+            var PosY = transform.localScale.y * num;
+            var PosZ = -Mathf.Cos(6 * num) * R;
+            Quaternion rote = Quaternion.Euler(0.0f, 16.22f * num, -3.0f);
+            GameObject Target = Instantiate(CreateStep, pos + new Vector3(PosX, PosY, PosZ), rote);
+            Target.transform.gameObject.AddComponent<InstantStaircase>().RootStaircase = gameObject;
+            Destroy(Target.gameObject.GetComponent<StaircaseScript>());
+            stepInstance.Add(Target);
+        }
     }
     void Update()
     {
         if (Flag)
         {
-            Flag = false;
-            for (int num = 1; num < CreateStepNum + 1; num++)
+            for (int num = 0; num < CreateStepNum; num++)
             {
-                var PosX = Mathf.Sin(6 * num) * R;
-                var PosY = transform.localScale.y * num;
-                var PosZ = -Mathf.Cos(6 * num) * R;
-                Quaternion rote = Quaternion.Euler(0.0f, 16.22f * num, -3.0f);
-                GameObject Target = Instantiate(CreateStep, pos + new Vector3(PosX, PosY, PosZ), rote);
-                Target.transform.gameObject.AddComponent<InstantStaircase>().RootStaircase = gameObject;
-                Destroy(Target.gameObject.GetComponent<StaircaseScript>());
-                stepInstance.Add(Target);
+                stepInstance[num].GetComponent<MeshRenderer>().enabled = true;
+                stepInstance[num].GetComponent<BoxCollider>().enabled = true;
             }
+            Flag = false;
         }
+
         if (CountFlag)
             Timer += Time.deltaTime;
         if (Timer < CreateStepNum)
-            Destroy(stepInstance[(int)Timer]);
-
+        {
+            stepInstance[(int)Timer].GetComponent<MeshRenderer>().enabled = false;
+            stepInstance[(int)Timer].GetComponent<BoxCollider>().enabled = false;
+        }
         if (CreateStepNum + 5 < Timer)
         {
             Timer = 0;
             Flag = true;
-            stepInstance.Clear();
         }
     }
 

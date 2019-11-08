@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            inputVertical = 0;
             if (ResetFlag)
             {
                 ReStartPosMem();
@@ -204,7 +205,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (JumpEnd)
+            if (JumpEnd || Sky)
                 if (5 < rb.velocity.y)
                     rb.AddForce(-transform.up * JumpForce * 0.2f, ForceMode.Impulse);
         }
