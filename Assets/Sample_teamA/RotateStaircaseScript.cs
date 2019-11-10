@@ -11,6 +11,7 @@ public class RotateStaircaseScript : MonoBehaviour
     void Start()
     {
         Flag = true;
+        transform.tag = "Floor";
         CreateStep = gameObject;
     }
 
@@ -31,7 +32,6 @@ public class RotateStaircaseScript : MonoBehaviour
         Destroy(transform.GetChild(0).GetComponent<RotateStaircaseScript>());
         transform.GetChild(0).transform.localScale = new Vector3(1, 1, 1);
         transform.GetChild(0).name = "Step";
-        transform.GetChild(0).tag = "Floor";
         GameObject child = gameObject;
         int num = 0;
         while (0 < CreateNum)

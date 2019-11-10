@@ -29,7 +29,7 @@ public class RayAbility : MonoBehaviour
     public float AbilityChengeMenuTime; //メニュー表示用。
     public int AbilityNum;              //能力いくつもってるか
     float KeyQTime = 0;                 //能力メニュー開くための長押し判定用
-    public bool AbilityMenuOpenFlag;    //能力メニュー開示判定用。あとで画像とかで表示するようにしないと…
+    public bool AbilityMenuOpenFlag = false;    //能力メニュー開示判定用。あとで画像とかで表示するようにしないと…
     Vector3 center;                     //視線をとるため
     bool AbilityFlag;                   //能力行使中か否か
     float AbilityTriggerTime = 0;       //各種能力発動までのカウント用

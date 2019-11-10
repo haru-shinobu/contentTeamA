@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7338075697156795800}
   - component: {fileID: 7338075697156795801}
   - component: {fileID: 7338075697156795807}
+  - component: {fileID: 5734628152871422194}
   m_Layer: 0
   m_Name: GameMaster 1
   m_TagString: Untagged
@@ -86,3 +87,31 @@ MonoBehaviour:
   Pointercursor: {fileID: 0}
   AbilityTrigger: 0
   handflag: 0
+--- !u!114 &5734628152871422194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7338075697156795802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf15588301a28548b45ae56c2df44ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  CircleWarp: {fileID: 0}
+  CircleStop: {fileID: 0}
+  CircleBreak: {fileID: 0}
+  reticleWarp: {fileID: 0}
+  reticleStop: {fileID: 0}
+  reticleBreak: {fileID: 0}
+  BreakAbilityPenaltyTime: 0
+  ResetAbilityPenaltyTime: 0
+  exploision: {fileID: 0}
+  WarpLoad: {fileID: 0}
+  WarpGeat: {fileID: 0}
+  AbilityChengeMenuTime: 0
+  AbilityNum: 0
+  AbilityMenuOpenFlag: 0
+  AbilityNow: 0

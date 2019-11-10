@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
     public bool PlayerAbility;//RayAbilityから書き換える
     bool Sky = false;
     float skyY;
-    public bool UseLongJump = false;
+    public bool UseLongJump;
+    public bool PlayerWalk;
 
     float inputVertical;
     Rigidbody rb;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
             ResetPos = transform.position;
         }
         defaultScale = transform.lossyScale;
+        PlayerWalk = false;
     }
 
     void OnTriggerEnter(Collider col)
@@ -73,6 +75,8 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
+        if (!UseLongJump)
+            JumpEnd = true;
         if (col.gameObject.tag == "Floor")
         {
             Sky = true;
@@ -92,6 +96,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Sky)
+            rb.AddForce(-transform.up);
         if (Sky && Ground)
             if (skyY - 1 > transform.position.y)
                 Ground = Sky = false;
@@ -114,6 +120,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         FallProcess();
+
         
         Vector3 lossScale = transform.lossyScale;
         Vector3 localScale = transform.localScale;
@@ -140,6 +147,10 @@ public class PlayerController : MonoBehaviour
         {
             vert = JumpVertical * PlayerScale;
         }
+        if(vert != 0)PlayerWalk = true;
+            else PlayerWalk = false;
+
+
         // カメラの方向から、X-Z平面の単位ベクトルを取得
         Vector3 cameraForward;
         cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
@@ -199,6 +210,12 @@ public class PlayerController : MonoBehaviour
                 GetComponent<Rigidbody>().useGravity = true;
             }
         }
+        else
+        {
+            if (!Ground && !Sky)
+                Ground = false;
+                
+        }
         if (!Ground && JumpEnd)
         {
             rb.AddForce(-transform.up * JumpForce, ForceMode.Force);
@@ -206,7 +223,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             if (JumpEnd || Sky)
-                if (5 < rb.velocity.y)
+                if (1 < rb.velocity.y)
                     rb.AddForce(-transform.up * JumpForce * 0.2f, ForceMode.Impulse);
         }
     }

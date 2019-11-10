@@ -56,8 +56,8 @@ public class FPSCameraController : MonoBehaviour
         }
         else
         {
-            InputX = Input.GetAxis("Mouse X");
-            InputY = Input.GetAxis("Mouse Y");
+            InputX = Input.GetAxisRaw("Mouse X");
+            InputY = Input.GetAxisRaw("Mouse Y");
         }
         // targetの位置のY軸を中心に、回転（公転）する
         transform.RotateAround(CameraPos, Vector3.up, InputX * Time.deltaTime * 200f);
