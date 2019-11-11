@@ -41,7 +41,7 @@ public class GameStageSetting : MonoBehaviour
     {
         ResetStatus = ResetFlag;
         ResetFlag = false;
-        //Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
+        Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
         RenderSetting_Gradient();//環境光設定
         Ability();//能力設定
         Setting();

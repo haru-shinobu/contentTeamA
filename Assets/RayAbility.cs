@@ -373,7 +373,7 @@ public class RayAbility : MonoBehaviour
                 }
                 WarpParticleFlag = false;
             }
-            Debug.DrawRay(ray.origin, ray.direction * raylong, Color.blue, 5);
+            //Debug.DrawRay(ray.origin, ray.direction * raylong, Color.blue, 5);
         }
     }
     //レティクルがオブジェクトの上に表示される用。
