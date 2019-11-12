@@ -31,6 +31,7 @@ public class footpointScript : MonoBehaviour
     void Update()
     {
         transform.position = Player.transform.position + Distance;
+        transform.localRotation = Player.transform.localRotation * new Quaternion(1,0,0,1);
         if (PController.PlayerWalk)
         {
             Timer += Time.deltaTime;
