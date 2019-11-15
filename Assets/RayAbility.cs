@@ -239,7 +239,8 @@ public class RayAbility : MonoBehaviour
                                 {
                                     if (Input.GetKeyDown(KeyCode.E))
                                     {
-                                        Player.gameObject.transform.position = hit.collider.gameObject.transform.position;
+                                        Player.transform.position = hit.point + (hit.normal * Player.transform.localScale.x);
+//Player.gameObject.transform.position = hit.collider.gameObject.transform.position;
                                         AbilityNow = 0;
                                     }
                                 }
@@ -304,12 +305,14 @@ public class RayAbility : MonoBehaviour
                                             if (StopObjectName == null)
                                             {
                                                 StopObjectName = hit.collider.gameObject.transform.root.name;
-                                                hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                                                if (hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>())
+                                                    hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
                                             }
                                             else
                                             {
                                                 StopObjectName = null;
-                                                hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                                                if (hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>())
+                                                    hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
                                             }
                                             AbilityNow = 0;
                                         }

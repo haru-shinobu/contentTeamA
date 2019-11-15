@@ -56,17 +56,11 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         JumpVertical = 0;
-        if (col.gameObject.tag == "Floor")
-        {
-            Ground = true;
-            Sky = false;
-        }
-        if (col.gameObject.tag == "Floor&Stop")
-        {
-            Ground = true;
-            Sky = false;
-        }
-        if (col.gameObject.tag == "Move&Stop")
+        if (col.gameObject.tag == "Floor" ||
+            col.gameObject.tag == "Floor&Stop"||
+            col.gameObject.tag == "Move&Stop" ||
+            col.gameObject.tag == "StepFloor"
+            )
         {
             Ground = true;
             Sky = false;
@@ -77,17 +71,11 @@ public class PlayerController : MonoBehaviour
     {
         if (!UseLongJump)
             JumpEnd = true;
-        if (col.gameObject.tag == "Floor")
-        {
-            Sky = true;
-            skyY = transform.position.y;
-        }
-        if (col.gameObject.tag == "Floor&Stop")
-        {
-            Sky = true;
-            skyY = transform.position.y;
-        }
-        if (col.gameObject.tag == "Move&Stop")
+        if (col.gameObject.tag == "Floor" ||
+            col.gameObject.tag == "Floor&Stop"||
+            col.gameObject.tag == "Move&Stop"||
+            col.gameObject.tag == "StepFloor"
+            )
         {
             Sky = true;
             skyY = transform.position.y;

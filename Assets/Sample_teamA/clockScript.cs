@@ -34,8 +34,8 @@ public class clockScript : MonoBehaviour
     void Start()
     {
         //clock関係
-        col = transform.GetChild(10).gameObject.GetComponent<Image>();
-
+        col = transform.GetChild(11).gameObject.GetComponent<Image>();
+        col.enabled = true;
         clockhand = GameObject.Find("ClockhandImage").GetComponent<RectTransform>();
         ResetFlag = GameObject.Find("GameMaster").GetComponent<GameStageSetting>().ResetStatus;
         clocker = GameObject.Find("ClockImage").GetComponent<RectTransform>();

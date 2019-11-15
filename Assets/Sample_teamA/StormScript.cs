@@ -15,6 +15,5 @@ public class StormScript : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
             col.gameObject.GetComponent<Rigidbody>().AddForce(transform.right*StormForce,ForceMode.Impulse);
-        Debug.Log(col.gameObject.GetComponent<Rigidbody>().position);
     }
 }
