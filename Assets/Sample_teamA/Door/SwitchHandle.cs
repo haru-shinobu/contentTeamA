@@ -5,54 +5,91 @@ using UnityEngine;
 public class SwitchHandle : MonoBehaviour
 {
     public GameObject Target;
-    public GameObject Target2;
     bool Flag = false;
     float rottt = 45;
     float Sub = -2f;
     float targetrotate = 90;
-    
+    public bool UseButtonType;
+    float ButtonPushmove;
+    bool DoorMove;
     void Start()
     {
+        Flag = false;
         transform.gameObject.GetComponent<BoxCollider>().isTrigger = true;
         tag = "Switch";
+        ButtonPushmove = 0;
+        DoorMove = false;
     }
 
-    
+
     void Update()
     {
-     
-        if (Flag)
+        if (!UseButtonType)
         {
-            var Goalrot = Quaternion.Euler(new Vector3(targetrotate + rottt, 0, 0));
-            var targetrot = transform.rotation;            
-
-            if (Quaternion.Angle(targetrot,Goalrot) <= 1)
+            if (Flag)
             {
-                if (rottt > 0)
+                var Goalrot = Quaternion.Euler(new Vector3(targetrotate + rottt, 0, 0));
+                var targetrot = transform.rotation;
+
+                if (Quaternion.Angle(targetrot, Goalrot) <= 1)
                 {
-                    Target.GetComponent<Doormove>().switching();
-                    Target2.GetComponent<Doormove>().switching();
+                    if (rottt > 0)
+                    {
+                        Target.GetComponent<Doormove>().switching();
+                    }
+                    else
+                    {
+                        Target.GetComponent<Doormove>().CloseSwitch();
+                    }
+
+                    transform.rotation = Goalrot;
+                    Flag = false;
+                    rottt = -rottt;
                 }
                 else
                 {
-                    Target.GetComponent<Doormove>().CloseSwitch();
-                    Target2.GetComponent<Doormove>().CloseSwitch();
+                    transform.Rotate(new Vector3(Sub, 0, 0));
                 }
-                
-                transform.rotation = Goalrot;
-                Flag = false;
-                rottt = -rottt;
             }
-            else
+        }
+        else//UseButton
+        {
+            if (Flag)
             {
-                transform.Rotate(new Vector3(Sub, 0,0));
+                if (0 < Sub)
+                {
+                    if (ButtonPushmove++ < 5)
+                        transform.position = transform.position - transform.forward;
+                    else
+                        transform.position = transform.position + transform.forward;
+
+                    if (10 <= ButtonPushmove)
+                    {
+                        Sub = -Sub;
+                        DoorMove = !DoorMove;
+                        ButtonPushmove = 0;
+                    }
+                }
+                else{
+                    if (DoorMove) {
+                        Target.GetComponent<Doormove>().switching();
+                        Flag = false;
+                    }
+                    else
+                    {
+                        Target.GetComponent<Doormove>().CloseSwitch();
+                        Flag = false;
+                    }
+                }
             }
         }
     }
-    
     void TriggerOn()
     {
-        Flag = !Flag;
-        Sub = -Sub;
+        if (!Flag)
+        {
+            Flag = !Flag;
+            Sub = -Sub;
+        }
     }
 }

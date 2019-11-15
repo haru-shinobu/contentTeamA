@@ -7,9 +7,7 @@ TagManager:
   - Floor
   - wall
   - TriggerBox
-  - Floor&Reset
   - WarpPoint
-  - Floor&Stop&Reset
   - Floor&Stop
   - CursorUI
   - Switch
@@ -18,6 +16,8 @@ TagManager:
   - Break&Wall
   - Explosion
   - Light
+  - move&Stop
+  - StepFloor
   layers:
   - Default
   - TransparentFX

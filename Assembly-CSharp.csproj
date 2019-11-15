@@ -57,13 +57,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BollMakerScript.cs" />
+    <Compile Include="Assets\BollsScript.cs" />
     <Compile Include="Assets\meshEyeIcon.cs" />
+    <Compile Include="Assets\RantanControllerScript.cs" />
     <Compile Include="Assets\RayAbility.cs" />
     <Compile Include="Assets\Sample_teamA\breakwallscript.cs" />
     <Compile Include="Assets\Sample_teamA\clockScript.cs" />
     <Compile Include="Assets\Sample_teamA\CursorColtroll.cs" />
     <Compile Include="Assets\Sample_teamA\Door\Doormove.cs" />
     <Compile Include="Assets\Sample_teamA\Door\DoorPassDiscrimination.cs" />
+    <Compile Include="Assets\Sample_teamA\Door\footpointScript.cs" />
     <Compile Include="Assets\Sample_teamA\Door\SwitchHandle.cs" />
     <Compile Include="Assets\Sample_teamA\Door\SwitchScript.cs" />
     <Compile Include="Assets\Sample_teamA\Elevator&amp;onewayfloor\MoveUpDownFloor.cs" />
@@ -72,9 +76,6 @@
     <Compile Include="Assets\Sample_teamA\Elevator&amp;onewayfloor\WayTrigger.cs" />
     <Compile Include="Assets\Sample_teamA\GameStageSetting.cs" />
     <Compile Include="Assets\Sample_teamA\GUIDE.cs" />
-    <Compile Include="Assets\Sample_teamA\HandRotetion.cs" />
-    <Compile Include="Assets\Sample_teamA\InstantStaircase.cs" />
-    <Compile Include="Assets\Sample_teamA\Materials\StormScript.cs" />
     <Compile Include="Assets\Sample_teamA\moveObject\BeltConveyorscript.cs" />
     <Compile Include="Assets\Sample_teamA\moveObject\FallDown.cs" />
     <Compile Include="Assets\Sample_teamA\moveObject\rotate_horizonal.cs" />
@@ -86,18 +87,21 @@
     <Compile Include="Assets\Sample_teamA\Pendulum\PendulumShaft.cs" />
     <Compile Include="Assets\Sample_teamA\Player\FPSCameraController.cs" />
     <Compile Include="Assets\Sample_teamA\Player\PlayerController.cs" />
-    <Compile Include="Assets\Sample_teamA\RotateStaircaseScript.cs" />
-    <Compile Include="Assets\Sample_teamA\StaircaseScript.cs" />
-    <Compile Include="Assets\SceneChengeScript\CreditScene.cs" />
-    <Compile Include="Assets\SceneChengeScript\ResultScene.cs" />
-    <Compile Include="Assets\SceneChengeScript\RuleScene.cs" />
-    <Compile Include="Assets\SceneChengeScript\Stage1Scene.cs" />
-    <Compile Include="Assets\SceneChengeScript\Stage2Scene.cs" />
-    <Compile Include="Assets\SceneChengeScript\Stage3Scene.cs" />
-    <Compile Include="Assets\SceneChengeScript\StageSelectScene.cs" />
-    <Compile Include="Assets\SceneChengeScript\TitleScene.cs" />
-    <Compile Include="Assets\SceneChengeScript\TitleSelectScene.cs" />
+    <Compile Include="Assets\Sample_teamA\Steps\footswitchScript.cs" />
+    <Compile Include="Assets\Sample_teamA\Steps\InstantStaircase.cs" />
+    <Compile Include="Assets\Sample_teamA\Steps\RotateStaircaseScript.cs" />
+    <Compile Include="Assets\Sample_teamA\Steps\StaircaseScript.cs" />
+    <Compile Include="Assets\Sample_teamA\StormScript.cs" />
     <Compile Include="Assets\Script\EffectDeleteScript.cs" />
+    <Compile Include="Assets\Script\SceneChengeScript\CreditScene.cs" />
+    <Compile Include="Assets\Script\SceneChengeScript\ResultScene.cs" />
+    <Compile Include="Assets\Script\SceneChengeScript\RuleScene.cs" />
+    <Compile Include="Assets\Script\SceneChengeScript\Stage1Scene.cs" />
+    <Compile Include="Assets\Script\SceneChengeScript\Stage2Scene.cs" />
+    <Compile Include="Assets\Script\SceneChengeScript\Stage3Scene.cs" />
+    <Compile Include="Assets\Script\SceneChengeScript\StageSelectScene.cs" />
+    <Compile Include="Assets\Script\SceneChengeScript\TitleScene.cs" />
+    <Compile Include="Assets\Script\SceneChengeScript\TitleSelectScene.cs" />
     <Compile Include="Assets\Script\TimerScript\ClearTimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\Stage1TimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\Stage2TimeManager.cs" />

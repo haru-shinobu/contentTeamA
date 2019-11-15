@@ -4,83 +4,94 @@ using UnityEngine;
 
 public class Doormove : MonoBehaviour
 {
-    
+    public GameObject ThruWall;
+    public GameObject ThruWallReverse;
     bool OpenFlag;
     bool CloseFlag;
-    bool DoorWay = true;
+    bool thruFlag;
     float rot;
     int Timer;
-    Vector3 pos;
+    Vector3 posL,posR;
     Vector3 NowPos;
     Vector3 FixRot;
-
+    Quaternion Rota;
     GameObject DoorCollide;
+    GameObject DoorRight;
+    GameObject DoorLeft;
     // Start is called before the first frame update
     void Start()
     {
+        
+        float roty = gameObject.transform.rotation.y;
+        float rotw = gameObject.transform.rotation.w;
+        Rota = gameObject.transform.rotation;
+
+        gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         Timer = 0;
         OpenFlag = false;
         CloseFlag = false;
-        rot = transform.rotation.y;
-        if (transform.tag == "door_right")
-            pos = transform.position + new Vector3(transform.localScale.x * 0.5f, 0, 0);
-        if (transform.tag == "door_left")
-        {
-            pos = transform.position + new Vector3(-transform.localScale.x * 0.5f, 0, 0);
-            DoorWay = false;            
-        }
-        NowPos = transform.position;
-        FixRot = transform.localRotation.eulerAngles;
+        DoorRight = transform.GetChild(0).gameObject;
+        DoorLeft = transform.GetChild(1).gameObject;
         
-        DoorCollide = Instantiate(transform.gameObject,transform.position,new Quaternion(0,0,0,0));
-        DoorCollide.transform.name = "wiv";
+        DoorCollide = Instantiate(DoorRight.transform.gameObject,transform.position + new Vector3(0,DoorRight.transform.localScale.y*0.5f,0),new Quaternion(0,0,0,0),transform);
+        DoorCollide.transform.name = "Door";
         DoorCollide.gameObject.GetComponent<MeshRenderer>().enabled = false;
         DoorCollide.gameObject.transform.GetComponent<BoxCollider>().isTrigger = true;
-        DoorCollide.transform.localScale = transform.localScale;
+        DoorCollide.transform.localScale = new Vector3(DoorRight.transform.localScale.x * 2, DoorRight.transform.localScale.y, DoorRight.transform.localScale.z*0.5f);
         Destroy(DoorCollide.transform.GetComponent<Doormove>());
         DoorCollide.transform.gameObject.AddComponent<DoorPassDiscrimination>().Target = gameObject;
+        gameObject.transform.rotation = Rota;
+        
+        
+        posR = transform.position + transform.right * DoorRight.transform.localScale.x;
+        posL = transform.position - transform.right * DoorRight.transform.localScale.x;
+        Vector3 rotangle = Rota.eulerAngles;
     }
 
     
     void Update()
     {
-
         int speed = 50;
 
+        Quaternion rta = DoorRight.transform.localRotation;
+        Vector3 RoAngle = rta.eulerAngles;
+        Quaternion lta = DoorLeft.transform.localRotation;
+        Vector3 LoAngle = lta.eulerAngles;
         if (OpenFlag)
         {
-            if (DoorWay)//trueのとき右扉動作
-                if (transform.rotation.y <= 0.7f)
-                    transform.RotateAround(pos, transform.up, Time.deltaTime * speed);
-                else
-                    OpenFlag = !OpenFlag;
-            if (!DoorWay)
-                if (-0.7f <= transform.rotation.y)
-                {
-                    transform.RotateAround(pos, transform.up, -Time.deltaTime * speed);
-                }
-                else
-                    OpenFlag = !OpenFlag;
+            if (RoAngle.y < 90)
+                DoorRight.transform.RotateAround(posR, transform.up, Time.deltaTime * speed);
+            if (270 < LoAngle.y || LoAngle.y < 1)
+                DoorLeft.transform.RotateAround(posL, transform.up, -Time.deltaTime * speed);
+            else
+            {
+                OpenFlag = !OpenFlag;
+                thruFlag = true;
+            }
         }
         if (CloseFlag)
         {
-            if (DoorWay)//trueのとき右扉動作
-                if (0 < transform.rotation.y)
-                    transform.RotateAround(pos, transform.up, -Time.deltaTime * speed);
-                else
-                    CloseFlag = !CloseFlag;
-            if (!DoorWay)
-                if (transform.rotation.y < 0)
-                    transform.RotateAround(pos, transform.up, Time.deltaTime * speed);
-                else
-                    CloseFlag = !CloseFlag;
+            if (1 < RoAngle.y)
+                DoorRight.transform.RotateAround(posR, transform.up, -Time.deltaTime * speed);
+            if (0 < LoAngle.y && 268 < LoAngle.y)
+                DoorLeft.transform.RotateAround(posL, transform.up, Time.deltaTime * speed);
+            else
+            {
+                CloseFlag = !CloseFlag;
+                thruFlag = false;
+                ThruWall.transform.GetComponent<MeshCollider>().enabled = true;
+                ThruWallReverse.transform.GetComponent<MeshCollider>().enabled = true;
+            }
         }
 
         if (0 < Timer)
         {
             Timer--;
             if (Timer <= 0)
+            {
+                Timer = 0;
                 CloseSwitch();
+            }
         }
     }
     public void switching()
@@ -94,5 +105,19 @@ public class Doormove : MonoBehaviour
     public void Pass()
     {
         Timer = 90;
+    }
+    public void ThruPass(bool bFlag)
+    {
+     if(thruFlag)
+            if (bFlag)
+            {
+                ThruWall.transform.GetComponent<MeshCollider>().enabled = false;
+                ThruWallReverse.transform.GetComponent<MeshCollider>().enabled = false;
+            }
+            else
+            {
+                ThruWall.transform.GetComponent<MeshCollider>().enabled = true;
+                ThruWallReverse.transform.GetComponent<MeshCollider>().enabled = true;
+            }
     }
 }

@@ -17,16 +17,19 @@ public class PlayerController : MonoBehaviour
     public bool PlayerAbility;//RayAbilityから書き換える
     bool Sky = false;
     float skyY;
+    public bool UseLongJump;
+    public bool PlayerWalk;
 
     float inputVertical;
     Rigidbody rb;
 
     //リセット能力用
     static Vector3 ResetPos;
-    public bool ResetFlag = false;
+    public bool ResetFlag;
     GameStageSetting Setting;
     void Start()
     {
+        ResetFlag = false;
         Setting = GameObject.Find("GameMaster").GetComponent<GameStageSetting>();
         tag = "Player";
         gameObject.AddComponent<Rigidbody>();
@@ -47,22 +50,17 @@ public class PlayerController : MonoBehaviour
             ResetPos = transform.position;
         }
         defaultScale = transform.lossyScale;
+        PlayerWalk = false;
     }
 
     void OnTriggerEnter(Collider col)
     {
         JumpVertical = 0;
-        if (col.gameObject.tag == "Floor")
-        {
-            Ground = true;
-            Sky = false;
-        }
-        if (col.gameObject.tag == "Floor&Stop")
-        {
-            Ground = true;
-            Sky = false;
-        }
-        if (col.gameObject.tag == "Move&Stop")
+        if (col.gameObject.tag == "Floor" ||
+            col.gameObject.tag == "Floor&Stop"||
+            col.gameObject.tag == "Move&Stop" ||
+            col.gameObject.tag == "StepFloor"
+            )
         {
             Ground = true;
             Sky = false;
@@ -71,24 +69,23 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Floor")
-        {
-            Sky = true;
-            skyY = transform.position.y;
-        }
-        if (col.gameObject.tag == "Floor&Stop")
-        {
-            Sky = true;
-            skyY = transform.position.y;
-        }
-        if (col.gameObject.tag == "Move&Stop")
+        if (!UseLongJump)
+            JumpEnd = true;
+        if (col.gameObject.tag == "Floor" ||
+            col.gameObject.tag == "Floor&Stop"||
+            col.gameObject.tag == "Move&Stop"||
+            col.gameObject.tag == "StepFloor"
+            )
         {
             Sky = true;
             skyY = transform.position.y;
         }
     }
+
     void Update()
     {
+        if (Sky)
+            rb.AddForce(-transform.up);
         if (Sky && Ground)
             if (skyY - 1 > transform.position.y)
                 Ground = Sky = false;
@@ -98,18 +95,20 @@ public class PlayerController : MonoBehaviour
 
         if (!PlayerAbility)//能力使用時の入力制限
         {
-            //EditのProjectSettings...でInput項目Verticalをup以外消去しておく
+            //EditのProjectSettings...でInput項目Verticalをupとｗ以外消去しておく
             inputVertical = Input.GetAxisRaw("Vertical");
             JumpProcess();
         }
         else
         {
+            inputVertical = 0;
             if (ResetFlag)
             {
                 ReStartPosMem();
             }
         }
         FallProcess();
+
         
         Vector3 lossScale = transform.lossyScale;
         Vector3 localScale = transform.localScale;
@@ -125,7 +124,7 @@ public class PlayerController : MonoBehaviour
             Setting.ReStartScene();
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         float vert = 0;
         if (Ground)
@@ -136,6 +135,10 @@ public class PlayerController : MonoBehaviour
         {
             vert = JumpVertical * PlayerScale;
         }
+        if(vert != 0)PlayerWalk = true;
+            else PlayerWalk = false;
+
+
         // カメラの方向から、X-Z平面の単位ベクトルを取得
         Vector3 cameraForward;
         cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
@@ -158,52 +161,64 @@ public class PlayerController : MonoBehaviour
         {
             JumpVertical = inputVertical;
             Ground = false;
-            JumpEnd = false;
             JumpTime = 1;
             rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
-            GetComponent<Rigidbody>().useGravity = false;
+            if (UseLongJump)
+            {
+                GetComponent<Rigidbody>().useGravity = false;
+                JumpEnd = false;
+            }
+            else
+                JumpEnd = true;
         }
         if (Sky && Ground)
             JumpVertical = inputVertical;
     }
     private void FallProcess()
     {
-        if (!Ground && !JumpEnd)
+        if (UseLongJump)
         {
-            JumpTime -= Time.deltaTime;
-            if (JumpTime <= 0)
+            if (!Ground && !JumpEnd)
+            {
+                JumpTime -= Time.deltaTime;
+                if (JumpTime <= 0)
+                {
+                    JumpEnd = true;
+                    JumpTime = 1;
+                }
+            }
+            else
+            {
+                if (!JumpEnd)
+                    JumpEnd = true;
+            }
+            if (Input.GetKeyUp(KeyCode.Space) || JumpEnd)
             {
                 JumpEnd = true;
-                JumpTime = 1;
+                GetComponent<Rigidbody>().useGravity = true;
             }
         }
         else
         {
-            if (!JumpEnd)
-                JumpEnd = true;
+            if (!Ground && !Sky)
+                Ground = false;
+                
         }
-        if (Input.GetKeyUp(KeyCode.Space) || JumpEnd)
-        {
-            JumpEnd = true;
-            GetComponent<Rigidbody>().useGravity = true;
-        }
-
         if (!Ground && JumpEnd)
         {
             rb.AddForce(-transform.up * JumpForce, ForceMode.Force);
         }
         else
         {
-            if (JumpEnd)
-                if (10 < rb.velocity.y)
+            if (JumpEnd || Sky)
+                if (1 < rb.velocity.y)
                     rb.AddForce(-transform.up * JumpForce * 0.2f, ForceMode.Impulse);
         }
-
     }
     private void ReStartPosMem()
     {
         ResetPos = transform.position + new Vector3(0, 5, 0);
-        Setting.ResetStatus = !Setting.ResetStatus;
+        Setting.ResetStatus = true;
         Setting.ReStartScene();
     }
 }

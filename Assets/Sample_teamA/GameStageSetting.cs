@@ -10,6 +10,10 @@ using UnityEngine.Rendering;
 
 public class GameStageSetting : MonoBehaviour
 {
+    //マウス操作かキー操作か
+    public bool MouseMode;
+    //ライト強さ
+    public float LightStrong = 0.3f;
     //リセット能力及び画面外用
     static public bool ResetFlag = false;
     public bool ResetStatus;
@@ -74,18 +78,18 @@ public class GameStageSetting : MonoBehaviour
     }
 
     public void RenderSetting_Gradient()
-    {
+    {   
         //スカイボックスを消去している
-        RenderSettings.skybox = null;
+        //RenderSettings.skybox = null;
         // 環境光のライティング設定
         // ソースをFlatに変更する
         RenderSettings.ambientMode = AmbientMode.Trilight;
         // 環境光の上方向からの色を指定する
-        RenderSettings.ambientSkyColor = Color.black;
+        RenderSettings.ambientSkyColor = Color.black;//.HSVToRGB(0.05f, 0.3f, LightStrong*0.1f, false);
         // 環境光の横方向からの色を指定する
-        RenderSettings.ambientEquatorColor = Color.black;
+        RenderSettings.ambientEquatorColor = Color.HSVToRGB(0.05f, 0.3f, LightStrong, false);
         // 環境光の下方向からの色を指定する
-        RenderSettings.ambientGroundColor = Color.black;
+        RenderSettings.ambientGroundColor = Color.HSVToRGB(0.05f, 0.3f, LightStrong, false);
         //RenderSettings.ambientGroundColor = Color.HSVToRGB(1,10,100,false);//デバッグ用。ちょっと赤にするとき
 
         // 環境光の反射設定
@@ -99,14 +103,16 @@ public class GameStageSetting : MonoBehaviour
 
     void Ability()
     {
-        this.gameObject.AddComponent<RayAbility>().AbilityChengeMenuTime = PlayerAbilityChengeMenuTime;
+        if (!this.gameObject.GetComponent<RayAbility>())
+            this.gameObject.AddComponent<RayAbility>();
+        this.gameObject.GetComponent<RayAbility>().AbilityChengeMenuTime = PlayerAbilityChengeMenuTime;
         if (SceneManager.GetActiveScene().name == "Stage1")
         {
             this.gameObject.GetComponent<RayAbility>().AbilityNum = 0;
         }
         else
         {
-            this.gameObject.GetComponent<RayAbility>().AbilityNum = 5;
+            this.gameObject.GetComponent<RayAbility>().AbilityNum = 4;
         }
         
     }

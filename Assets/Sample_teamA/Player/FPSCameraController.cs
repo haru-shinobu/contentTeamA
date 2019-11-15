@@ -8,6 +8,7 @@ public class FPSCameraController : MonoBehaviour
     Vector3 targetPos, CameraPos, CameraEyePos;
     Camera cam;
     bool SceneEndFlag;
+    bool MouseControl;
     void Start()
     {
         Player = GameObject.Find("Player");
@@ -16,7 +17,7 @@ public class FPSCameraController : MonoBehaviour
         targetPos = Player.transform.position;
         transform.position = Player.transform.position + CameraEyePos;
         cam = GetComponent<Camera>();
-        
+        MouseControl = GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MouseMode;
     }
     // Update is called once per frame
     void Update()
@@ -25,35 +26,43 @@ public class FPSCameraController : MonoBehaviour
         targetPos = Player.transform.position;
         CameraPos = this.transform.position;
 
-        // キーを押している間
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
+        float InputX = 0;
+        float InputY = 0;
+        if (!MouseControl)
         {
-            float InputX = 0;
-            float InputY = 0;
-            if (Input.GetKey(KeyCode.A))
+            // キーを押している間
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
             {
-                InputX = -1;
+                if (Input.GetKey(KeyCode.A))
+                {
+                    InputX = -1;
+                }
+                else
+                if (Input.GetKey(KeyCode.D))
+                {
+                    InputX = 1;
+                }
+                else
+                if (Input.GetKey(KeyCode.W))
+                {
+                    InputY = 1;
+                }
+                else
+                    if (Input.GetKey(KeyCode.S))
+                {
+                    InputY = -1;
+                }
             }
-            else
-            if (Input.GetKey(KeyCode.D))
-            {
-                InputX = 1;
-            }
-            else
-            if (Input.GetKey(KeyCode.W))
-            {
-                InputY = 1;
-            }
-            else
-                if (Input.GetKey(KeyCode.S))
-            {
-                InputY = -1;
-            }
-
-            // targetの位置のY軸を中心に、回転（公転）する
-            transform.RotateAround(CameraPos, Vector3.up, InputX * Time.deltaTime * 200f);
-            transform.RotateAround(CameraPos, transform.right, InputY * Time.deltaTime * 200f);
         }
+        else
+        {
+            InputX = Input.GetAxisRaw("Mouse X");
+            InputY = Input.GetAxisRaw("Mouse Y");
+        }
+        // targetの位置のY軸を中心に、回転（公転）する
+        transform.RotateAround(CameraPos, Vector3.up, InputX * Time.deltaTime * 200f);
+        transform.RotateAround(CameraPos, transform.right, InputY * Time.deltaTime * 200f);
+        
     }
 }
 
