@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Assets\BollMakerScript.cs" />
     <Compile Include="Assets\BollsScript.cs" />
+    <Compile Include="Assets\GoalScript.cs" />
     <Compile Include="Assets\meshEyeIcon.cs" />
     <Compile Include="Assets\RantanControllerScript.cs" />
     <Compile Include="Assets\RayAbility.cs" />

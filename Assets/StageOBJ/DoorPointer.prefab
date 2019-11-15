@@ -200,6 +200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfb289fe1b0102429f1f2d41f8591d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThruWall: {fileID: 0}
+  ThruWallReverse: {fileID: 0}
+  DoorImage: {fileID: 2800000, guid: 4f92328c5ec1d1045a9a497890b47367, type: 3}
 --- !u!1 &4405119868628826702
 GameObject:
   m_ObjectHideFlags: 0

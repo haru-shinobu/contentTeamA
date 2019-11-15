@@ -18,10 +18,10 @@ public class Doormove : MonoBehaviour
     GameObject DoorCollide;
     GameObject DoorRight;
     GameObject DoorLeft;
+    public Texture DoorImage;
     // Start is called before the first frame update
     void Start()
     {
-        
         float roty = gameObject.transform.rotation.y;
         float rotw = gameObject.transform.rotation.w;
         Rota = gameObject.transform.rotation;
@@ -35,7 +35,8 @@ public class Doormove : MonoBehaviour
         
         DoorCollide = Instantiate(DoorRight.transform.gameObject,transform.position + new Vector3(0,DoorRight.transform.localScale.y*0.5f,0),new Quaternion(0,0,0,0),transform);
         DoorCollide.transform.name = "Door";
-        DoorCollide.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //DoorCollide.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        DoorCollide.gameObject.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", DoorImage);
         DoorCollide.gameObject.transform.GetComponent<BoxCollider>().isTrigger = true;
         DoorCollide.transform.localScale = new Vector3(DoorRight.transform.localScale.x * 2, DoorRight.transform.localScale.y, DoorRight.transform.localScale.z*0.5f);
         Destroy(DoorCollide.transform.GetComponent<Doormove>());
