@@ -24,7 +24,8 @@ public class Pendulumbody : MonoBehaviour
         Destroy(transform.root.GetChild(1).gameObject.transform.GetComponent<Rigidbody>());
         transform.root.GetChild(1).gameObject.transform.GetComponent<BoxCollider>().enabled = true;
         transform.root.GetChild(1).gameObject.transform.GetComponent<BoxCollider>().isTrigger = true;
-        transform.root.GetChild(1).gameObject.transform.localScale = new Vector3(1f, 0.5f, 30f);
+        float bodylong = transform.root.GetComponent<Pendulum>().PendulumLong;
+        transform.root.GetChild(1).gameObject.transform.localScale = new Vector3(1f, 0.5f, bodylong);
         transform.root.GetChild(1).gameObject.transform.GetComponent<BoxCollider>();
         transform.root.GetChild(1).gameObject.transform.name = "PendulumBody";
         transform.root.GetChild(1).gameObject.AddComponent<Pendulumbodyfloot>();

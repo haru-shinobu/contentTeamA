@@ -17,7 +17,6 @@ public class StaircaseScript : MonoBehaviour
 
     void Start()
     {
-        tag = "Floor&Stop";
         name = "SpiralStep";
         GameObject obj = (GameObject)Resources.Load("SpiralStep");
 
@@ -39,7 +38,7 @@ public class StaircaseScript : MonoBehaviour
             var PosX = Mathf.Sin(6 * num ) * R;
             var PosY = obj.transform.localScale.y * num;
             var PosZ = -Mathf.Cos(6 * num ) * R;
-            Quaternion rote = Quaternion.Euler(0.0f, 16.22f * num , -3.0f);
+            Quaternion rote = Quaternion.Euler(4.0f, 16.22f * num , -4.5f);
             GameObject Target = Instantiate(obj, pos + new Vector3(PosX, PosY, PosZ), rote, gameObject.transform);
             Target.transform.gameObject.AddComponent<InstantStaircase>().RootStaircase = gameObject;
             Destroy(Target.gameObject.GetComponent<StaircaseScript>());

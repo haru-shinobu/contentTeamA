@@ -80,9 +80,9 @@ public class RotateStaircaseScript : MonoBehaviour
         while (0 < CreateNum)
         {
             if (Pass)
-                pos = transform.GetChild(Childnum+num).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y;
+                pos = transform.GetChild(Childnum + num).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y * 0.7f;
             else
-                pos = transform.GetChild(Childnum+num).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y;
+                pos = transform.GetChild(Childnum + num).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y * 0.7f;
             Instantiate(transform.GetChild(Childnum).gameObject, pos, Quaternion.identity, transform);
             num++;
             CreateNum--;
@@ -108,9 +108,9 @@ public class RotateStaircaseScript : MonoBehaviour
         while (0 < CreateNum)
         {
             if (Pass)
-                pos = transform.GetChild(Childnum+num + 1).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y;
+                pos = transform.GetChild(Childnum + num + 1).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y * 0.7f;
             else
-                pos = transform.GetChild(Childnum+num + 1).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y;
+                pos = transform.GetChild(Childnum + num + 1).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y * 0.7f;
             Instantiate(transform.GetChild(Childnum+num + 1).gameObject, pos, Quaternion.identity, transform);
             num++;
             CreateNum--;
@@ -124,7 +124,7 @@ public class RotateStaircaseScript : MonoBehaviour
             pos = transform.GetChild(Childnum+num + 1).transform.position + transform.up * transform.GetChild(Childnum+num + 1).transform.lossyScale.y * 0.5f;
             Instantiate(transform.GetChild(Childnum + num + 1).gameObject, pos, Quaternion.identity, transform.GetChild(Childnum+num + 1));
             transform.GetChild(Childnum+num + 1).gameObject.transform.GetChild(1).transform.localScale = transform.right * 1 + transform.up * 0.1f + transform.forward * 5;
-            transform.GetChild(Childnum+num + 1).gameObject.transform.GetChild(1).transform.rotation = Quaternion.Euler(1.15f, 0, 0);
+            transform.GetChild(Childnum+num + 1).gameObject.transform.GetChild(1).transform.rotation = Quaternion.Euler(0.8f, 0, 0);
             num++;
             CreateNum--;
         }

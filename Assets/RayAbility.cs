@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[DefaultExecutionOrder(-4)]//スクリプト実行順
 public class RayAbility : MonoBehaviour
 {
     bool MouseControl;
@@ -33,16 +34,17 @@ public class RayAbility : MonoBehaviour
     Vector3 center;                     //視線をとるため
     bool AbilityFlag;                   //能力行使中か否か
     float AbilityTriggerTime = 0;       //各種能力発動までのカウント用
-    protected string StopObjectName;    //Stop能力で別オブジェクトが反応しないようにするため
+    public string StopObjectName;    //Stop能力で別オブジェクトが反応しないようにするため
     public int AbilityNow;              //現在発動中の能力0～4
     float NextUseTime = 0;//クールタイム用
     bool WarpParticleFlag;
     GameObject Instance;
     GameObject InstanceGeat;
+    public bool AbilityStopEmissionFlag;
     void Start()
     {
         MouseControl = GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MouseMode;
-        col = GameObject.Find("clockCanvas").GetComponent<clockScript>();
+        col = GameObject.Find("UICanvas").GetComponent<clockScript>();
         carsor = gameObject.transform.GetComponent<CursorColtroll>();
         center = new Vector3(Screen.width / 2, Screen.height / 2);
         Player = GameObject.Find("Player");
@@ -56,6 +58,7 @@ public class RayAbility : MonoBehaviour
         reticleBreak = GameObject.Find("BreakImage");
         WarpParticleFlag = false;
         AbilityMenuOpenFlag = false;
+        AbilityStopEmissionFlag = false;
     }
 
     // Update is called once per frame
@@ -158,7 +161,7 @@ public class RayAbility : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 AbilityTriggerTime += Time.deltaTime;
-
+                
                 col.RayAbilityWhiteOut(AbilityTriggerTime, true, false);
             }
             if (Input.GetKeyUp(KeyCode.E))
@@ -240,7 +243,6 @@ public class RayAbility : MonoBehaviour
                                     if (Input.GetKeyDown(KeyCode.E))
                                     {
                                         Player.transform.position = hit.point + (hit.normal * Player.transform.localScale.x);
-//Player.gameObject.transform.position = hit.collider.gameObject.transform.position;
                                         AbilityNow = 0;
                                     }
                                 }
@@ -277,12 +279,14 @@ public class RayAbility : MonoBehaviour
                                             if (StopObjectName == null)
                                             {
                                                 StopObjectName = hit.collider.gameObject.transform.root.name;
-                                                hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                                                //hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                                                AbilityStopEmissionFlag = true;
                                             }
                                             else
                                             {
                                                 StopObjectName = null;
-                                                hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                                                //hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                                                AbilityStopEmissionFlag = false;
                                             }
                                             AbilityNow = 0;
                                         }
@@ -293,8 +297,7 @@ public class RayAbility : MonoBehaviour
                                             AbilityTriggerTime = 0;
                                     }
                                 }
-                                else
-                            if (hit.collider.gameObject.tag == "Floor&Stop")
+                                else if (hit.collider.gameObject.tag == "Floor&Stop")
                                 {
                                     AbilityTriggerTime += Time.deltaTime;
                                     if (3 <= AbilityTriggerTime)
@@ -307,12 +310,14 @@ public class RayAbility : MonoBehaviour
                                                 StopObjectName = hit.collider.gameObject.transform.root.name;
                                                 if (hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>())
                                                     hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                                                AbilityStopEmissionFlag = true;
                                             }
                                             else
                                             {
                                                 StopObjectName = null;
                                                 if (hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>())
                                                     hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                                                AbilityStopEmissionFlag = false;
                                             }
                                             AbilityNow = 0;
                                         }
@@ -355,7 +360,32 @@ public class RayAbility : MonoBehaviour
                                     if (Input.GetKeyDown(KeyCode.E))
                                         AbilityTriggerTime = 0;
                                 }
-                            }
+                            }/*
+                            else
+                            if (hit.collider.gameObject.tag == "BreakItem")
+                            {
+                                AbilityTriggerTime += Time.deltaTime;
+                                if (3 <= AbilityTriggerTime)
+                                {
+                                    if (Input.GetKeyDown(KeyCode.E))
+                                    {
+                                        foreach (Transform n in hit.transform)
+                                        {
+                                            GameObject.Destroy(n.gameObject);
+                                        }
+                                        Destroy(hit.collider.gameObject.transform.root.transform);
+                                        AbilityNow = 0;
+                                        AbilityPenalty(BreakAbilityPenaltyTime);
+                                        NextUseTime = 10;
+                                        Instantiate(exploision, hit.point + (hit.normal * 3), Quaternion.identity);
+                                    }
+                                }
+                                else
+                                {
+                                    if (Input.GetKeyDown(KeyCode.E))
+                                        AbilityTriggerTime = 0;
+                                }
+                            }*/
                             else
                             {
                                 AbilityTriggerTime = 0;
@@ -387,19 +417,19 @@ public class RayAbility : MonoBehaviour
             case 0:
                 break;
             case 1:
-                reticleWarp.transform.rotation = Quaternion.LookRotation(normal);
+                reticleWarp.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 reticleWarp.transform.position = point + (normal * 5);
                 CircleWarp.transform.rotation = Quaternion.LookRotation(normal);
                 CircleWarp.transform.position = point + (normal * 5);
                 break;
             case 2:
-                reticleStop.transform.rotation = Quaternion.LookRotation(normal);
+                reticleStop.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 reticleStop.transform.position = point + (normal * 5);
                 CircleStop.transform.rotation = Quaternion.LookRotation(normal);
                 CircleStop.transform.position = point + (normal * 5);
                 break;
             case 3:
-                reticleBreak.transform.rotation = Quaternion.LookRotation(normal);
+                reticleBreak.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 reticleBreak.transform.position = point + (normal * 5);
                 CircleBreak.transform.rotation = Quaternion.LookRotation(normal);
                 CircleBreak.transform.position = point + (normal * 5);
@@ -415,15 +445,15 @@ public class RayAbility : MonoBehaviour
                 break;
             case 1:
                 reticleWarp.transform.rotation = Camera.main.transform.rotation;
-                reticleWarp.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 50);
+                reticleWarp.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 150);
                 break;
             case 2:
                 reticleStop.transform.rotation = Camera.main.transform.rotation;
-                reticleStop.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 50);
+                reticleStop.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 150);
                 break;
             case 3:
                 reticleBreak.transform.rotation = Camera.main.transform.rotation;
-                reticleBreak.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 50);
+                reticleBreak.transform.position = Camera.main.transform.position + (Camera.main.transform.forward * 150);
                 break;
         }
     }

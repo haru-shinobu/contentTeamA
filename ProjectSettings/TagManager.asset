@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Floor
   - wall
-  - TriggerBox
   - WarpPoint
   - Floor&Stop
   - CursorUI
@@ -14,10 +13,12 @@ TagManager:
   - door_right
   - door_left
   - Break&Wall
-  - Explosion
   - Light
   - move&Stop
   - StepFloor
+  - SpiralSteps
+  - Explosion
+  - BreakItem
   layers:
   - Default
   - TransparentFX

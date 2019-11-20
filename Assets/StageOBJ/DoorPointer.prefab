@@ -202,7 +202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ThruWall: {fileID: 0}
   ThruWallReverse: {fileID: 0}
-  DoorImage: {fileID: 2800000, guid: 4f92328c5ec1d1045a9a497890b47367, type: 3}
+  DoorImage: {fileID: 2800000, guid: fd87cb4a47e982445b4c2d56cdda5554, type: 3}
+  PerceptionTime: 0
 --- !u!1 &4405119868628826702
 GameObject:
   m_ObjectHideFlags: 0

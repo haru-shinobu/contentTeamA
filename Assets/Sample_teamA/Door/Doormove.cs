@@ -19,9 +19,16 @@ public class Doormove : MonoBehaviour
     GameObject DoorRight;
     GameObject DoorLeft;
     public Texture DoorImage;
+
+    bool PerceptionFlag;
+    public int PerceptionTime;
+    //ドア通過判定後のプレイヤー保存
+    GameObject Player;
+    
     // Start is called before the first frame update
     void Start()
     {
+        Player = GameObject.Find("Player");
         float roty = gameObject.transform.rotation.y;
         float rotw = gameObject.transform.rotation.w;
         Rota = gameObject.transform.rotation;
@@ -30,6 +37,7 @@ public class Doormove : MonoBehaviour
         Timer = 0;
         OpenFlag = false;
         CloseFlag = false;
+        PerceptionFlag = false;
         DoorRight = transform.GetChild(0).gameObject;
         DoorLeft = transform.GetChild(1).gameObject;
         
@@ -38,7 +46,7 @@ public class Doormove : MonoBehaviour
         //DoorCollide.gameObject.GetComponent<MeshRenderer>().enabled = false;
         DoorCollide.gameObject.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", DoorImage);
         DoorCollide.gameObject.transform.GetComponent<BoxCollider>().isTrigger = true;
-        DoorCollide.transform.localScale = new Vector3(DoorRight.transform.localScale.x * 2, DoorRight.transform.localScale.y, DoorRight.transform.localScale.z*0.5f);
+        DoorCollide.transform.localScale = new Vector3(DoorRight.transform.localScale.x * 1.9f, DoorRight.transform.localScale.y, DoorRight.transform.localScale.z*0.5f);
         Destroy(DoorCollide.transform.GetComponent<Doormove>());
         DoorCollide.transform.gameObject.AddComponent<DoorPassDiscrimination>().Target = gameObject;
         gameObject.transform.rotation = Rota;
@@ -68,6 +76,7 @@ public class Doormove : MonoBehaviour
             {
                 OpenFlag = !OpenFlag;
                 thruFlag = true;
+                PerceptionFlag = false;
             }
         }
         if (CloseFlag)
@@ -94,11 +103,31 @@ public class Doormove : MonoBehaviour
                 CloseSwitch();
             }
         }
+        if (PerceptionFlag)
+        {
+            Timer = PerceptionTime;
+        }
     }
     public void switching()
     {
         OpenFlag = !OpenFlag;
     }
+    //スイッチ式からの入力
+    void SwichChange()
+    {
+        OpenFlag = !OpenFlag;
+    }
+    //感圧式からの入力
+    void PerceptionChange()
+    {
+        if (!CloseFlag)
+        {
+            OpenFlag = true;
+            PerceptionFlag = true;
+        }
+    }
+
+
     public void CloseSwitch()
     {
         CloseFlag = !CloseFlag;
@@ -119,6 +148,7 @@ public class Doormove : MonoBehaviour
             {
                 ThruWall.transform.GetComponent<MeshCollider>().enabled = true;
                 ThruWallReverse.transform.GetComponent<MeshCollider>().enabled = true;
+                Player.GetComponent<PlayerController>().SavePoint(transform.position,-transform.forward);
             }
     }
 }

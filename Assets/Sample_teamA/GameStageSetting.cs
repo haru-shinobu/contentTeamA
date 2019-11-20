@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 // 環境光のモード定義のため利用
 using UnityEngine.Rendering;
 
-
+[DefaultExecutionOrder(-5)]//スクリプト実行順
 public class GameStageSetting : MonoBehaviour
 {
     //マウス操作かキー操作か
@@ -15,7 +15,7 @@ public class GameStageSetting : MonoBehaviour
     //ライト強さ
     public float LightStrong = 0.3f;
     //リセット能力及び画面外用
-    static public bool ResetFlag = false;
+    static public bool ResetFlag;
     public bool ResetStatus;
     //プレイヤーの能力変更メニュー開くために必要な時間。０以上であること
     public float PlayerAbilityChengeMenuTime;
@@ -31,15 +31,17 @@ public class GameStageSetting : MonoBehaviour
     public int Stage1TimeLimit;
     public int Stage2TimeLimit;
     public int Stage3TimeLimit;
+    public int NowStageTimeLimit;
     //ストームエリア加速度設定
     public float StormForce; //100で移動力と拮抗
     //各種エフェクト
     public GameObject Explotion;
     public GameObject Warpload;
     public GameObject Warpgeat;
-
+    //リロード用
     public static int ReLoadPlayerPos;
-    void Start()
+
+    void Awake()
     {
         ResetStatus = ResetFlag;
         ResetFlag = false;
@@ -50,13 +52,20 @@ public class GameStageSetting : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "Stage1":
+                NowStageTimeLimit = Stage1TimeLimit;
                 this.transform.gameObject.AddComponent<Stage1TimeManager>().LimitTime(Stage1TimeLimit);
                 break;
             case "Stage2":
+                NowStageTimeLimit = Stage2TimeLimit;
                 this.transform.gameObject.AddComponent<Stage2TimeManager>().LimitTime(Stage2TimeLimit);
                 break;
             case "Stage3":
+                NowStageTimeLimit = Stage3TimeLimit;
                 this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(Stage3TimeLimit);
+                break;
+            case "Sample_TeamA":
+                NowStageTimeLimit = 240;
+                this.transform.gameObject.AddComponent<SamPleTimeManager>().LimitTime(NowStageTimeLimit);
                 break;
         }
     }

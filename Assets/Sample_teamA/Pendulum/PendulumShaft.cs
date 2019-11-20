@@ -54,6 +54,32 @@ public class PendulumShaft : MonoBehaviour
             gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
             gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
         }
+    }
+    public void StopTexChange(Texture Tex,bool AbFlag , Color color)
+    {
+        gameObject.transform.root.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", color);
+        gameObject.transform.root.GetChild(1).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", color);
+        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", color);
+        gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", color);
+
+
+        gameObject.transform.root.GetComponent<MeshRenderer>().material.SetTexture("_EmissionMap", Tex);
+        gameObject.transform.root.GetChild(1).GetComponent<MeshRenderer>().material.SetTexture("_EmissionMap", Tex);
+        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetTexture("_EmissionMap", Tex);
+        gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.SetTexture("_EmissionMap", Tex);
+
+        if (AbFlag)
+        {
+            gameObject.transform.root.GetChild(1).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+            gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+            gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+        }
+        else
+        {
+            gameObject.transform.root.GetChild(1).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+            gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+            gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+        }
 
     }
 }

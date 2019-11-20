@@ -4,19 +4,45 @@ using UnityEngine;
 
 public class footswitchScript : MonoBehaviour
 {
+    public bool SwitchOrPerception;
+    public int PerceptionTime;
     public GameObject Target;
-    // Start is called before the first frame update
+    public GameObject Target2;
+    
+
+    MeshRenderer mesh;
     void Start()
     {
-        gameObject.transform.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+        mesh = gameObject.transform.GetComponent<MeshRenderer>();
+        mesh.material.DisableKeyword("_EMISSION");
+        if (Target.transform.GetComponent<Doormove>())
+        {
+            if (++PerceptionTime <= 90)
+                PerceptionTime *= 60;
+            Target.transform.GetComponent<Doormove>().PerceptionTime = PerceptionTime;
+        }
+        if (SwitchOrPerception)
+            mesh.enabled = false;
     }
     void OnTriggerEnter(Collider col)
     {
-        gameObject.transform.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
-        Target.SendMessage("SwichChange");
+        mesh.material.EnableKeyword("_EMISSION");
+        if (SwitchOrPerception)
+        {
+            Target.SendMessage("PerceptionChange");
+            if (Target2)
+                Target2.SendMessage("PerceptionChange");
+        }
+        else
+        {
+            Target.SendMessage("SwichChange");
+            if (Target2)
+                Target2.SendMessage("SwichChange");
+        }
     }
     void OnTriggerExit(Collider col)
     {
-        gameObject.transform.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+        mesh.material.DisableKeyword("_EMISSION");
     }
 }
+//SwitchOrPerception

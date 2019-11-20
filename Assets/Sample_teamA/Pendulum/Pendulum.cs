@@ -7,6 +7,7 @@ public class Pendulum : MonoBehaviour
     Rigidbody rigid;
     GameObject WayTrigger;
     public float PendulumHigh;
+    public float PendulumLong;
     void Start()
     {
         tag = "Floor&Stop";

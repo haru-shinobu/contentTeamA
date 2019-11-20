@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         ResetFlag = false;
         Setting = GameObject.Find("GameMaster").GetComponent<GameStageSetting>();
         tag = "Player";
+        gameObject.transform.localScale = new Vector3(50,150,50);
         gameObject.AddComponent<Rigidbody>();
         GetComponent<BoxCollider>().isTrigger = true;
         GetComponent<Rigidbody>().freezeRotation = true;
@@ -162,14 +163,17 @@ public class PlayerController : MonoBehaviour
             JumpVertical = inputVertical;
             Ground = false;
             JumpTime = 1;
-            rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
             if (UseLongJump)
             {
+                rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
                 GetComponent<Rigidbody>().useGravity = false;
                 JumpEnd = false;
             }
             else
+            {
+                rb.AddForce(transform.up * JumpForce*1.5f, ForceMode.Impulse);
                 JumpEnd = true;
+            }
         }
         if (Sky && Ground)
             JumpVertical = inputVertical;
@@ -198,12 +202,13 @@ public class PlayerController : MonoBehaviour
                 GetComponent<Rigidbody>().useGravity = true;
             }
         }
+        /*
         else
         {
             if (!Ground && !Sky)
                 Ground = false;
                 
-        }
+        }*/
         if (!Ground && JumpEnd)
         {
             rb.AddForce(-transform.up * JumpForce, ForceMode.Force);
@@ -217,9 +222,13 @@ public class PlayerController : MonoBehaviour
     }
     private void ReStartPosMem()
     {
-        ResetPos = transform.position + new Vector3(0, 5, 0);
+//        ResetPos = transform.position + new Vector3(0, 5, 0);
         Setting.ResetStatus = true;
         Setting.ReStartScene();
+    }
+    public void SavePoint(Vector3 point,Vector3 Way)
+    {
+        ResetPos = point + Way * transform.localScale.y + new Vector3(0, transform.localScale.y + 5, 0);
     }
 }
 
