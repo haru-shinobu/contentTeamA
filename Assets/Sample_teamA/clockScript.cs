@@ -359,7 +359,10 @@ public class clockScript : MonoBehaviour
         foreach (GameObject gameObj in stopObjects2)
             gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
         foreach (GameObject gameObj in breakObjects)
-            gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
+            if (gameObj.GetComponent<MeshRenderer>())
+                gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
+            else
+                gameObj.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
         foreach (GameObject gameObj in stopObjects3)
         {
             gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
@@ -496,12 +499,18 @@ public class clockScript : MonoBehaviour
         {
             foreach (GameObject gameObj in breakObjects)
             {
-                gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                if (gameObj.GetComponent<MeshRenderer>())
+                    gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                else
+                    gameObj.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
             }
         }
     }
     void Emission(GameObject gObj)
     {
-        gObj.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");        
+        if (gObj.GetComponent<MeshRenderer>())
+            gObj.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+        else
+            gObj.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
     }
 }

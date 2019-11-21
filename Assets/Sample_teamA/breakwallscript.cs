@@ -13,10 +13,6 @@ public class breakwallscript : MonoBehaviour
         transform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
         secand = transform.gameObject.AddComponent<BoxCollider>();
         secand.isTrigger = true;
-        //BreakFrame = GameObject.Find("fure-mu");
-        //Instantiate(BreakFrame,transform.position - new Vector3(0,transform.localScale.y*0.5f),new Quaternion(0,0,0,0),transform);
-        //transform.GetChild(0).gameObject.transform.localScale *= 0.001f;
-        //transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
     void Update()
     {
@@ -28,7 +24,7 @@ public class breakwallscript : MonoBehaviour
                 transform.gameObject.GetComponent<BoxCollider>().enabled = false;
                 secand.enabled = false;
                 transform.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                //transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
+                
             }
         }
     }

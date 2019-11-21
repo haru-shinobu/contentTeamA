@@ -360,20 +360,25 @@ public class RayAbility : MonoBehaviour
                                     if (Input.GetKeyDown(KeyCode.E))
                                         AbilityTriggerTime = 0;
                                 }
-                            }/*
+                            }
                             else
-                            if (hit.collider.gameObject.tag == "BreakItem")
+                                 if (hit.collider.gameObject.tag == "BreakItem")
                             {
                                 AbilityTriggerTime += Time.deltaTime;
                                 if (3 <= AbilityTriggerTime)
                                 {
                                     if (Input.GetKeyDown(KeyCode.E))
                                     {
-                                        foreach (Transform n in hit.transform)
+                                        if (hit.collider.gameObject.GetComponent<MeshRenderer>())
                                         {
-                                            GameObject.Destroy(n.gameObject);
+                                            hit.collider.gameObject.GetComponent<MeshCollider>().enabled = false;
+                                            hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = false;
                                         }
-                                        Destroy(hit.collider.gameObject.transform.root.transform);
+                                        else
+                                        {
+                                            hit.collider.gameObject.GetComponent<MeshCollider>().enabled = false;
+                                            hit.collider.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+                                        }
                                         AbilityNow = 0;
                                         AbilityPenalty(BreakAbilityPenaltyTime);
                                         NextUseTime = 10;
@@ -385,7 +390,7 @@ public class RayAbility : MonoBehaviour
                                     if (Input.GetKeyDown(KeyCode.E))
                                         AbilityTriggerTime = 0;
                                 }
-                            }*/
+                            }
                             else
                             {
                                 AbilityTriggerTime = 0;

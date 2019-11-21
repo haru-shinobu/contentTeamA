@@ -57,8 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DownloadAsset\Laterns and candles\scripts\CameraFacing.cs" />
-    <Compile Include="Assets\DownloadAsset\Laterns and candles\scripts\ExtendedFlycam.cs" />
+    <Compile Include="Assets\DownloadAsset\Dissolve Edge by Moonflower Carnivore\Scripts\HideIfDisabledDrawer.cs" />
     <Compile Include="Assets\DownloadAsset\RunemarkStudio\DarkFantasyKit [Free]\Readme\Parts\Readme.cs" />
     <Compile Include="Assets\GameTimerDirector.cs" />
     <Compile Include="Assets\meshEyeIcon.cs" />
@@ -116,7 +115,10 @@
     <Compile Include="Assets\windowScript.cs" />
     <None Include="Assets\DownloadAsset\Laterns and candles\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Script\NoClearObj.shader" />
+    <None Include="Assets\DownloadAsset\Dissolve Edge by Moonflower Carnivore\Shaders\Transparent_Unlit_DissolveEdge.shader" />
+    <None Include="Assets\DownloadAsset\Dissolve Edge by Moonflower Carnivore\readme_DissolveEdge.txt" />
     <None Include="Assets\ObjClearShader.shader" />
+    <None Include="Assets\DownloadAsset\Racing Flag Animated\shaders\vertex_animation_shader.shader" />
     <None Include="Assets\NoObjClearShader.shader" />
     <None Include="Assets\Script\DoubleSide.shader" />
     <Reference Include="Unity.Timeline.Editor">

@@ -89,8 +89,8 @@ public class Doormove : MonoBehaviour
             {
                 CloseFlag = !CloseFlag;
                 thruFlag = false;
-                ThruWall.transform.GetComponent<MeshCollider>().enabled = true;
-                ThruWallReverse.transform.GetComponent<MeshCollider>().enabled = true;
+                ThruWall.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = true;
+                ThruWallReverse.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = true;
             }
         }
 
@@ -141,13 +141,13 @@ public class Doormove : MonoBehaviour
      if(thruFlag)
             if (bFlag)
             {
-                ThruWall.transform.GetComponent<MeshCollider>().enabled = false;
-                ThruWallReverse.transform.GetComponent<MeshCollider>().enabled = false;
+                ThruWall.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = false;
+                ThruWallReverse.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = false;
             }
             else
             {
-                ThruWall.transform.GetComponent<MeshCollider>().enabled = true;
-                ThruWallReverse.transform.GetComponent<MeshCollider>().enabled = true;
+                ThruWall.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = true;
+                ThruWallReverse.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = true;
                 Player.GetComponent<PlayerController>().SavePoint(transform.position,-transform.forward);
             }
     }
