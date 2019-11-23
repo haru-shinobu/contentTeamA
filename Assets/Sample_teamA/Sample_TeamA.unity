@@ -5572,7 +5572,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 5253d4af8b9e25a49a7a7247f6f1e2e9, type: 3}
     m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
@@ -15628,7 +15628,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 5253d4af8b9e25a49a7a7247f6f1e2e9, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 1
@@ -16448,7 +16448,7 @@ MonoBehaviour:
     type: 3}
   Warpgeat: {fileID: 7896925598725281991, guid: 622f7893533f98743b52a09a852e2c53,
     type: 3}
-  NexrLoadWaitTime: 5
+  NextLoadWaitTime: 0
   DGoalFlag: 0
 --- !u!4 &1795324803
 Transform:
@@ -24175,12 +24175,12 @@ PrefabInstance:
     - target: {fileID: 1222665590858070946, guid: d3b9bcb82929d744888613f59a8c932e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1281
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1222665590858070946, guid: d3b9bcb82929d744888613f59a8c932e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1222665590858070946, guid: d3b9bcb82929d744888613f59a8c932e,
         type: 3}
