@@ -7,7 +7,7 @@ public class BollMakerScript : MonoBehaviour
     //public int BollNum;
     public int ReCastTime;
     public float bollScale;
-    
+
     float TimeCountB;
     bool Flag;
     bool RemakeFlag;
@@ -21,9 +21,9 @@ public class BollMakerScript : MonoBehaviour
             ReCastTime = 6;
         if (bollScale < 1)
             bollScale = 1;
-        Flag = true;
+        Flag = false;
     }
-    
+
     void Update()
     {
         if (Flag) {
@@ -39,6 +39,9 @@ public class BollMakerScript : MonoBehaviour
     void CollStop()
     {
         Flag = !Flag;
+    }
+    void SwichChange(){
+        Flag = true;
     }
     
     void Maker()
