@@ -68,8 +68,8 @@ public class FPSCameraController : MonoBehaviour
         }
         else
         {
-            gameObject.transform.LookAt(goalpos, Vector3.up);
             gameObject.transform.LookAt(goalpos, Vector3.right);
+            gameObject.transform.LookAt(goalpos, Vector3.up);   
         }
         // targetの位置のY軸を中心に、回転（公転）する
         transform.RotateAround(CameraPos, Vector3.up, InputX * Time.deltaTime * 200f);

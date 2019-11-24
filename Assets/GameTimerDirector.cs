@@ -30,11 +30,12 @@ public class GameTimerDirector : MonoBehaviour
     void Update()
     {
         float onetime = NowTime;
+
         if (!GameCrearLoadFlag)
         {
             rect.sizeDelta = TextSpace;
             rect.localPosition = timepos;
-            timerText.GetComponent<Text>().text = ("TimeLimit") + ("\n") + (Limittimer/* - onetime*/).ToString("F0") + (" sec");
+            timerText.GetComponent<Text>().text = ("TimeLimit") + ("\n") + (Limittimer).ToString("F0") + (" sec");
         }
         else
         {
@@ -42,5 +43,7 @@ public class GameTimerDirector : MonoBehaviour
             rect.localPosition = timepos;
             timerText.GetComponent<Text>().text = ("ClearTime") + ("\n") + (Limittimer - onetime).ToString("F0") + (" sec");
         }
+        if (NowTime < 0)
+            gameObject.GetComponent<GameStageSetting>().GAMEOVER();
     }
 }

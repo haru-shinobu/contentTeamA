@@ -132,7 +132,7 @@ public class clockScript : MonoBehaviour
             {//針を向けてる
                 //clockhand.eulerAngles = new Vector3(0, 0, 180);
                 float Second = GNTimer.NowTime;
-                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (RestSecond - Second));
+                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond*/ - Second));
                 if (!GameStartFlag) GameStartFlag = true;
             }
             else
@@ -141,7 +141,7 @@ public class clockScript : MonoBehaviour
                 clockertop.localPosition = clocker.localPosition - pos;
                 clockhand.localPosition = clocker.localPosition - handpos;
                 float Second = GNTimer.NowTime;
-                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (RestSecond - Second));
+                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond*/ - Second));
 
                 if (StartPos.x - clocker.localPosition.x < 1f)
                 {
@@ -163,7 +163,8 @@ public class clockScript : MonoBehaviour
             {
                 CountTimer -= 1.0f;
                 float Second = GNTimer.NowTime;
-                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (RestSecond - Second));
+                if (RestSecond - Second >= 0)
+                    clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond -*/ Second));
             }
         }
     }
@@ -255,7 +256,7 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
                     EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
                     EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
-                    AbilityText.text = ("魔眼を使ってる間は動けなくなる。");
+                    AbilityText.text = ("Qで魔眼を使う。目に集中するので動けない");
                     if (OpenRootFlag)
                         AbilityText.text = ("風の音がする…どこかに道が開いたようだ");
                     break;
@@ -316,6 +317,7 @@ public class clockScript : MonoBehaviour
     bool bFadeOut;
     float SFadenum;
     float OFadenum;
+
     public void RayAbilityWhiteOut(float Count, bool bFadeC, bool bFadeO)
     {
         col.enabled = true;

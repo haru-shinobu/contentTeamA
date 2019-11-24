@@ -19,7 +19,7 @@ public class GameStageSetting : MonoBehaviour
     static public int ResetStageDiv;
     public bool ResetStatus;
     //プレイヤーの能力変更メニュー開くために必要な時間。０以上であること
-    public float PlayerAbilityChengeMenuTime;
+    public float AbilityMenuTime;
     //破壊能力及びリセット能力ペナルティー数。（秒）
     public int BreakAbilityPenalty; //仮数10
     public int ResetAbilityPenalty; //仮数10
@@ -48,7 +48,7 @@ public class GameStageSetting : MonoBehaviour
     public bool DGoalFlag;
     void Awake()
     {
-        if (DGoalFlag)
+        if (DGoalFlag)//ゴールデバッグ用
             DGoal();
         ResetStatus = ResetFlag;
         if (ResetFlag)
@@ -150,7 +150,7 @@ public class GameStageSetting : MonoBehaviour
     {
         if (!this.gameObject.GetComponent<RayAbility>())
             this.gameObject.AddComponent<RayAbility>();
-        this.gameObject.GetComponent<RayAbility>().AbilityChengeMenuTime = PlayerAbilityChengeMenuTime;
+        this.gameObject.GetComponent<RayAbility>().AbilityChengeMenuTime = AbilityMenuTime;
         /*
          * if (SceneManager.GetActiveScene().name == "Stage1")
         {
@@ -204,6 +204,9 @@ public class GameStageSetting : MonoBehaviour
     {
         StartCoroutine("LoadScene"); 
     }
+    void GameOverLoad() {
+        StartCoroutine("LoadSceneGameOver");
+    }
     protected IEnumerator LoadScene()
     {
         var async = SceneManager.LoadSceneAsync("Result");
@@ -212,8 +215,16 @@ public class GameStageSetting : MonoBehaviour
         yield return new WaitForSeconds(NextLoadWaitTime);
         async.allowSceneActivation = true;
     }
+    protected IEnumerator LoadSceneGameOver()
+    {
+        var async = SceneManager.LoadSceneAsync("Title");
 
-    
+        async.allowSceneActivation = false;
+        yield return new WaitForSeconds(NextLoadWaitTime);
+        async.allowSceneActivation = true;
+    }
+
+
     //以下、SampleStafeのみの関数
     public void MakeDiv(int val)
     {
@@ -227,5 +238,23 @@ public class GameStageSetting : MonoBehaviour
         GameObject Picture = GameObject.Find("picture");
         Picture.transform.position = new Vector3(765, 1180, 0);
         Picture.transform.rotation = new Quaternion(-0.3f, 0.7f, 0.3f, 0.7f);
+    }
+
+    public void GAMEOVER()
+    {
+        ClearTimeStop();
+        GameOverLoad();
+        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        Player.GetComponent<PlayerController>().enabled = false;
+        //Player.AddComponent<GameOverPlayerMoving>();
+        Destroy(GameObject.Find("footCanvas"));
+        GameObject cam = GameObject.Find("FPSCamera");
+        Destroy(cam.GetComponent<FPSCameraController>());
+        //cam.AddComponent<>
+        GameObject.Find("UICanvas").transform.GetChild(12).GetChild(0).gameObject.SetActive(false);
+        GameObject.Find("UICanvas").GetComponent<Canvas>().enabled = false;
+        gameObject.GetComponent<CursorColtroll>().enabled = false;
+        gameObject.GetComponent<RayAbility>().enabled = false;
+        Destroy(GameObject.Find("CursolCanvas"));
     }
 }
