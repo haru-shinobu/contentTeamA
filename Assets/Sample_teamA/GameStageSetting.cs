@@ -42,7 +42,8 @@ public class GameStageSetting : MonoBehaviour
     //リロード用
     public static int ReLoadPlayerPos;
     //ステージクリアからリザルトへ飛ぶときの待ち時間
-    public int NextLoadWaitTime;
+    public int ClearLoadWaitTime;
+    public int GameOverLoadWaitTime;
 
     //デバッグ用
     public bool DGoalFlag;
@@ -99,7 +100,7 @@ public class GameStageSetting : MonoBehaviour
                 this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(Stage3TimeLimit, SceneManager.GetActiveScene().name);
                 break;
             case "Sample_TeamA":
-                NowStageTimeLimit = 240;
+                NowStageTimeLimit = 5;
                 this.transform.gameObject.AddComponent<SamPleTimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 break;
         }
@@ -151,15 +152,9 @@ public class GameStageSetting : MonoBehaviour
         if (!this.gameObject.GetComponent<RayAbility>())
             this.gameObject.AddComponent<RayAbility>();
         this.gameObject.GetComponent<RayAbility>().AbilityChengeMenuTime = AbilityMenuTime;
-        /*
-         * if (SceneManager.GetActiveScene().name == "Stage1")
-        {
-            this.gameObject.GetComponent<RayAbility>().AbilityNum = 0;
-        }
-        else
-        {*/
-            this.gameObject.GetComponent<RayAbility>().AbilityNum = 4;
-        //}
+      
+        this.gameObject.GetComponent<RayAbility>().AbilityNum = 4;
+        
         
     }
 
@@ -212,7 +207,7 @@ public class GameStageSetting : MonoBehaviour
         var async = SceneManager.LoadSceneAsync("Result");
         
         async.allowSceneActivation = false;   
-        yield return new WaitForSeconds(NextLoadWaitTime);
+        yield return new WaitForSeconds(ClearLoadWaitTime);
         async.allowSceneActivation = true;
     }
     protected IEnumerator LoadSceneGameOver()
@@ -220,7 +215,7 @@ public class GameStageSetting : MonoBehaviour
         var async = SceneManager.LoadSceneAsync("Title");
 
         async.allowSceneActivation = false;
-        yield return new WaitForSeconds(NextLoadWaitTime);
+        yield return new WaitForSeconds(GameOverLoadWaitTime);
         async.allowSceneActivation = true;
     }
 
@@ -250,7 +245,7 @@ public class GameStageSetting : MonoBehaviour
         Destroy(GameObject.Find("footCanvas"));
         GameObject cam = GameObject.Find("FPSCamera");
         Destroy(cam.GetComponent<FPSCameraController>());
-        //cam.AddComponent<>
+        cam.AddComponent<GameOverCam>();
         GameObject.Find("UICanvas").transform.GetChild(12).GetChild(0).gameObject.SetActive(false);
         GameObject.Find("UICanvas").GetComponent<Canvas>().enabled = false;
         gameObject.GetComponent<CursorColtroll>().enabled = false;

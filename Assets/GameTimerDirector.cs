@@ -14,6 +14,7 @@ public class GameTimerDirector : MonoBehaviour
     Vector2 TextSpace;
     public float NowTime;
     public bool GameCrearLoadFlag;
+    private bool GameOverFlag;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class GameTimerDirector : MonoBehaviour
         TextSpace = rect.sizeDelta;
         timepos = rect.transform.localPosition;
         GameCrearLoadFlag = false;
+        GameOverFlag = false;
     }
 
     // Update is called once per frame
@@ -44,6 +46,10 @@ public class GameTimerDirector : MonoBehaviour
             timerText.GetComponent<Text>().text = ("ClearTime") + ("\n") + (Limittimer - onetime).ToString("F0") + (" sec");
         }
         if (NowTime < 0)
-            gameObject.GetComponent<GameStageSetting>().GAMEOVER();
+            if (!GameOverFlag)
+            {
+                gameObject.GetComponent<GameStageSetting>().GAMEOVER();
+                GameOverFlag = true;
+            }
     }
 }
