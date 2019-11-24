@@ -16545,7 +16545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MouseMode: 1
-  LightStrong: 0.3
+  LightStrong: 0.4
   ResetStatus: 0
   AbilityMenuTime: 0
   BreakAbilityPenalty: 10
