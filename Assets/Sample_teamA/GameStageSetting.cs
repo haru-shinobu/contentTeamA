@@ -100,7 +100,7 @@ public class GameStageSetting : MonoBehaviour
                 this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(Stage3TimeLimit, SceneManager.GetActiveScene().name);
                 break;
             case "Sample_TeamA":
-                NowStageTimeLimit = 20;
+                NowStageTimeLimit = 200;
                 this.transform.gameObject.AddComponent<SamPleTimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 break;
         }
