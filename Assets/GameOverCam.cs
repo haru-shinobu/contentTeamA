@@ -19,12 +19,14 @@ public class GameOverCam : MonoBehaviour
     void Update()
     {
         float Rot = transform.localRotation.eulerAngles.z;
-
+        Debug.Log(Rot);
         count =50;
         //if (count > 100) count = 0;
+
+        /*
         if (!Flag)
         {
-            if (Rot < 90)
+            if (Rot < 20)
                 transform.RotateAround(pos, transform.forward, Time.deltaTime * count);
             else
                 Flag = true;
@@ -36,7 +38,7 @@ public class GameOverCam : MonoBehaviour
             else
                 Flag = false;
         }
-            
+          */  
 
     }
 }
