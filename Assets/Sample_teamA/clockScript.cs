@@ -183,10 +183,10 @@ public class clockScript : MonoBehaviour
             EyeAbilityTear3.gameObject.GetComponent<Image>().enabled = true;
             EyeAbilityTear4.gameObject.GetComponent<Image>().enabled = true;
             float ANum = Time.deltaTime * 10;
-            EyeAbilityTear4.localPosition = Vector2.Lerp(EyeAbilityTear1.localPosition, StandardTearPos + new Vector2(0, -200), ANum);
-            EyeAbilityTear3.localPosition = Vector2.Lerp(EyeAbilityTear2.localPosition, StandardTearPos + new Vector2(0, -415), ANum);
-            EyeAbilityTear2.localPosition = Vector2.Lerp(EyeAbilityTear3.localPosition, StandardTearPos + new Vector2(0, -630), ANum);
-            EyeAbilityTear1.localPosition = Vector2.Lerp(EyeAbilityTear4.localPosition, StandardTearPos + new Vector2(0, -845), ANum);
+            EyeAbilityTear4.localPosition = Vector2.Lerp(EyeAbilityTear4.localPosition, StandardTearPos + new Vector2(0, -200), ANum);
+            EyeAbilityTear3.localPosition = Vector2.Lerp(EyeAbilityTear3.localPosition, StandardTearPos + new Vector2(0, -415), ANum);
+            EyeAbilityTear2.localPosition = Vector2.Lerp(EyeAbilityTear2.localPosition, StandardTearPos + new Vector2(0, -630), ANum);
+            EyeAbilityTear1.localPosition = Vector2.Lerp(EyeAbilityTear1.localPosition, StandardTearPos + new Vector2(0, -845), ANum);
 
             switch (Abilitycontroller.AbilityNow)
             {
@@ -243,10 +243,10 @@ public class clockScript : MonoBehaviour
             EyeAbilityTear2.gameObject.GetComponent<Image>().enabled = false;
             EyeAbilityTear3.gameObject.GetComponent<Image>().enabled = false;
             EyeAbilityTear4.gameObject.GetComponent<Image>().enabled = false;
-            EyeAbilityTear1.localPosition = StandardTearPos;
-            EyeAbilityTear2.localPosition = StandardTearPos;
-            EyeAbilityTear3.localPosition = StandardTearPos;
             EyeAbilityTear4.localPosition = StandardTearPos;
+            EyeAbilityTear3.localPosition = StandardTearPos;
+            EyeAbilityTear2.localPosition = StandardTearPos;
+            EyeAbilityTear1.localPosition = StandardTearPos;
             AbilityText.fontSize = 50;
             switch (Abilitycontroller.AbilityNow)
             {

@@ -8,37 +8,51 @@ public class GameOverCam : MonoBehaviour
     bool Flag;
     int count;
     Quaternion rot;
+    GameObject player;
+    int Cou;
     void Start()
     {
         Flag = false;
         count = 0;
-        pos = GameObject.Find("Player").transform.position - Vector3.up * transform.localScale.y * 0.5f;
-        rot = transform.rotation;
+        Cou = 0;
+        player = GameObject.Find("Player");
+        pos = player.transform.position - Vector3.up * player.transform.localScale.y * 0.5f;
+        rot = player.transform.rotation;
+        Instantiate(Resources.Load<Canvas>("GameOverCanvas"));
     }
 
     void Update()
     {
         float Rot = transform.localRotation.eulerAngles.z;
-        Debug.Log(Rot);
-        count =50;
-        //if (count > 100) count = 0;
 
-        /*
-        if (!Flag)
+        if (Cou < 2)
         {
-            if (Rot < 20)
-                transform.RotateAround(pos, transform.forward, Time.deltaTime * count);
+            Vector3 Forward = player.transform.forward;
+            Quaternion IRot = transform.rotation;
+            transform.rotation = rot;
+            
+            if (!Flag)
+            {
+                if (count++ < 20)
+                    transform.RotateAround(pos, Forward, Time.deltaTime * 50);
+                else
+                {
+                    Flag = !Flag;
+                    Cou++;
+                }
+            }
             else
-                Flag = true;
+            {
+                if (-20 < count--)
+                    transform.RotateAround(pos, Forward, -Time.deltaTime * 50);
+                else
+                    Flag = !Flag;
+            }
+            transform.rotation = IRot;
         }
         else
         {
-            if (0 < Rot)
-                transform.RotateAround(pos, transform.forward, -Time.deltaTime * count);
-            else
-                Flag = false;
+            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(0,0.7f,0.7f,0.1f), Time.deltaTime * 2);
         }
-          */  
-
     }
 }
