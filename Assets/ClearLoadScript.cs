@@ -10,14 +10,13 @@ public class ClearLoadScript : MonoBehaviour
     GameTimerDirector GTD;
     GameStageSetting GSS;
     GameObject Player;
-    GameObject GoalEffect;
+    //GameObject GoalEffect;
     GameObject obj;
     public GameObject sulewall;
     Canvas PrefabCanvas;
     void Start()
     {
-
-        GoalEffect = GameObject.Find("GoalEffect");
+      //GoalEffect = GameObject.Find("GoalEffect");
         Player = GameObject.Find("Player");
         Flag = false;
         Flag2 = false;
