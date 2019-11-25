@@ -119,8 +119,11 @@ public class GameStageSetting : MonoBehaviour
         Player.gameObject.transform.localScale = new Vector3(PlayerSizeX, PlayerSizeY, PlayerSizeZ);
         Player.gameObject.GetComponent<PlayerController>().moveSpeed = MoveSpeed;
         Player.gameObject.GetComponent<PlayerController>().JumpForce = JampForce;
-        GameObject Storm = GameObject.Find("StormEria");
-        Storm.transform.GetComponent<StormScript>().StormForce = StormForce;
+        if (GameObject.Find("StormEria"))
+        {
+            GameObject Storm = GameObject.Find("StormEria");
+            Storm.transform.GetComponent<StormScript>().StormForce = StormForce;
+        }
     }
 
     public void RenderSetting_Gradient()
