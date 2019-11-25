@@ -23,6 +23,7 @@ public class RayAbility : MonoBehaviour
     clockScript col;//リセット能力の視界濁らせる用
 
     public GameObject exploision;
+    public GameObject CFX2_PickupDiamond2;
     public GameObject WarpLoad;
     public GameObject WarpGeat;
     CursorColtroll carsor;
@@ -44,6 +45,7 @@ public class RayAbility : MonoBehaviour
     void Start()
     {
         MouseControl = GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MouseMode;
+        CFX2_PickupDiamond2 = (GameObject)Resources.Load("CFX2_PickupDiamond2");
         col = GameObject.Find("UICanvas").GetComponent<clockScript>();
         carsor = gameObject.transform.GetComponent<CursorColtroll>();
         center = new Vector3(Screen.width / 2, Screen.height / 2);
@@ -276,6 +278,8 @@ public class RayAbility : MonoBehaviour
                                         if (Input.GetKeyDown(KeyCode.E))
                                         {
                                             hit.collider.gameObject.SendMessage("CollStop");
+                                            Instantiate(CFX2_PickupDiamond2, hit.point + (hit.normal * 3), Quaternion.identity);
+
                                             if (StopObjectName == null)
                                             {
                                                 StopObjectName = hit.collider.gameObject.transform.root.name;
@@ -305,6 +309,7 @@ public class RayAbility : MonoBehaviour
                                         if (Input.GetKeyDown(KeyCode.E))
                                         {
                                             hit.collider.gameObject.SendMessage("CollStop");
+                                            Instantiate(CFX2_PickupDiamond2, hit.point + (hit.normal * 3), Quaternion.identity);
                                             if (StopObjectName == null)
                                             {
                                                 StopObjectName = hit.collider.gameObject.transform.root.name;
