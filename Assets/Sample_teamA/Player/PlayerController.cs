@@ -219,6 +219,11 @@ public class PlayerController : MonoBehaviour
                 if (1 < rb.velocity.y)
                     rb.AddForce(-transform.up * JumpForce * 0.2f, ForceMode.Impulse);
         }
+        if (!UseLongJump)
+            if (!Ground && !JumpEnd)
+            {
+                Ground = true;
+            }
     }
     private void ReStartPosMem()
     {

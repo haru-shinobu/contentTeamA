@@ -12,7 +12,7 @@ public class SeasawZ : MonoBehaviour
         tag = "Floor&Stop";
         gameObject.AddComponent<Rigidbody>();
         gameObject.GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<Rigidbody>().angularDrag = 30.0f;
+        GetComponent<Rigidbody>().angularDrag = 40.0f;
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition |
         RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         rigid = gameObject.GetComponent<Rigidbody>();

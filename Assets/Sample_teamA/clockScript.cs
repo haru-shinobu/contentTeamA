@@ -48,6 +48,10 @@ public class clockScript : MonoBehaviour
     GameObject[] breakObjects;
     public Texture texture;
     public Texture texture2;
+
+    //道開きメッセージ用
+    public bool OpenRootFlag;
+
     void Start()
     {
         GameMaster = GameObject.Find("GameMaster");
@@ -108,7 +112,7 @@ public class clockScript : MonoBehaviour
         }
         //Ability Text
         AbilityText = GameObject.Find("AbilityText").GetComponent<Text>();
-        AbilityText.text = ("制限時間までに出口を探せ！");
+        
         //AbilityLiting
         RAy = GameMaster.GetComponent<RayAbility>();
         TagnameMemory();
@@ -128,7 +132,7 @@ public class clockScript : MonoBehaviour
             {//針を向けてる
                 //clockhand.eulerAngles = new Vector3(0, 0, 180);
                 float Second = GNTimer.NowTime;
-                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (RestSecond - Second));
+                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond*/ - Second));
                 if (!GameStartFlag) GameStartFlag = true;
             }
             else
@@ -137,7 +141,7 @@ public class clockScript : MonoBehaviour
                 clockertop.localPosition = clocker.localPosition - pos;
                 clockhand.localPosition = clocker.localPosition - handpos;
                 float Second = GNTimer.NowTime;
-                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (RestSecond - Second));
+                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond*/ - Second));
 
                 if (StartPos.x - clocker.localPosition.x < 1f)
                 {
@@ -159,136 +163,146 @@ public class clockScript : MonoBehaviour
             {
                 CountTimer -= 1.0f;
                 float Second = GNTimer.NowTime;
-                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (RestSecond - Second));
+                if (RestSecond - Second >= 0)
+                    clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond -*/ Second));
             }
         }
     }
 
     void Update() {
-        //if (!GameStartFlag) {
-            if (Abilitycontroller.AbilityMenuOpenFlag)
-            {
-                EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = true;
-                EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = true;
-                EyeAbilityStop.gameObject.GetComponent<Image>().enabled = true;
-                EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = true;
-                EyeAbilityReset.gameObject.GetComponent<Image>().enabled = true;
-                EyeAbilityTear1.gameObject.GetComponent<Image>().enabled = true;
-                EyeAbilityTear2.gameObject.GetComponent<Image>().enabled = true;
-                EyeAbilityTear3.gameObject.GetComponent<Image>().enabled = true;
-                EyeAbilityTear4.gameObject.GetComponent<Image>().enabled = true;
-                float ANum = Time.deltaTime * 10;
-                EyeAbilityTear1.localPosition = Vector2.Lerp(EyeAbilityTear1.localPosition, StandardTearPos + new Vector2(0, -200), ANum);
-                EyeAbilityTear2.localPosition = Vector2.Lerp(EyeAbilityTear2.localPosition, StandardTearPos + new Vector2(0, -415), ANum);
-                EyeAbilityTear3.localPosition = Vector2.Lerp(EyeAbilityTear3.localPosition, StandardTearPos + new Vector2(0, -630), ANum);
-                EyeAbilityTear4.localPosition = Vector2.Lerp(EyeAbilityTear4.localPosition, StandardTearPos + new Vector2(0, -845), ANum);
 
-                switch (Abilitycontroller.AbilityNow)
-                {
-                    case 0://160//280//400//520
-                        EyeAbilityNormal.localPosition = StandardTearPos;
-                        EyeAbilityWarp.localPosition = Vector2.Lerp(EyeAbilityWarp.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
-                        EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
-                        EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
-                        EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
-                        AbilityText.text = ("魔眼を使うときは動けなくなる。");
-                        break;
-                    case 1:
-                        EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
-                        EyeAbilityWarp.localPosition = StandardTearPos;
-                        EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
-                        EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
-                        EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
-                        AbilityText.text = ("転移の魔眼。とある物を見つめ続けたらEで跳ぶことができる");
-                        break;
-                    case 2:
-                        EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
-                        EyeAbilityWarp.localPosition = Vector2.Lerp(EyeAbilityWarp.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
-                        EyeAbilityStop.localPosition = StandardTearPos;
-                        EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
-                        EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
-                        AbilityText.text = ("停止の魔眼。見つめ続けた動くものをEで止められるが、解除しないと次が使えない");
-                        break;
-                    case 3:
-                        EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
-                        EyeAbilityWarp.localPosition = Vector2.Lerp(EyeAbilityWarp.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
-                        EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
-                        EyeAbilityExplosion.localPosition = StandardTearPos;
-                        EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
-                        AbilityText.text = ("破壊の魔眼。見つめ続けたひび割れた物体をEで破壊できる");
-                        break;
-                    case 4:
-                        EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
-                        EyeAbilityWarp.localPosition = Vector2.Lerp(EyeAbilityWarp.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
-                        EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
-                        EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
-                        EyeAbilityReset.localPosition = StandardTearPos;
-                        AbilityText.text = ("初見の魔眼。力(E)を溜めると使えるリセット能力。");
-                        break;
-                }
-            }
-            else
+        if (Abilitycontroller.AbilityMenuOpenFlag)
+        {
+            EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = true;
+            EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = true;
+            EyeAbilityStop.gameObject.GetComponent<Image>().enabled = true;
+            EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = true;
+            EyeAbilityReset.gameObject.GetComponent<Image>().enabled = true;
+            EyeAbilityTear1.gameObject.GetComponent<Image>().enabled = true;
+            EyeAbilityTear2.gameObject.GetComponent<Image>().enabled = true;
+            EyeAbilityTear3.gameObject.GetComponent<Image>().enabled = true;
+            EyeAbilityTear4.gameObject.GetComponent<Image>().enabled = true;
+            float ANum = Time.deltaTime * 10;
+            EyeAbilityTear4.localPosition = Vector2.Lerp(EyeAbilityTear1.localPosition, StandardTearPos + new Vector2(0, -200), ANum);
+            EyeAbilityTear3.localPosition = Vector2.Lerp(EyeAbilityTear2.localPosition, StandardTearPos + new Vector2(0, -415), ANum);
+            EyeAbilityTear2.localPosition = Vector2.Lerp(EyeAbilityTear3.localPosition, StandardTearPos + new Vector2(0, -630), ANum);
+            EyeAbilityTear1.localPosition = Vector2.Lerp(EyeAbilityTear4.localPosition, StandardTearPos + new Vector2(0, -845), ANum);
+
+            switch (Abilitycontroller.AbilityNow)
             {
-                EyeAbilityNormal.localPosition = StandardTearPos;
-                EyeAbilityWarp.localPosition = StandardTearPos;
-                EyeAbilityStop.localPosition = StandardTearPos;
-                EyeAbilityExplosion.localPosition = StandardTearPos;
-                EyeAbilityReset.localPosition = StandardTearPos;
-                EyeAbilityTear1.gameObject.GetComponent<Image>().enabled = false;
-                EyeAbilityTear2.gameObject.GetComponent<Image>().enabled = false;
-                EyeAbilityTear3.gameObject.GetComponent<Image>().enabled = false;
-                EyeAbilityTear4.gameObject.GetComponent<Image>().enabled = false;
-                EyeAbilityTear1.localPosition = StandardTearPos;
-                EyeAbilityTear2.localPosition = StandardTearPos;
-                EyeAbilityTear3.localPosition = StandardTearPos;
-                EyeAbilityTear4.localPosition = StandardTearPos;
-                AbilityText.fontSize = 50;
-                switch (Abilitycontroller.AbilityNow)
-                {
-                    case 0:
-                        EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = true;
-                        EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
-                        AbilityText.text = ("魔眼を使うときは動けなくなる。");
-                        break;
-                    case 1:
-                        EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = true;
-                        EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
-                        AbilityText.text = ("転移の魔眼。とある物を見つめ続けたらEで跳ぶことができる");
-                        break;
-                    case 2:
-                        EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityStop.gameObject.GetComponent<Image>().enabled = true;
-                        EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
-                        AbilityText.text = ("停止の魔眼。見つめ続けた動くものをEで止められるが、解除しないと次が使えない");
-                        break;
-                    case 3:
-                        EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = true;
-                        EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
-                        AbilityText.text = ("破壊の魔眼。見つめ続けたひび割れた物体をEで破壊できる");
-                        break;
-                    case 4:
-                        EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
-                        EyeAbilityReset.gameObject.GetComponent<Image>().enabled = true;
-                        AbilityText.text = ("初見の魔眼。力(E)を溜めると使えるリセット能力。");
-                        break;
-                }
+                case 0://160//280//400//520
+                    EyeAbilityNormal.localPosition = StandardTearPos;
+                    EyeAbilityWarp.localPosition = Vector2.Lerp(EyeAbilityWarp.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
+                    EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
+                    EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
+                    EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
+                    AbilityText.text = ("魔眼を使うときは動けなくなる。");
+                    break;
+                case 1:
+                    EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
+                    EyeAbilityWarp.localPosition = StandardTearPos;
+                    EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
+                    EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
+                    EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
+                    AbilityText.text = ("転移の魔眼。とある物を見つめ続けたらEで跳ぶことができる");
+                    break;
+                case 2:
+                    EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
+                    EyeAbilityWarp.localPosition = Vector2.Lerp(EyeAbilityWarp.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
+                    EyeAbilityStop.localPosition = StandardTearPos;
+                    EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
+                    EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
+                    AbilityText.text = ("停止の魔眼。見つめ続けた動くものをEで止められるが、解除しないと次が使えない");
+                    break;
+                case 3:
+                    EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
+                    EyeAbilityWarp.localPosition = Vector2.Lerp(EyeAbilityWarp.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
+                    EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
+                    EyeAbilityExplosion.localPosition = StandardTearPos;
+                    EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
+                    AbilityText.text = ("破壊の魔眼。見つめ続けたひび割れた物体をEで破壊できる");
+                    break;
+                case 4:
+                    EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
+                    EyeAbilityWarp.localPosition = Vector2.Lerp(EyeAbilityWarp.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
+                    EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
+                    EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
+                    EyeAbilityReset.localPosition = StandardTearPos;
+                    AbilityText.text = ("初見の魔眼。力(E)を溜めると使えるリセット能力。");
+                    break;
             }
-            Tagname(Abilitycontroller.AbilityNow);
-       // }
+        }
+        else
+        {
+            EyeAbilityNormal.localPosition = StandardTearPos;
+            EyeAbilityWarp.localPosition = StandardTearPos;
+            EyeAbilityStop.localPosition = StandardTearPos;
+            EyeAbilityExplosion.localPosition = StandardTearPos;
+            EyeAbilityReset.localPosition = StandardTearPos;
+            EyeAbilityTear1.gameObject.GetComponent<Image>().enabled = false;
+            EyeAbilityTear2.gameObject.GetComponent<Image>().enabled = false;
+            EyeAbilityTear3.gameObject.GetComponent<Image>().enabled = false;
+            EyeAbilityTear4.gameObject.GetComponent<Image>().enabled = false;
+            EyeAbilityTear1.localPosition = StandardTearPos;
+            EyeAbilityTear2.localPosition = StandardTearPos;
+            EyeAbilityTear3.localPosition = StandardTearPos;
+            EyeAbilityTear4.localPosition = StandardTearPos;
+            AbilityText.fontSize = 50;
+            switch (Abilitycontroller.AbilityNow)
+            {
+                case 0:
+                    EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = true;
+                    EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
+                    AbilityText.text = ("Qで魔眼を使う。目に集中するので動けない");
+                    if (OpenRootFlag)
+                        AbilityText.text = ("風の音がする…どこかに道が開いたようだ");
+                    break;
+                case 1:
+                    EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = true;
+                    EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
+                    AbilityText.text = ("転移の魔眼。とある物を見つめ続けたらEで跳ぶことができる");
+                    break;
+                case 2:
+                    EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityStop.gameObject.GetComponent<Image>().enabled = true;
+                    EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
+                    AbilityText.text = ("停止の魔眼。見つめ続けた動くものをEで止められるが、解除しないと次が使えない");
+                    break;
+                case 3:
+                    EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = true;
+                    EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
+                    AbilityText.text = ("破壊の魔眼。見つめ続けたひび割れた物体をEで破壊できる");
+                    break;
+                case 4:
+                    EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityWarp.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
+                    EyeAbilityReset.gameObject.GetComponent<Image>().enabled = true;
+                    AbilityText.text = ("初見の魔眼。力(E)を溜めると使えるリセット能力。");
+                    break;
+            }
+
+            if (!GameStartFlag)
+            {
+                CountTimer = Time.time;
+                AbilityText.text = ("制限時間までに出口を探せ！");
+                if (4 < CountTimer)//***********************************************注意
+                    GameStartFlag = true;
+            }
+        }
+        Tagname(Abilitycontroller.AbilityNow);
     }
 
     void CallResetScene()
@@ -303,6 +317,7 @@ public class clockScript : MonoBehaviour
     bool bFadeOut;
     float SFadenum;
     float OFadenum;
+
     public void RayAbilityWhiteOut(float Count, bool bFadeC, bool bFadeO)
     {
         col.enabled = true;
@@ -344,8 +359,8 @@ public class clockScript : MonoBehaviour
             col.color = new Color32(255, 255, 255, 0);
         }
     }
-
-    void TagnameMemory()
+    //扉潜るたびに呼び出す。
+    public void TagnameMemory()
     {
         /*GameObject[]*/ warpObjects  = GameObject.FindGameObjectsWithTag("WarpPoint");
         /*GameObject[]*/ stopObjects  = GameObject.FindGameObjectsWithTag("move&Stop");
@@ -357,7 +372,8 @@ public class clockScript : MonoBehaviour
         foreach (GameObject gameObj in stopObjects)
             gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
         foreach (GameObject gameObj in stopObjects2)
-            gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
+            if (gameObj.GetComponent<MeshRenderer>())
+                gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
         foreach (GameObject gameObj in breakObjects)
             if (gameObj.GetComponent<MeshRenderer>())
                 gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
@@ -403,8 +419,11 @@ public class clockScript : MonoBehaviour
                     {
                         if (gameObj.transform.name == "PendulumPoleShaft")
                             gameObj.transform.GetComponent<PendulumShaft>().StopTexChange(texture2, true, new Color(0, 0, 1));
-                        gameObj.GetComponent<MeshRenderer>().material.SetTexture("_EmissionMap", texture2);
-                        gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
+                        if (gameObj.GetComponent<MeshRenderer>())
+                        {
+                            gameObj.GetComponent<MeshRenderer>().material.SetTexture("_EmissionMap", texture2);
+                            gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
+                        }
                         Emission(gameObj);
                     }
                 }
@@ -427,6 +446,7 @@ public class clockScript : MonoBehaviour
                     {
                         if (gameObj.transform.name == "PendulumPoleShaft")
                             gameObj.transform.GetComponent<PendulumShaft>().StopTexChange(texture2, false, new Color(0, 0, 1));
+                        if(gameObj.GetComponent<MeshRenderer>())
                         gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
                     }
                 }
@@ -461,7 +481,8 @@ public class clockScript : MonoBehaviour
                     {//
                         if (gameObj.transform.name == "PendulumPoleShaft")
                             gameObj.transform.GetComponent<PendulumShaft>().StopTexChange(texture2, false, new Color(0, 1, 0.06542563f));
-                        gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                        if (gameObj.GetComponent<MeshRenderer>())
+                            gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
                     }
                     else
                     {
@@ -511,6 +532,7 @@ public class clockScript : MonoBehaviour
         if (gObj.GetComponent<MeshRenderer>())
             gObj.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
         else
+            if (gObj.GetComponent<MeshRenderer>())
             gObj.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
     }
 }

@@ -12,8 +12,8 @@ public class Doormove : MonoBehaviour
     float rot;
     int Timer;
     Vector3 posL,posR;
-    Vector3 NowPos;
-    Vector3 FixRot;
+    Vector3 SRPos, SLPos;
+    Quaternion SRRot, SLRot;
     Quaternion Rota;
     GameObject DoorCollide;
     GameObject DoorRight;
@@ -50,8 +50,11 @@ public class Doormove : MonoBehaviour
         Destroy(DoorCollide.transform.GetComponent<Doormove>());
         DoorCollide.transform.gameObject.AddComponent<DoorPassDiscrimination>().Target = gameObject;
         gameObject.transform.rotation = Rota;
-        
-        
+
+        SRPos = DoorRight.transform.position;
+        SLPos = DoorLeft.transform.position;
+        SRRot = DoorRight.transform.localRotation;
+        SLRot = DoorLeft.transform.localRotation;
         posR = transform.position + transform.right * DoorRight.transform.localScale.x;
         posL = transform.position - transform.right * DoorRight.transform.localScale.x;
         Vector3 rotangle = Rota.eulerAngles;
@@ -66,6 +69,7 @@ public class Doormove : MonoBehaviour
         Vector3 RoAngle = rta.eulerAngles;
         Quaternion lta = DoorLeft.transform.localRotation;
         Vector3 LoAngle = lta.eulerAngles;
+
         if (OpenFlag)
         {
             if (RoAngle.y < 90)
@@ -83,12 +87,18 @@ public class Doormove : MonoBehaviour
         {
             if (1 < RoAngle.y)
                 DoorRight.transform.RotateAround(posR, transform.up, -Time.deltaTime * speed);
-            if (0 < LoAngle.y && 268 < LoAngle.y)
+            if (1 < LoAngle.y && 268 < LoAngle.y)
                 DoorLeft.transform.RotateAround(posL, transform.up, Time.deltaTime * speed);
             else
             {
                 CloseFlag = !CloseFlag;
                 thruFlag = false;
+
+                DoorRight.transform.position = SRPos;
+                DoorLeft.transform.position = SLPos;
+                DoorRight.transform.localRotation = SRRot;
+                DoorLeft.transform.localRotation = SLRot;
+                
                 ThruWall.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = true;
                 ThruWallReverse.transform.GetChild(0).transform.GetComponent<MeshCollider>().enabled = true;
             }
@@ -110,12 +120,12 @@ public class Doormove : MonoBehaviour
     }
     public void switching()
     {
-        OpenFlag = !OpenFlag;
+        OpenFlag = true;
     }
     //スイッチ式からの入力
     void SwichChange()
     {
-        OpenFlag = !OpenFlag;
+        OpenFlag = true;
     }
     //感圧式からの入力
     void PerceptionChange()

@@ -198,11 +198,7 @@ public class RayAbility : MonoBehaviour
             }
 
             if (Physics.Raycast(ray, out hit, raylong))
-            {
-                //位置座標を取得してみている
-                //Debug.Log(hit.collider.gameObject.transform.position);
-                //Debug.Log((int)AbilityTriggerTime);
-                
+            {                
                 reticleAction(hit.normal, hit.point);
                 if (AbilityNow != 1 && WarpParticleFlag)
                 {
@@ -283,13 +279,13 @@ public class RayAbility : MonoBehaviour
                                             if (StopObjectName == null)
                                             {
                                                 StopObjectName = hit.collider.gameObject.transform.root.name;
-                                                //hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                                               
                                                 AbilityStopEmissionFlag = true;
                                             }
                                             else
                                             {
                                                 StopObjectName = null;
-                                                //hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                                               
                                                 AbilityStopEmissionFlag = false;
                                             }
                                             AbilityNow = 0;
@@ -381,6 +377,8 @@ public class RayAbility : MonoBehaviour
                                         }
                                         else
                                         {
+                                            hit.collider.gameObject.GetComponent<BoxCollider>().enabled = false;
+                                            hit.collider.gameObject.GetComponent<CapsuleCollider>().enabled = false;
                                             hit.collider.gameObject.GetComponent<MeshCollider>().enabled = false;
                                             hit.collider.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
                                         }

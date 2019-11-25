@@ -22,11 +22,17 @@ public class footswitchScript : MonoBehaviour
             Target.transform.GetComponent<Doormove>().PerceptionTime = PerceptionTime;
         }
         if (SwitchOrPerception)
+        {
             mesh.enabled = false;
+            SwitchOrPerception = true;
+        }else
+            SwitchOrPerception = false;
     }
     void OnTriggerEnter(Collider col)
     {
+        
         mesh.material.EnableKeyword("_EMISSION");
+
         if (SwitchOrPerception)
         {
             Target.SendMessage("PerceptionChange");
