@@ -19,9 +19,6 @@ public class gameoverScript : MonoBehaviour
     {
         scale = new Vector3(1, com-0.2f, 1);
         rec.localScale = scale;
-        Debug.Log(rec.localScale);
-
-
         if (com < 3)
             com += Time.deltaTime*0.2f;
     }

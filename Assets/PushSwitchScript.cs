@@ -15,7 +15,7 @@ public class PushSwitchScript : MonoBehaviour
         StartPos = gameObject.transform.position;
         Flag = false;
         ButtonPushmove = 0;
-        Target = GameObject.Find("ChainM");
+        
     }
 
     // Update is called once per frame
@@ -39,7 +39,8 @@ public class PushSwitchScript : MonoBehaviour
             else
             {
                 Flag = false;
-                GameObject.Find("WeightNet").SendMessage("SwichChange");
+                Target.SendMessage("SwichChange");
+                //ChainMから外したので後で再ターゲット？？
             }
         }
     }

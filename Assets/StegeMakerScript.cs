@@ -8,6 +8,8 @@ public class StegeMakerScript : MonoBehaviour
     //=========================================
     //Sample_TeamAのみのスクリプト
     //=========================================
+
+    /*
     SwitchHandle switch1;
     SwitchHandle switch2;
     bool Flag1;
@@ -66,4 +68,5 @@ public class StegeMakerScript : MonoBehaviour
         Instantiate(obj, new Vector3(-500, 1000, 20), new Quaternion(0, 0.7f, 0, 0.7f));
         GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MakeDiv(3);
     }
+    */
 }
