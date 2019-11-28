@@ -1,6 +1,6 @@
 // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
-Shader "FontEx" {
+Shader "FontEX" {
     Properties {
         _MainTex ("Font Texture", 2D) = "white" {}
         _Color ("Text Color", Color) = (1,1,1,1)
@@ -15,9 +15,9 @@ Shader "FontEx" {
             "PreviewType"="Plane"
         }
         Lighting Off 
-			Cull Back 
-			ZTest LEqual
-			ZWrite On
+		Cull Back
+		ZTest LEqual
+		ZWrite On
         Blend SrcAlpha OneMinusSrcAlpha
 
         Pass {
