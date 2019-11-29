@@ -152,6 +152,7 @@
      <Compile Include="Assets\Script\TimerScript\Stage3TimeManager.cs" />
      <Compile Include="Assets\Script\TimerScript\TimeResetController.cs" />
      <Compile Include="Assets\ScrollScript.cs" />
+     <Compile Include="Assets\ScrollTexScript.cs" />
      <Compile Include="Assets\StegeMakerScript.cs" />
      <None Include="Assets\DownloadAsset\Laterns and candles\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Script\NoClearObj.shader" />
