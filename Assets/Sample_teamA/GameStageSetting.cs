@@ -49,6 +49,7 @@ public class GameStageSetting : MonoBehaviour
     //ステージクリアからリザルトへ飛ぶときの待ち時間
     public int ClearLoadWaitTime;
     public int GameOverLoadWaitTime;
+<<<<<<< HEAD
   
     //デバッグ用
     public bool DGoalFlag;
@@ -63,6 +64,12 @@ public class GameStageSetting : MonoBehaviour
             //やり直し音声を書いておく
             audioSource.PlayOneShot(yarinaosiSE);
         }
+=======
+    
+    void Awake()
+    {
+        ResetStatus = ResetFlag;
+>>>>>>> b8ad8ca63a5a6b5340e082f4bc590eb8702c9633
     
         ResetFlag = false;
         //Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
@@ -119,12 +126,11 @@ public class GameStageSetting : MonoBehaviour
         // ソースをFlatに変更する
         RenderSettings.ambientMode = AmbientMode.Trilight;
         // 環境光の上方向からの色を指定する
-        RenderSettings.ambientSkyColor = Color.black;//.HSVToRGB(0.05f, 0.3f, LightStrong*0.1f, false);
+        RenderSettings.ambientSkyColor = Color.black;
         // 環境光の横方向からの色を指定する
         RenderSettings.ambientEquatorColor = Color.HSVToRGB(0.05f, 0.3f, LightStrong, false);
         // 環境光の下方向からの色を指定する
         RenderSettings.ambientGroundColor = Color.HSVToRGB(0.05f, 0.3f, LightStrong, false);
-        //RenderSettings.ambientGroundColor = Color.HSVToRGB(1,10,100,false);//デバッグ用。ちょっと赤にするとき
 
         // 環境光の反射設定
         // ソースをCustomに変更する
@@ -139,8 +145,7 @@ public class GameStageSetting : MonoBehaviour
     {
         if (!this.gameObject.GetComponent<RayAbility>())
             this.gameObject.AddComponent<RayAbility>();
-        this.gameObject.GetComponent<RayAbility>().AbilityChengeMenuTime = AbilityMenuTime;
-      
+        this.gameObject.GetComponent<RayAbility>().AbilityChengeMenuTime = AbilityMenuTime;      
         this.gameObject.GetComponent<RayAbility>().AbilityNum = 4;
         
         
@@ -207,12 +212,7 @@ public class GameStageSetting : MonoBehaviour
         async.allowSceneActivation = true;
     }
 
-
-    //以下、SampleStafeのみの関数
-    public void MakeDiv(int val)
-    {
-        ResetStageDiv = val;
-    }
+    /*
     void DGoal()
     {
         GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker1();
@@ -222,14 +222,13 @@ public class GameStageSetting : MonoBehaviour
         Picture.transform.position = new Vector3(765, 1180, 0);
         Picture.transform.rotation = new Quaternion(-0.3f, 0.7f, 0.3f, 0.7f);
     }
-
+    */
     public void GAMEOVER()
     {
         ClearTimeStop();
         GameOverLoad();
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         Player.GetComponent<PlayerController>().enabled = false;
-        //Player.AddComponent<GameOverPlayerMoving>();
         Destroy(GameObject.Find("footCanvas"));
         GameObject cam = GameObject.Find("FPSCamera");
         Destroy(cam.GetComponent<FPSCameraController>());

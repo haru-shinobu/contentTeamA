@@ -10,14 +10,11 @@ public class ClearLoadScript : MonoBehaviour
     GameTimerDirector GTD;
     GameStageSetting GSS;
     GameObject Player;
-    GameObject GoalEffect;
     GameObject obj;
     public GameObject sulewall;
     Canvas PrefabCanvas;
     void Start()
     {
-
-        GoalEffect = GameObject.Find("GoalEffect");
         Player = GameObject.Find("Player");
         Flag = false;
         Flag2 = false;
@@ -39,7 +36,6 @@ public class ClearLoadScript : MonoBehaviour
             if (col.gameObject.tag == "Player")
             {
                 Flag = false;
-               GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker3();
                 if (gameObject.name == "GoalParticleFlag")
                     Destroy(gameObject);
             }

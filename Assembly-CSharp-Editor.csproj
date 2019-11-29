@@ -66,6 +66,7 @@
      <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Editor\UIShadowEditor.cs" />
      <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Editor\UIShinyEditor.cs" />
      <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Editor\UITransitionEffectEditor.cs" />
+     <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
      <Compile Include="Assets\DownloadAsset\RunemarkStudio\DarkFantasyKit [Free]\Readme\Parts\Editor\ReadmeEditor.cs" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
@@ -82,8 +83,14 @@
  <Reference Include="Unity.VSCode.Editor">
  <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.Recorder.Editor">
+ <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.Recorder.Editor.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Recorder">
+ <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
@@ -324,6 +331,9 @@
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="JMOAssets_CartoonFXFreeWelcome">
+ <HintPath>C:/Users/rtamura/Desktop/nins/Assets/DownloadAsset/JMO Assets/Editor/JMOAssets_CartoonFXFreeWelcome.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Users/rtamura/Desktop/nins/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

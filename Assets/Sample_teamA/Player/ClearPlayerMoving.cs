@@ -8,7 +8,7 @@ public class ClearPlayerMoving : MonoBehaviour
     Rigidbody rb;
     void Start()
     {
-        SceneEndPos = GameObject.Find("GoalFootSwitch").transform.position;
+        SceneEndPos = GameObject.Find("GoalwatchPointer").transform.position;
         rb = gameObject.GetComponent<Rigidbody>();
     }
     void Update()

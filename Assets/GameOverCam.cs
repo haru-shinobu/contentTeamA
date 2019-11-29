@@ -18,7 +18,8 @@ public class GameOverCam : MonoBehaviour
         player = GameObject.Find("Player");
         pos = player.transform.position - Vector3.up * player.transform.localScale.y * 0.5f;
         rot = player.transform.rotation;
-        Instantiate(Resources.Load<Canvas>("GameOverCanvas"));
+        Instantiate(Resources.Load<Canvas>("GameOverShade"));
+        //Instantiate(Resources.Load<Canvas>("GameOverDissolve"));
     }
 
     void Update()

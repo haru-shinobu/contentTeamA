@@ -49,7 +49,7 @@ public class lereaseChainScript : MonoBehaviour
                     ReOpenFlag = false;
                     textFlag.OpenRootFlag = false;
                     Clear.FlagON();
-                    GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MakeDiv(4);
+//                    GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MakeDiv(4);
                 }
         }        
     }
