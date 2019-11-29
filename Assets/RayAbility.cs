@@ -429,19 +429,19 @@ public class RayAbility : MonoBehaviour
             case 1:
                 reticleWarp.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 reticleWarp.transform.position = point + (normal * 5);
-                CircleWarp.transform.rotation = Quaternion.LookRotation(normal);
+                CircleWarp.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 CircleWarp.transform.position = point + (normal * 5);
                 break;
             case 2:
                 reticleStop.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 reticleStop.transform.position = point + (normal * 5);
-                CircleStop.transform.rotation = Quaternion.LookRotation(normal);
+                CircleStop.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 CircleStop.transform.position = point + (normal * 5);
                 break;
             case 3:
                 reticleBreak.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 reticleBreak.transform.position = point + (normal * 5);
-                CircleBreak.transform.rotation = Quaternion.LookRotation(normal);
+                CircleBreak.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 CircleBreak.transform.position = point + (normal * 5);
                 break;
         }
