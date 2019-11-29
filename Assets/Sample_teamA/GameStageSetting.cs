@@ -10,6 +10,11 @@ using UnityEngine.Rendering;
 [DefaultExecutionOrder(-5)]//スクリプト実行順
 public class GameStageSetting : MonoBehaviour
 {
+    AudioSource audioSource;
+    //
+    //
+
+    public AudioClip yarinaosiSE;
     //マウス操作かキー操作か
     public bool MouseMode;
     //ライト強さ
@@ -44,39 +49,19 @@ public class GameStageSetting : MonoBehaviour
     //ステージクリアからリザルトへ飛ぶときの待ち時間
     public int ClearLoadWaitTime;
     public int GameOverLoadWaitTime;
-
+  
     //デバッグ用
     public bool DGoalFlag;
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         if (DGoalFlag)//ゴールデバッグ用
             DGoal();
         ResetStatus = ResetFlag;
         if (ResetFlag)
         {
-            switch (ResetStageDiv)
-            {
-                case 1:
-                    GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker1();
-                    break;
-                case 2:
-                    GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker1();
-                    GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker2();
-                    break;
-                case 3:
-                    GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker1();
-                    GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker2();
-                    GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker3();
-                    break;
-                case 4:
-                    GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker1();
-                    GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker2();
-                    GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker3();
-                    GameObject Picture = GameObject.Find("picture");
-                    Picture.transform.position = new Vector3(765, 1180, 0);
-                    Picture.transform.rotation = new Quaternion(-0.3f, 0.7f, 0.3f, 0.7f);
-                    break;
-            }
+            //やり直し音声を書いておく
+            audioSource.PlayOneShot(yarinaosiSE);
         }
     
         ResetFlag = false;

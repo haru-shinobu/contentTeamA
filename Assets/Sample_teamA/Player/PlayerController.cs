@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    
+
+    
     public Vector3 defaultScale = Vector3.zero;
     private float JumpVertical;
     public float moveSpeed;
     public float JumpForce; // 145で身長と同じくらい。Scaley=150。
+    private bool wolkflag = false;
     float Speed;
     float JumpTime;
     private float PlayerScale;
@@ -26,9 +30,15 @@ public class PlayerController : MonoBehaviour
     //リセット能力用
     static Vector3 ResetPos;
     public bool ResetFlag;
+    AudioSource audioSource;
+    AudioSource audioSource2;
+    public AudioClip yarinaosiSE;
+    public AudioClip walkingSE;
     GameStageSetting Setting;
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+       
         ResetFlag = false;
         Setting = GameObject.Find("GameMaster").GetComponent<GameStageSetting>();
         tag = "Player";
@@ -45,6 +55,7 @@ public class PlayerController : MonoBehaviour
         if (Setting.ResetStatus)
         {
             gameObject.transform.position = ResetPos;
+            audioSource.PlayOneShot(yarinaosiSE);
         }
         else
         {
@@ -153,7 +164,27 @@ public class PlayerController : MonoBehaviour
         if (moveForward != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(moveForward);
+            
+            if (wolkflag==false)
+            {
+                audioSource2 = GetComponent<AudioSource>();
+                audioSource2.enabled = true;
+                  wolkflag = true;
+
+            }
+        
         }
+
+        if (moveForward == Vector3.zero)
+        {
+            //audioSource.Stop();
+            //gameObject.GetComponent<AudioSource>().enable = false;
+            audioSource2 = GetComponent<AudioSource>();
+            audioSource2.enabled = false;
+
+            wolkflag = false;
+        }
+        
     }
 
     private void JumpProcess()

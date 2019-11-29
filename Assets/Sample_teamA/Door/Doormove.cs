@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Doormove : MonoBehaviour
 {
+    
+        AudioSource audioSource;
+    public AudioClip doaSE;
+
     public GameObject ThruWall;
     public GameObject ThruWallReverse;
     bool OpenFlag;
@@ -28,6 +32,9 @@ public class Doormove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        audioSource = GetComponent<AudioSource>();
+
         Player = GameObject.Find("Player");
         float roty = gameObject.transform.rotation.y;
         float rotw = gameObject.transform.rotation.w;
@@ -72,12 +79,15 @@ public class Doormove : MonoBehaviour
 
         if (OpenFlag)
         {
+            
             if (RoAngle.y < 90)
                 DoorRight.transform.RotateAround(posR, transform.up, Time.deltaTime * speed);
             if (270 < LoAngle.y || LoAngle.y < 1)
                 DoorLeft.transform.RotateAround(posL, transform.up, -Time.deltaTime * speed);
             else
             {
+                
+
                 OpenFlag = !OpenFlag;
                 thruFlag = true;
                 PerceptionFlag = false;
@@ -120,12 +130,14 @@ public class Doormove : MonoBehaviour
     }
     public void switching()
     {
+        audioSource.PlayOneShot(doaSE);
         OpenFlag = true;
     }
     //スイッチ式からの入力
     void SwichChange()
     {
         OpenFlag = true;
+        
     }
     //感圧式からの入力
     void PerceptionChange()
@@ -133,6 +145,7 @@ public class Doormove : MonoBehaviour
         if (!CloseFlag)
         {
             OpenFlag = true;
+            audioSource.PlayOneShot(doaSE);
             PerceptionFlag = true;
         }
     }
