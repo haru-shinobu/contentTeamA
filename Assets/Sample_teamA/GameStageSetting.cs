@@ -49,27 +49,20 @@ public class GameStageSetting : MonoBehaviour
     //ステージクリアからリザルトへ飛ぶときの待ち時間
     public int ClearLoadWaitTime;
     public int GameOverLoadWaitTime;
-<<<<<<< HEAD
+
   
     //デバッグ用
     public bool DGoalFlag;
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        if (DGoalFlag)//ゴールデバッグ用
-            DGoal();
+
         ResetStatus = ResetFlag;
         if (ResetFlag)
         {
             //やり直し音声を書いておく
             audioSource.PlayOneShot(yarinaosiSE);
         }
-=======
-    
-    void Awake()
-    {
-        ResetStatus = ResetFlag;
->>>>>>> b8ad8ca63a5a6b5340e082f4bc590eb8702c9633
     
         ResetFlag = false;
         //Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
