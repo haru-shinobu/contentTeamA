@@ -65,7 +65,7 @@ public class GameStageSetting : MonoBehaviour
         }
     
         ResetFlag = false;
-        //Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
+        Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
         RenderSetting_Gradient();//環境光設定
         Ability();//能力設定
         Setting();
@@ -119,7 +119,7 @@ public class GameStageSetting : MonoBehaviour
         // ソースをFlatに変更する
         RenderSettings.ambientMode = AmbientMode.Trilight;
         // 環境光の上方向からの色を指定する
-        RenderSettings.ambientSkyColor = Color.black;
+        RenderSettings.ambientSkyColor = new Color(214f,124f,172f,255f);//Color.black;
         // 環境光の横方向からの色を指定する
         RenderSettings.ambientEquatorColor = Color.HSVToRGB(0.05f, 0.3f, LightStrong, false);
         // 環境光の下方向からの色を指定する

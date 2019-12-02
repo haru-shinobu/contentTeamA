@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     static Vector3 ResetPos;
     public bool ResetFlag;
     AudioSource audioSource;
-    AudioSource audioSource2;
+    //AudioSource audioSource2;
     public AudioClip yarinaosiSE;
     public AudioClip walkingSE;
     GameStageSetting Setting;
@@ -167,9 +167,10 @@ public class PlayerController : MonoBehaviour
             
             if (wolkflag==false)
             {
-                audioSource2 = GetComponent<AudioSource>();
-                audioSource2.enabled = true;
-                  wolkflag = true;
+             //   audioSource2 = GetComponent<AudioSource>();
+                //audioSource2.enabled = true;
+                audioSource.enabled = true;
+                wolkflag = true;
 
             }
         
@@ -179,9 +180,9 @@ public class PlayerController : MonoBehaviour
         {
             //audioSource.Stop();
             //gameObject.GetComponent<AudioSource>().enable = false;
-            audioSource2 = GetComponent<AudioSource>();
-            audioSource2.enabled = false;
-
+            //audioSource2 = GetComponent<AudioSource>();
+            //audioSource2.enabled = false;
+            audioSource.enabled = false;
             wolkflag = false;
         }
         

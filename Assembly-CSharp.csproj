@@ -60,6 +60,7 @@
     <Compile Include="Assets\CamWayScript.cs" />
     <Compile Include="Assets\ClearLoadScript.cs" />
     <Compile Include="Assets\cleartextScript.cs" />
+    <Compile Include="Assets\DizableOnScript.cs" />
     <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\BaseMeshEffect.cs" />
     <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\BlurMode.cs" />
     <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\ColorMode.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Assets\GameTimerDirector.cs" />
     <Compile Include="Assets\lereaseChainScript.cs" />
     <Compile Include="Assets\meshEyeIcon.cs" />
+    <Compile Include="Assets\monoclescript.cs" />
     <Compile Include="Assets\NumberSwitchScript.cs" />
     <Compile Include="Assets\PushSwitchScript.cs" />
     <Compile Include="Assets\RantanControllerScript.cs" />

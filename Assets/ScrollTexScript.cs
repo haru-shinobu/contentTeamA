@@ -10,17 +10,25 @@ public class ScrollTexScript : MonoBehaviour
     Quaternion qua;
     bool moveFlag;
     float mtime;
+    BoxCollider box;
+    bool Flag;
     void Start()
     {
         moveFlag = false;
         tag = "Switch";
         Player = GameObject.FindWithTag("Player");
-        WarldSpaceText.tag = "BreakItem";
         pos = WarldSpaceText.transform.position;
         qua = WarldSpaceText.transform.localRotation;
         scaler = WarldSpaceText.transform.localScale;
 
         WarldSpaceText.GetComponent<Canvas>().enabled = false;
+        Flag = false;
+        if (WarldSpaceText.transform.GetChild(0).GetComponent<BoxCollider>())
+        {
+            Flag = true;
+            box = WarldSpaceText.transform.GetChild(0).GetComponent<BoxCollider>();
+            box.enabled = false;
+        }
     }
     void Update()
     {
@@ -44,6 +52,9 @@ public class ScrollTexScript : MonoBehaviour
         WarldSpaceText.transform.rotation = Player.transform.localRotation;
         WarldSpaceText.GetComponent<Canvas>().enabled = true;
         moveFlag = true;
+        if (Flag)
+        {
+            box.enabled = true;
+        }
     }
-    
 }
