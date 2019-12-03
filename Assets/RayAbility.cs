@@ -191,7 +191,7 @@ public class RayAbility : MonoBehaviour
             }
             else
             {
-                raylong = 1000f;
+                raylong = 1500f;
                 carsor.handflag = false;
             }
 
