@@ -11,6 +11,9 @@ using UnityEngine.Rendering;
 public class GameStageSetting : MonoBehaviour
 {
     AudioSource audioSource;
+    //
+    //
+
     public AudioClip yarinaosiSE;
     //マウス操作かキー操作か
     public bool MouseMode;
@@ -47,21 +50,22 @@ public class GameStageSetting : MonoBehaviour
     public int ClearLoadWaitTime;
     public int GameOverLoadWaitTime;
 
-
   
     //デバッグ用
     public bool DGoalFlag;
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+
         ResetStatus = ResetFlag;
         if (ResetFlag)
         {
             //やり直し音声を書いておく
             audioSource.PlayOneShot(yarinaosiSE);
-        }    
+        }
+    
         ResetFlag = false;
-        //Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
+        Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
         RenderSetting_Gradient();//環境光設定
         Ability();//能力設定
         Setting();
@@ -108,7 +112,6 @@ public class GameStageSetting : MonoBehaviour
     }
 
     public void RenderSetting_Gradient()
-
     {   
         //スカイボックスを消去している
         RenderSettings.skybox = null;
@@ -116,7 +119,7 @@ public class GameStageSetting : MonoBehaviour
         // ソースをFlatに変更する
         RenderSettings.ambientMode = AmbientMode.Trilight;
         // 環境光の上方向からの色を指定する
-        RenderSettings.ambientSkyColor = Color.black;
+        RenderSettings.ambientSkyColor = new Color(214f,124f,172f,255f);//Color.black;
         // 環境光の横方向からの色を指定する
         RenderSettings.ambientEquatorColor = Color.HSVToRGB(0.05f, 0.3f, LightStrong, false);
         // 環境光の下方向からの色を指定する
@@ -142,7 +145,6 @@ public class GameStageSetting : MonoBehaviour
     }
 
     public void ReStartScene()
-
     {
         ResetFlag = ResetStatus;
         switch (SceneManager.GetActiveScene().name)
@@ -162,7 +164,6 @@ public class GameStageSetting : MonoBehaviour
         }
     }
     public void ClearTimeStop()
-
     {
         switch (SceneManager.GetActiveScene().name)
         {
@@ -181,18 +182,12 @@ public class GameStageSetting : MonoBehaviour
         }
     }
     public void ClearLoad()
-
     {
         StartCoroutine("LoadScene"); 
     }
-
-
     void GameOverLoad() {
         StartCoroutine("LoadSceneGameOver");
     }
-
-
-
     protected IEnumerator LoadScene()
     {
         var async = SceneManager.LoadSceneAsync("Result");
@@ -201,9 +196,6 @@ public class GameStageSetting : MonoBehaviour
         yield return new WaitForSeconds(ClearLoadWaitTime);
         async.allowSceneActivation = true;
     }
-
-
-
     protected IEnumerator LoadSceneGameOver()
     {
         var async = SceneManager.LoadSceneAsync("Title");
@@ -224,8 +216,6 @@ public class GameStageSetting : MonoBehaviour
         Picture.transform.rotation = new Quaternion(-0.3f, 0.7f, 0.3f, 0.7f);
     }
     */
-
-
     public void GAMEOVER()
     {
         ClearTimeStop();
@@ -242,7 +232,4 @@ public class GameStageSetting : MonoBehaviour
         gameObject.GetComponent<RayAbility>().enabled = false;
         Destroy(GameObject.Find("CursolCanvas"));
     }
-
-
-
 }

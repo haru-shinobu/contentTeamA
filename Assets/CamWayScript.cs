@@ -4,12 +4,27 @@ using UnityEngine;
 
 public class CamWayScript : MonoBehaviour
 {
-    void OnBecameInvisible()
+ //   private void OnBecameVisible()    {    }
+    private void OnBecameInvisible()
     {
+        foreach (Transform childTransform in gameObject.transform)
+        {
+            childTransform.gameObject.SetActive(false);
+        }
         enabled = false;
     }
-    void OnBecameVisible()
+
+    void OnWillRenderObject()
     {
-        enabled = true;
+#if UNITY_EDITOR
+        if (Camera.current.name != "SceneCamera" && Camera.current.name != "Preview Camera")
+#endif
+        {
+            enabled = true;
+            foreach (Transform childTransform in gameObject.transform)
+            {
+                childTransform.gameObject.SetActive(false);
+            }
+        }
     }
 }

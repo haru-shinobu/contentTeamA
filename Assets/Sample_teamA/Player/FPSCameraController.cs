@@ -21,7 +21,7 @@ public class FPSCameraController : MonoBehaviour
         cam = GetComponent<Camera>();
         MouseControl = GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MouseMode;
         CamControllFlag = true;
-
+        //goalpos = GameObject.Find("GoalFootSwitch").transform.position;
     }
     // Update is called once per frame
     void Update()

@@ -57,6 +57,9 @@ public class RayAbility : MonoBehaviour
     bool WarpParticleFlag;
     GameObject Instance;
     GameObject InstanceGeat;
+
+    public bool EyeLongFlag;//アイテム取ったときレイを伸ばす。
+
     public bool AbilityStopEmissionFlag;
     void Start()
     {
@@ -79,6 +82,7 @@ public class RayAbility : MonoBehaviour
         WarpParticleFlag = false;
         AbilityMenuOpenFlag = false;
         AbilityStopEmissionFlag = false;
+        EyeLongFlag = false;
     }
 
     // Update is called once per frame
@@ -216,7 +220,10 @@ public class RayAbility : MonoBehaviour
             }
             else
             {
-                raylong = 1000f;
+                if (!EyeLongFlag)
+                    raylong = 1000f;
+                else
+                    raylong = 1500;
                 carsor.handflag = false;
             }
 
@@ -525,6 +532,12 @@ public class RayAbility : MonoBehaviour
                 Stage3TimeManager.PenaltyTime(time);
                 break;
         }
+    }
+
+    //モノクル入手
+    void GetMonocle()
+    {
+        EyeLongFlag = true;
     }
 }
 
