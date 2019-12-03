@@ -13,6 +13,8 @@ public class GameTimerDirector : MonoBehaviour
     Vector3 timepos;
     Vector2 TextSpace;
     public float NowTime;
+    public bool GameCrearLoadFlag;
+    private bool GameOverFlag;
 
     void Start()
     {
@@ -22,6 +24,8 @@ public class GameTimerDirector : MonoBehaviour
         memo = timerText.GetComponent<Text>();
         TextSpace = rect.sizeDelta;
         timepos = rect.transform.localPosition;
+        GameCrearLoadFlag = false;
+        GameOverFlag = false;
     }
 
     // Update is called once per frame
@@ -29,8 +33,23 @@ public class GameTimerDirector : MonoBehaviour
     {
         float onetime = NowTime;
 
-        rect.sizeDelta = TextSpace;
-        rect.localPosition = timepos;
-        timerText.GetComponent<Text>().text = ("TimeLimit") + ("\n") + (Limittimer/* - onetime*/).ToString("F0")+(" min");
+        if (!GameCrearLoadFlag)
+        {
+            rect.sizeDelta = TextSpace;
+            rect.localPosition = timepos;
+            timerText.GetComponent<Text>().text = ("TimeLimit") + ("\n") + (Limittimer).ToString("F0") + (" sec");
+        }
+        else
+        {
+            rect.sizeDelta = TextSpace;
+            rect.localPosition = timepos;
+            timerText.GetComponent<Text>().text = ("ClearTime") + ("\n") + (Limittimer - onetime).ToString("F0") + (" sec");
+        }
+        if (NowTime < 0)
+            if (!GameOverFlag)
+            {
+                gameObject.GetComponent<GameStageSetting>().GAMEOVER();
+                GameOverFlag = true;
+            }
     }
 }

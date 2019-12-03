@@ -10,6 +10,7 @@ public class FallDown : MonoBehaviour
     bool Flag = true;
     bool GravityFlag;
     Rigidbody rb;
+    public bool ElevatorFlag;
     
     void Start()
     {
@@ -36,8 +37,11 @@ public class FallDown : MonoBehaviour
                 CountTimer = FallStartTime;
         }
         if (col.gameObject.tag != "Player")
-            //GetComponent<Rigidbody>().isKinematic = true;
+        {
+            if(ElevatorFlag)
+            GameObject.Find("Elevator").GetComponent<MoveUpDownFloor>().MoveFlag = true;
             Destroy(gameObject);
+        }
     }
 
     void Update()

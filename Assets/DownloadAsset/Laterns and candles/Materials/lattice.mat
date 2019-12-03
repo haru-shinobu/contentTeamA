@@ -8,9 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: lattice
-  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHATEST_ON _NORMALMAP _SPECGLOSSMAP
-  m_LightmapFlags: 4
+  m_Shader: {fileID: 4800000, guid: c82ecb1dd2b2be447ada13cdc6ab94ab, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _EMISSION _NORMALMAP _SPECGLOSSMAP
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2450
@@ -79,5 +79,5 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.122641504, g: 0.062646955, b: 0.05148629, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
