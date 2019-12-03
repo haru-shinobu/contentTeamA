@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FontEX
+  m_Name: FontEx
   m_Shader: {fileID: 4800000, guid: 0ce6c858936e78f4c97a9d5a7c17b128, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

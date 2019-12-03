@@ -11,9 +11,6 @@ using UnityEngine.Rendering;
 public class GameStageSetting : MonoBehaviour
 {
     AudioSource audioSource;
-    //
-    //
-
     public AudioClip yarinaosiSE;
     //マウス操作かキー操作か
     public bool MouseMode;
@@ -49,28 +46,20 @@ public class GameStageSetting : MonoBehaviour
     //ステージクリアからリザルトへ飛ぶときの待ち時間
     public int ClearLoadWaitTime;
     public int GameOverLoadWaitTime;
-<<<<<<< HEAD
+
+
   
     //デバッグ用
     public bool DGoalFlag;
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        if (DGoalFlag)//ゴールデバッグ用
-            DGoal();
         ResetStatus = ResetFlag;
         if (ResetFlag)
         {
             //やり直し音声を書いておく
             audioSource.PlayOneShot(yarinaosiSE);
-        }
-=======
-    
-    void Awake()
-    {
-        ResetStatus = ResetFlag;
->>>>>>> b8ad8ca63a5a6b5340e082f4bc590eb8702c9633
-    
+        }    
         ResetFlag = false;
         //Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
         RenderSetting_Gradient();//環境光設定
@@ -119,6 +108,7 @@ public class GameStageSetting : MonoBehaviour
     }
 
     public void RenderSetting_Gradient()
+
     {   
         //スカイボックスを消去している
         RenderSettings.skybox = null;
@@ -152,6 +142,7 @@ public class GameStageSetting : MonoBehaviour
     }
 
     public void ReStartScene()
+
     {
         ResetFlag = ResetStatus;
         switch (SceneManager.GetActiveScene().name)
@@ -171,6 +162,7 @@ public class GameStageSetting : MonoBehaviour
         }
     }
     public void ClearTimeStop()
+
     {
         switch (SceneManager.GetActiveScene().name)
         {
@@ -189,12 +181,18 @@ public class GameStageSetting : MonoBehaviour
         }
     }
     public void ClearLoad()
+
     {
         StartCoroutine("LoadScene"); 
     }
+
+
     void GameOverLoad() {
         StartCoroutine("LoadSceneGameOver");
     }
+
+
+
     protected IEnumerator LoadScene()
     {
         var async = SceneManager.LoadSceneAsync("Result");
@@ -203,6 +201,9 @@ public class GameStageSetting : MonoBehaviour
         yield return new WaitForSeconds(ClearLoadWaitTime);
         async.allowSceneActivation = true;
     }
+
+
+
     protected IEnumerator LoadSceneGameOver()
     {
         var async = SceneManager.LoadSceneAsync("Title");
@@ -223,6 +224,8 @@ public class GameStageSetting : MonoBehaviour
         Picture.transform.rotation = new Quaternion(-0.3f, 0.7f, 0.3f, 0.7f);
     }
     */
+
+
     public void GAMEOVER()
     {
         ClearTimeStop();
@@ -239,4 +242,7 @@ public class GameStageSetting : MonoBehaviour
         gameObject.GetComponent<RayAbility>().enabled = false;
         Destroy(GameObject.Find("CursolCanvas"));
     }
+
+
+
 }
