@@ -22,7 +22,7 @@ public class clockScript : MonoBehaviour
     RayAbility Abilitycontroller;
     Vector2 StandardTearPos;
 
-    GameObject clockParticleBlock;
+    
     ParticleSystem clockside;
     Vector3 StartPos;
     Vector3 pos, handpos;
@@ -54,6 +54,8 @@ public class clockScript : MonoBehaviour
 
     void Start()
     {
+
+        gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         GameMaster = GameObject.Find("GameMaster");
         GNTimer = GameMaster.GetComponent<GameTimerDirector>();
         //clock関係
