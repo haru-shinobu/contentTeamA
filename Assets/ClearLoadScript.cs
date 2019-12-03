@@ -73,7 +73,9 @@ public class ClearLoadScript : MonoBehaviour
             if (col.gameObject.tag == "Player")
             {
                 Particle.Play();
-                sulewall.transform.GetChild(0).GetComponent<MeshCollider>().enabled = false;
+                if (sulewall.transform.GetChild(0).GetComponent<MeshCollider>()) {
+                        sulewall.transform.GetChild(0).GetComponent<MeshCollider>().enabled = false;
+                }
                 GTD.GameCrearLoadFlag = true;
                 GSS.ClearTimeStop();
                 GSS.ClearLoad();

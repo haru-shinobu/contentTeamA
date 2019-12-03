@@ -1299,7 +1299,7 @@ GameObject:
   - component: {fileID: 2418278858306799746}
   m_Layer: 0
   m_Name: dfk_shelf_01
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -39262,11 +39262,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.0065
       objectReference: {fileID: 0}
-    - target: {fileID: -7315802078511791693, guid: 5c3198742d11b6c4ba3bb0230a2b52d3,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a2aaeb1c6c6d9f44681f7599f2aed133, type: 2}
     - target: {fileID: -203637587556650257, guid: 5c3198742d11b6c4ba3bb0230a2b52d3,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -39277,6 +39272,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 8.6
       objectReference: {fileID: 0}
+    - target: {fileID: -7315802078511791693, guid: 5c3198742d11b6c4ba3bb0230a2b52d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a2aaeb1c6c6d9f44681f7599f2aed133, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c3198742d11b6c4ba3bb0230a2b52d3, type: 3}
 --- !u!4 &2164670745727985975 stripped

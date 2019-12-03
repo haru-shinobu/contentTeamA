@@ -120,7 +120,7 @@ public class clockScript : MonoBehaviour
     //タイム処理
     void FixedUpdate()
     {
-        //if(GameProgressionFlag)========================================
+        float Second = GNTimer.NowTime;
         if (Flag)//シーン読み込み直後
         {
             ResetTimer += Time.deltaTime;
@@ -133,9 +133,7 @@ public class clockScript : MonoBehaviour
                 clocker.localPosition = Vector3.Lerp(clocker.localPosition, StartPos, Time.deltaTime);
                 clockertop.localPosition = clocker.localPosition - pos;
                 clockhand.localPosition = clocker.localPosition - handpos;
-                float Second = GNTimer.NowTime;
-                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond*/ - Second));
-
+                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (-Second));
                 if (StartPos.x - clocker.localPosition.x < 1f)
                 {
                     ResetTimer = 0;
@@ -152,12 +150,11 @@ public class clockScript : MonoBehaviour
         else//通常
         {
             CountTimer += Time.deltaTime;
-            if (CountTimer > 1)
+            if (CountTimer >= 1)
             {
-                CountTimer -= 1.0f;
-                float Second = GNTimer.NowTime;
+                CountTimer -= 1.0f;                
                 if (RestSecond - Second >= 0)
-                    clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond -*/ Second));
+                    clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (int)Second);
             }
         }
     }

@@ -154,6 +154,7 @@
     <Compile Include="Assets\Script\TimerScript\Stage1TimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\Stage2TimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\Stage3TimeManager.cs" />
+    <Compile Include="Assets\Script\TimerScript\SubSceenTimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\TimeResetController.cs" />
     <Compile Include="Assets\ScrollScript.cs" />
     <Compile Include="Assets\ScrollTexScript.cs" />

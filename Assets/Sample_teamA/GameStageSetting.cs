@@ -20,7 +20,7 @@ public class GameStageSetting : MonoBehaviour
     //ライト強さ
     public float LightStrong = 0.3f;
     //リセット能力及び画面外用
-    static public bool ResetFlag;
+    static public bool ResetFlag = false;
     static public int ResetStageDiv;
     public bool ResetStatus;
     //プレイヤーの能力変更メニュー開くために必要な時間。０以上であること
@@ -51,8 +51,6 @@ public class GameStageSetting : MonoBehaviour
     public int GameOverLoadWaitTime;
 
   
-    //デバッグ用
-    public bool DGoalFlag;
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -84,9 +82,9 @@ public class GameStageSetting : MonoBehaviour
                 NowStageTimeLimit = Stage3TimeLimit;
                 this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(Stage3TimeLimit, SceneManager.GetActiveScene().name);
                 break;
-            case "Sample_TeamA":
-                NowStageTimeLimit = 200;
-                this.transform.gameObject.AddComponent<SamPleTimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
+            case "SubScene":
+                NowStageTimeLimit = 300;
+                this.transform.gameObject.AddComponent<SubSceenTimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 break;
         }
 
@@ -149,8 +147,8 @@ public class GameStageSetting : MonoBehaviour
         ResetFlag = ResetStatus;
         switch (SceneManager.GetActiveScene().name)
         {
-            case "Sample_TeamA":
-                SceneManager.LoadScene("Sample_TeamA");
+            case "SubScene":
+                SceneManager.LoadScene("SubScene");
                 break;
             case "Stage1":
                 SceneManager.LoadScene("Stage1");
@@ -167,8 +165,8 @@ public class GameStageSetting : MonoBehaviour
     {
         switch (SceneManager.GetActiveScene().name)
         {
-            case "Sample_TeamA":
-                this.transform.gameObject.GetComponent<SamPleTimeManager>().TimeCountEnd();
+            case "SubScene":
+                this.transform.gameObject.GetComponent<SubSceenTimeManager>().TimeCountEnd();
                 break;
             case "Stage1":
                 this.transform.gameObject.GetComponent<Stage1TimeManager>().TimeCountEnd();
