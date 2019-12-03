@@ -10,7 +10,7 @@ public class SwitchScript : MonoBehaviour
     void Start()
     {
         tag = "Switch";
-        SwitchButton = gameObject.transform.root.GetChild(0).gameObject;
+        SwitchButton = gameObject.transform.GetChild(0).gameObject;        
         transform.gameObject.GetComponent<BoxCollider>().isTrigger = true;
     }
 

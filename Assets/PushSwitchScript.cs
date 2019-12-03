@@ -9,13 +9,15 @@ public class PushSwitchScript : MonoBehaviour
     public GameObject Target;
     float ButtonPushmove;
     float Sub = -2f;
+    Material mat;
     void Start()
     {
         tag = "Switch";
-        StartPos = gameObject.transform.position;
+        StartPos = gameObject.transform.localPosition;
         Flag = false;
         ButtonPushmove = 0;
-        
+        mat = gameObject.GetComponent<MeshRenderer>().material;
+        mat.DisableKeyword("_EMISSION");
     }
 
     // Update is called once per frame
@@ -40,6 +42,7 @@ public class PushSwitchScript : MonoBehaviour
             {
                 Flag = false;
                 Target.SendMessage("SwichChange");
+                mat.DisableKeyword("_EMISSION");
                 //ChainMから外したので後で再ターゲット？？
             }
         }
@@ -47,6 +50,7 @@ public class PushSwitchScript : MonoBehaviour
 
     void TriggerOn()
     {
+        mat.EnableKeyword("_EMISSION");
         Flag = true;
     }
 }

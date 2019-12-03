@@ -17,7 +17,7 @@ public class NumberSwitchScript : MonoBehaviour
 
     public List<Material> _MatNumList;
     TextMesh tex;
-
+    bool Flag;
     void Start()
     {   
         NumSarface1 = gameObject.transform.GetChild(0).gameObject;
@@ -25,10 +25,12 @@ public class NumberSwitchScript : MonoBehaviour
         NumSarface3 = gameObject.transform.GetChild(2).gameObject;
         tex = gameObject.transform.GetChild(4).GetComponent<TextMesh>();
         tex.text = "CLOSE";
+        Flag = false;
     }
 
     public void HitCheck(string name, int val)
     {
+        Flag = !Flag;
         if (NumSarface1.name == name)
         {
             if (HitNumber1 == val)
@@ -60,7 +62,10 @@ public class NumberSwitchScript : MonoBehaviour
         }
         else
         {
-            tex.text = "ERROR";
+            if (Flag)
+                tex.text = "ERROR";
+            else
+                tex.text = "FUMBLE";
         }
     }
 }

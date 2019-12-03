@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BreakpopItemScript.cs" />
     <Compile Include="Assets\CamWayScript.cs" />
     <Compile Include="Assets\ClearLoadScript.cs" />
     <Compile Include="Assets\cleartextScript.cs" />
@@ -98,7 +99,6 @@
     <Compile Include="Assets\GameOverCam.cs" />
     <Compile Include="Assets\gameoverScript.cs" />
     <Compile Include="Assets\GameTimerDirector.cs" />
-    <Compile Include="Assets\lereaseChainScript.cs" />
     <Compile Include="Assets\meshEyeIcon.cs" />
     <Compile Include="Assets\monoclescript.cs" />
     <Compile Include="Assets\NumberSwitchScript.cs" />

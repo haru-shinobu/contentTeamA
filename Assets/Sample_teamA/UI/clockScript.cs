@@ -126,15 +126,8 @@ public class clockScript : MonoBehaviour
             ResetTimer += Time.deltaTime;
 
             RayAbilityWhiteOut(ResetTimer, true, true);
-            if (ResetTimer < 3)//3秒間画面中央で針回し
+            if (ResetTimer < 2.5f)//2.5秒間画面中央で針回し
                 CallResetScene();
-            else if (2 <= ResetTimer && ResetTimer < 2.1f)
-            {//針を向けてる
-                //clockhand.eulerAngles = new Vector3(0, 0, 180);
-                float Second = GNTimer.NowTime;
-                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond*/ - Second));
-                if (!GameStartFlag) GameStartFlag = true;
-            }
             else
             {
                 clocker.localPosition = Vector3.Lerp(clocker.localPosition, StartPos, Time.deltaTime);
