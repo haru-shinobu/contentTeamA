@@ -83,7 +83,7 @@ public class GameStageSetting : MonoBehaviour
                 this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(Stage3TimeLimit, SceneManager.GetActiveScene().name);
                 break;
             case "SubScene":
-                NowStageTimeLimit = 300;
+                NowStageTimeLimit = 65;
                 this.transform.gameObject.AddComponent<SubSceenTimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 break;
         }

@@ -36,6 +36,7 @@ public class clockScript : MonoBehaviour
     static public bool ResetFlag = false;
     static public bool GameProgressionFlag = true;
     float RestSecond;
+    Color colers;
     //text
     Text AbilityText;
 
@@ -54,7 +55,6 @@ public class clockScript : MonoBehaviour
 
     void Start()
     {
-
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         GameMaster = GameObject.Find("GameMaster");
         GNTimer = GameMaster.GetComponent<GameTimerDirector>();
@@ -122,7 +122,7 @@ public class clockScript : MonoBehaviour
     //タイム処理
     void FixedUpdate()
     {
-        float Second = GNTimer.NowTime;
+        int Second = (int)GNTimer.NowTime;
         if (Flag)//シーン読み込み直後
         {
             ResetTimer += Time.deltaTime;
@@ -156,7 +156,7 @@ public class clockScript : MonoBehaviour
             {
                 CountTimer -= 1.0f;                
                 if (RestSecond - Second >= 0)
-                    clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (int)Second);
+                    clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * Second);
             }
         }
     }
