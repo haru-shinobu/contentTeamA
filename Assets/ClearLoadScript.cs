@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ClearLoadScript : MonoBehaviour
 {
-    bool Flag, Flag2,Flag3;
+    public bool Flag, Flag2,Flag3;
     GameTimerDirector GTD;
     GameStageSetting GSS;
     GameObject Player , Picture , obj;
@@ -33,10 +33,10 @@ public class ClearLoadScript : MonoBehaviour
         GTD = obj.gameObject.GetComponent<GameTimerDirector>();
         GSS = obj.gameObject.GetComponent<GameStageSetting>();
         textFlag = GameObject.Find("UICanvas").GetComponent<clockScript>();
-        if (gameObject.name != "TimeCountStop")
-            Flag2 = false;
-        else
-            Flag2 = true;
+ //       if (gameObject.name != "TimeCountStop")
+ //           Flag2 = false;
+ //       else
+ //           Flag2 = true;
         PrefabCanvas = Resources.Load<Canvas>("ClearCanvas" );
     }
     
@@ -67,8 +67,10 @@ public class ClearLoadScript : MonoBehaviour
                 {
                     textFlag.OpenRootFlag = false;
                     Flag3 = false;
+                    Flag2 = true;
                 }
         }
+        
         if (Flag2)
             if (col.gameObject.tag == "Player")
             {
