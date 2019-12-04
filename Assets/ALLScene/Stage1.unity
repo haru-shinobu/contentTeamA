@@ -313,7 +313,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9887fab548e903b4396843ab6986964a, type: 2}
+  - {fileID: 2100000, guid: bd30beecef211ee4aac3f3e2098cc9b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1445,7 +1445,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ae97d27b6ac4a1b4d912d5db45ec6d5b, type: 2}
+      objectReference: {fileID: 2100000, guid: de6c4161739446045b242633433a0476, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5249fc6c28841cd498e04fe8c2f40410, type: 3}
 --- !u!1001 &479583421
@@ -3722,6 +3722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 727ad9cd4977d604691089202e016d55, type: 3}
   texture2: {fileID: 2800000, guid: 620189c527029a54fab2c65919062351, type: 3}
+  OpenRootFlag: 0
 --- !u!114 &1001162434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4074,6 +4075,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 8d73c4220a828514ea3254532952d7f6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eee1a9cf7a789174fb85e3dcd1aa244e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d73c4220a828514ea3254532952d7f6, type: 3}
 --- !u!1 &1118373285
@@ -9362,7 +9367,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ae97d27b6ac4a1b4d912d5db45ec6d5b, type: 2}
+      objectReference: {fileID: 2100000, guid: de6c4161739446045b242633433a0476, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5249fc6c28841cd498e04fe8c2f40410, type: 3}
 --- !u!1001 &1247882896
@@ -9632,6 +9637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NowTime: 0
+  GameCrearLoadFlag: 0
 --- !u!114 &1305695395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9644,6 +9650,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf15588301a28548b45ae56c2df44ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tameSE: {fileID: 0}
+  worpSE: {fileID: 0}
+  stopSE: {fileID: 0}
+  hakaiSE: {fileID: 0}
+  kirikaeSE: {fileID: 0}
   Player: {fileID: 1427728714}
   CircleWarp: {fileID: 1349284347}
   CircleStop: {fileID: 576702934}
@@ -9654,6 +9665,8 @@ MonoBehaviour:
   BreakAbilityPenaltyTime: 10
   ResetAbilityPenaltyTime: 10
   exploision: {fileID: 0}
+  CFX2_PickupDiamond2: {fileID: 0}
+  CFX_Explosion_B_Smoke: {fileID: 0}
   WarpLoad: {fileID: 0}
   WarpGeat: {fileID: 0}
   AbilityChengeMenuTime: 4
@@ -9661,6 +9674,7 @@ MonoBehaviour:
   AbilityMenuOpenFlag: 0
   StopObjectName: 
   AbilityNow: 0
+  EyeLongFlag: 0
   AbilityStopEmissionFlag: 0
 --- !u!114 &1305695396
 MonoBehaviour:
@@ -9696,10 +9710,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e4f8cbe105ce74fab3da8cdff79e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yarinaosiSE: {fileID: 0}
   MouseMode: 1
   LightStrong: 0.3
   ResetStatus: 0
-  PlayerAbilityChengeMenuTime: 2
+  AbilityMenuTime: 0
   BreakAbilityPenalty: 10
   ResetAbilityPenalty: 10
   PlayerSizeX: 50
@@ -9718,6 +9733,8 @@ MonoBehaviour:
     type: 3}
   Warpgeat: {fileID: 7896925598725281991, guid: 622f7893533f98743b52a09a852e2c53,
     type: 3}
+  ClearLoadWaitTime: 0
+  GameOverLoadWaitTime: 0
 --- !u!4 &1305695398
 Transform:
   m_ObjectHideFlags: 0
@@ -11148,7 +11165,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ae97d27b6ac4a1b4d912d5db45ec6d5b, type: 2}
+      objectReference: {fileID: 2100000, guid: de6c4161739446045b242633433a0476, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5249fc6c28841cd498e04fe8c2f40410, type: 3}
 --- !u!1001 &1564741625
@@ -11463,7 +11480,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ae97d27b6ac4a1b4d912d5db45ec6d5b, type: 2}
+      objectReference: {fileID: 2100000, guid: de6c4161739446045b242633433a0476, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5249fc6c28841cd498e04fe8c2f40410, type: 3}
 --- !u!1001 &1710501405
