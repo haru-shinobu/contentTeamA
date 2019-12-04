@@ -117,7 +117,7 @@ public class GameStageSetting : MonoBehaviour
         this.gameObject.GetComponent<RayAbility>().AbilityChengeMenuTime = PlayerAbilityChengeMenuTime;
         if (SceneManager.GetActiveScene().name == "Stage1")
         {
-            this.gameObject.GetComponent<RayAbility>().AbilityNum = 0;
+            this.gameObject.GetComponent<RayAbility>().AbilityNum = 4;
         }
         else
         {
