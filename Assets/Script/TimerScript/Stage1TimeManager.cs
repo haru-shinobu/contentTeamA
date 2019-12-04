@@ -4,40 +4,58 @@ using UnityEngine;
 
 public class Stage1TimeManager : MonoBehaviour
 {
-    public static int ClearTime = 0;
+    private static int ClearTime1 = 0;
     float LimitedTime = 0;
+    private bool ClearLoadFlag;
+    string scene = null;
+    string nowscene;
     void Start()
     {
-        ClearTime = 0;
+        ClearTime1 = 0;
+        ClearLoadFlag = true;
+        nowscene = "Stage1";
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if文などでフェード終了とかから
-         * 計測できるようにするとか
-         * したほうがいいかも？
-         * あるいはプレイヤーの初期操作以降…
-         */
-        ClearTime = (int)Time.time;
-        if (LimitedTime < ClearTime)
-            Debug.Log("GameOver");
+        if (scene == nowscene)
+        {
+            LimitedTime -= Time.deltaTime;
+            if (0 < LimitedTime)
+            {
+                if (ClearLoadFlag)
+                {
+                    ClearTime1 = (int)LimitedTime;
+                }
+            }
+            else
+            {
+                Debug.Log("GameOver");
+            }
+            gameObject.transform.GetComponent<GameTimerDirector>().NowTime = LimitedTime;
+        }
     }
     public static void PenaltyTime(int time)
     {
-        ClearTime -= time;
+        ClearTime1 -= time;
     }
-    public void LimitTime(int time)
+    public void LimitTime(int time, string scenename)
     {
         LimitedTime = time;
+        scene = scenename;
     }
     public static int GetTime()
     {
-        return ClearTime;
+        return ClearTime1;
     }
     public static void ResetTime()
     {
-        ClearTime = 0;
+        ClearTime1 = 0;
+    }
+    public void TimeCountEnd()
+    {
+        ClearLoadFlag = false;
     }
 }
 

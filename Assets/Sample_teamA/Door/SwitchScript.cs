@@ -6,15 +6,16 @@ using UnityEngine;
 
 public class SwitchScript : MonoBehaviour
 {
-    public GameObject SwitchHandle;
+    GameObject SwitchButton;
     void Start()
     {
         tag = "Switch";
+        SwitchButton = gameObject.transform.GetChild(0).gameObject;        
         transform.gameObject.GetComponent<BoxCollider>().isTrigger = true;
     }
 
     void TriggerOn()
     {
-        SwitchHandle.SendMessage("TriggerOn");
+        SwitchButton.SendMessage("TriggerOn");
     }
 }

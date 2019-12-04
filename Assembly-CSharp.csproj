@@ -57,17 +57,56 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BreakpopItemScript.cs" />
+    <Compile Include="Assets\CamWayScript.cs" />
+    <Compile Include="Assets\ClearLoadScript.cs" />
+    <Compile Include="Assets\cleartextScript.cs" />
+    <Compile Include="Assets\DizableOnScript.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\BaseMeshEffect.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\BlurMode.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\ColorMode.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\EffectArea.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\EffectPlayer.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\MaterialCache.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\MaterialResolver.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\Matrix2x3.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\Packer.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\ParameterTexture.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\ShadowStyle.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\ToneMode.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\Common\UIEffectBase.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\UIDissolve.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\UIEffect.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\UIEffectCapturedImage.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\UIFlip.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\UIGradient.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\UIHsvModifier.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\UIShadow.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\UIShiny.cs" />
+    <Compile Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Scripts\UITransitionEffect.cs" />
     <Compile Include="Assets\DownloadAsset\Dissolve Edge by Moonflower Carnivore\Scripts\HideIfDisabledDrawer.cs" />
+    <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
+    <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_New.cs" />
+    <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
+    <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+    <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
+    <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_Translate.cs" />
+    <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
+    <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
+    <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Scripts\CFX_LightFlicker.cs" />
+    <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\DownloadAsset\RunemarkStudio\DarkFantasyKit [Free]\Readme\Parts\Readme.cs" />
+    <Compile Include="Assets\GameOverCam.cs" />
+    <Compile Include="Assets\gameoverScript.cs" />
     <Compile Include="Assets\GameTimerDirector.cs" />
     <Compile Include="Assets\meshEyeIcon.cs" />
+    <Compile Include="Assets\monoclescript.cs" />
+    <Compile Include="Assets\NumberSwitchScript.cs" />
+    <Compile Include="Assets\PushSwitchScript.cs" />
     <Compile Include="Assets\RantanControllerScript.cs" />
     <Compile Include="Assets\RayAbility.cs" />
     <Compile Include="Assets\Sample_teamA\BollMaker\BollMakerScript.cs" />
     <Compile Include="Assets\Sample_teamA\BollMaker\BollsScript.cs" />
-    <Compile Include="Assets\Sample_teamA\breakwallscript.cs" />
-    <Compile Include="Assets\Sample_teamA\clockScript.cs" />
-    <Compile Include="Assets\Sample_teamA\CursorColtroll.cs" />
     <Compile Include="Assets\Sample_teamA\Door\Doormove.cs" />
     <Compile Include="Assets\Sample_teamA\Door\DoorPassDiscrimination.cs" />
     <Compile Include="Assets\Sample_teamA\Door\footpointScript.cs" />
@@ -78,25 +117,28 @@
     <Compile Include="Assets\Sample_teamA\Elevator&amp;onewayfloor\ParentMesh.cs" />
     <Compile Include="Assets\Sample_teamA\Elevator&amp;onewayfloor\WayTrigger.cs" />
     <Compile Include="Assets\Sample_teamA\GameStageSetting.cs" />
-    <Compile Include="Assets\Sample_teamA\GoalScript.cs" />
     <Compile Include="Assets\Sample_teamA\GUIDE.cs" />
     <Compile Include="Assets\Sample_teamA\moveObject\BeltConveyorscript.cs" />
+    <Compile Include="Assets\Sample_teamA\moveObject\breakwallscript.cs" />
     <Compile Include="Assets\Sample_teamA\moveObject\FallDown.cs" />
     <Compile Include="Assets\Sample_teamA\moveObject\rotate_horizonal.cs" />
     <Compile Include="Assets\Sample_teamA\moveObject\rotate_vertical.cs" />
     <Compile Include="Assets\Sample_teamA\moveObject\SeasawZ.cs" />
+    <Compile Include="Assets\Sample_teamA\moveObject\StormScript.cs" />
     <Compile Include="Assets\Sample_teamA\Pendulum\Pendulum.cs" />
     <Compile Include="Assets\Sample_teamA\Pendulum\Pendulumbody.cs" />
     <Compile Include="Assets\Sample_teamA\Pendulum\Pendulumbodyfloot.cs" />
     <Compile Include="Assets\Sample_teamA\Pendulum\PendulumShaft.cs" />
+    <Compile Include="Assets\Sample_teamA\Player\ClearPlayerMoving.cs" />
     <Compile Include="Assets\Sample_teamA\Player\FPSCameraController.cs" />
     <Compile Include="Assets\Sample_teamA\Player\PlayerController.cs" />
-    <Compile Include="Assets\Sample_teamA\SamPleTimeManager.cs" />
     <Compile Include="Assets\Sample_teamA\Steps\footswitchScript.cs" />
     <Compile Include="Assets\Sample_teamA\Steps\InstantStaircase.cs" />
     <Compile Include="Assets\Sample_teamA\Steps\RotateStaircaseScript.cs" />
     <Compile Include="Assets\Sample_teamA\Steps\StaircaseScript.cs" />
-    <Compile Include="Assets\Sample_teamA\StormScript.cs" />
+    <Compile Include="Assets\Sample_teamA\UI\clockScript.cs" />
+    <Compile Include="Assets\Sample_teamA\UI\CursorColtroll.cs" />
+    <Compile Include="Assets\SarfaceSkinChangeScript.cs" />
     <Compile Include="Assets\Script\EffectDeleteScript.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\CreditScene.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\ResultScene.cs" />
@@ -108,19 +150,52 @@
     <Compile Include="Assets\Script\SceneChengeScript\TitleScene.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\TitleSelectScene.cs" />
     <Compile Include="Assets\Script\TimerScript\ClearTimeManager.cs" />
+    <Compile Include="Assets\Script\TimerScript\SamPleTimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\Stage1TimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\Stage2TimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\Stage3TimeManager.cs" />
+    <Compile Include="Assets\Script\TimerScript\SubSceenTimeManager.cs" />
     <Compile Include="Assets\Script\TimerScript\TimeResetController.cs" />
-    <Compile Include="Assets\windowScript.cs" />
+    <Compile Include="Assets\ScrollScript.cs" />
+    <Compile Include="Assets\ScrollTexScript.cs" />
+    <Compile Include="Assets\StegeMakerScript.cs" />
     <None Include="Assets\DownloadAsset\Laterns and candles\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Script\NoClearObj.shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Shaders\UI-Effect-HSV.shader" />
+    <None Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
+    <None Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_Sprite (UIHsvModifier).shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF (UIDissolve).shader" />
+    <None Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
     <None Include="Assets\DownloadAsset\Dissolve Edge by Moonflower Carnivore\Shaders\Transparent_Unlit_DissolveEdge.shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF (UIShiny).shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_Sprite (UIDissolve).shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_Sprite (UIShiny).shader" />
+    <None Include="Assets\DownloadAsset\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF-Mobile (UIDissolve).shader" />
+    <None Include="Assets\Sample_teamA\UI\FontEX.shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF-Mobile (UIEffect).shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Shaders\UI-Effect-Dissolve.shader" />
     <None Include="Assets\DownloadAsset\Dissolve Edge by Moonflower Carnivore\readme_DissolveEdge.txt" />
-    <None Include="Assets\ObjClearShader.shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_Sprite (UIEffect).shader" />
+    <None Include="Assets\Script\ObjClearShader.shader" />
     <None Include="Assets\DownloadAsset\Racing Flag Animated\shaders\vertex_animation_shader.shader" />
-    <None Include="Assets\NoObjClearShader.shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Shaders\UI-EffectCapture.shader" />
+    <None Include="Assets\Script\NoObjClearShader.shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF-Mobile (UIHsvModifier).shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_Sprite (UITransition).shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Shaders\UI-Effect-Sprite.cginc" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF (UIEffect).shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF-Mobile (UIShiny).shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Shaders\UI-Effect-Shiny.shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\UI-Effect-TMPro.cginc" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Shaders\UI-Effect.shader" />
     <None Include="Assets\Script\DoubleSide.shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF-Mobile (UITransition).shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Shaders\UI-Effect-Transition.shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\Shaders\UI-Effect.cginc" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF (UIHsvModifier).shader" />
+    <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF (UITransition).shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -130,8 +205,14 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Recorder.Editor">
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.Recorder.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Recorder">
+      <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Users/rtamura/Desktop/nins/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>

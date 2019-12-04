@@ -10,15 +10,21 @@ using UnityEngine.Rendering;
 [DefaultExecutionOrder(-5)]//スクリプト実行順
 public class GameStageSetting : MonoBehaviour
 {
+    AudioSource audioSource;
+    //
+    //
+
+    public AudioClip yarinaosiSE;
     //マウス操作かキー操作か
     public bool MouseMode;
     //ライト強さ
     public float LightStrong = 0.3f;
     //リセット能力及び画面外用
-    static public bool ResetFlag;
+    static public bool ResetFlag = false;
+    static public int ResetStageDiv;
     public bool ResetStatus;
     //プレイヤーの能力変更メニュー開くために必要な時間。０以上であること
-    public float PlayerAbilityChengeMenuTime;
+    public float AbilityMenuTime;
     //破壊能力及びリセット能力ペナルティー数。（秒）
     public int BreakAbilityPenalty; //仮数10
     public int ResetAbilityPenalty; //仮数10
@@ -40,34 +46,48 @@ public class GameStageSetting : MonoBehaviour
     public GameObject Warpgeat;
     //リロード用
     public static int ReLoadPlayerPos;
+    //ステージクリアからリザルトへ飛ぶときの待ち時間
+    public int ClearLoadWaitTime;
+    public int GameOverLoadWaitTime;
 
+  
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+
         ResetStatus = ResetFlag;
+        if (ResetFlag)
+        {
+            //やり直し音声を書いておく
+            audioSource.PlayOneShot(yarinaosiSE);
+        }
+    
         ResetFlag = false;
-        //Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
+        Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
         RenderSetting_Gradient();//環境光設定
         Ability();//能力設定
         Setting();
+
         switch (SceneManager.GetActiveScene().name)
         {
             case "Stage1":
                 NowStageTimeLimit = Stage1TimeLimit;
-                this.transform.gameObject.AddComponent<Stage1TimeManager>().LimitTime(Stage1TimeLimit);
+                this.transform.gameObject.AddComponent<Stage1TimeManager>().LimitTime(Stage1TimeLimit, SceneManager.GetActiveScene().name);
                 break;
             case "Stage2":
                 NowStageTimeLimit = Stage2TimeLimit;
-                this.transform.gameObject.AddComponent<Stage2TimeManager>().LimitTime(Stage2TimeLimit);
+                this.transform.gameObject.AddComponent<Stage2TimeManager>().LimitTime(Stage2TimeLimit, SceneManager.GetActiveScene().name);
                 break;
             case "Stage3":
                 NowStageTimeLimit = Stage3TimeLimit;
-                this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(Stage3TimeLimit);
+                this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(Stage3TimeLimit, SceneManager.GetActiveScene().name);
                 break;
-            case "Sample_TeamA":
-                NowStageTimeLimit = 240;
-                this.transform.gameObject.AddComponent<SamPleTimeManager>().LimitTime(NowStageTimeLimit);
+            case "SubScene":
+                NowStageTimeLimit = 300;
+                this.transform.gameObject.AddComponent<SubSceenTimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 break;
         }
+
     }
 
     void Setting()
@@ -82,24 +102,26 @@ public class GameStageSetting : MonoBehaviour
         Player.gameObject.transform.localScale = new Vector3(PlayerSizeX, PlayerSizeY, PlayerSizeZ);
         Player.gameObject.GetComponent<PlayerController>().moveSpeed = MoveSpeed;
         Player.gameObject.GetComponent<PlayerController>().JumpForce = JampForce;
-        GameObject Storm = GameObject.Find("StormEria");
-        Storm.transform.GetComponent<StormScript>().StormForce = StormForce;
+        if (GameObject.Find("StormEria"))
+        {
+            GameObject Storm = GameObject.Find("StormEria");
+            Storm.transform.GetComponent<StormScript>().StormForce = StormForce;
+        }
     }
 
     public void RenderSetting_Gradient()
     {   
         //スカイボックスを消去している
-        //RenderSettings.skybox = null;
+        RenderSettings.skybox = null;
         // 環境光のライティング設定
         // ソースをFlatに変更する
         RenderSettings.ambientMode = AmbientMode.Trilight;
         // 環境光の上方向からの色を指定する
-        RenderSettings.ambientSkyColor = Color.black;//.HSVToRGB(0.05f, 0.3f, LightStrong*0.1f, false);
+        RenderSettings.ambientSkyColor = new Color(214f,124f,172f,255f);//Color.black;
         // 環境光の横方向からの色を指定する
         RenderSettings.ambientEquatorColor = Color.HSVToRGB(0.05f, 0.3f, LightStrong, false);
         // 環境光の下方向からの色を指定する
         RenderSettings.ambientGroundColor = Color.HSVToRGB(0.05f, 0.3f, LightStrong, false);
-        //RenderSettings.ambientGroundColor = Color.HSVToRGB(1,10,100,false);//デバッグ用。ちょっと赤にするとき
 
         // 環境光の反射設定
         // ソースをCustomに変更する
@@ -114,15 +136,9 @@ public class GameStageSetting : MonoBehaviour
     {
         if (!this.gameObject.GetComponent<RayAbility>())
             this.gameObject.AddComponent<RayAbility>();
-        this.gameObject.GetComponent<RayAbility>().AbilityChengeMenuTime = PlayerAbilityChengeMenuTime;
-        if (SceneManager.GetActiveScene().name == "Stage1")
-        {
-            this.gameObject.GetComponent<RayAbility>().AbilityNum = 4;
-        }
-        else
-        {
-            this.gameObject.GetComponent<RayAbility>().AbilityNum = 4;
-        }
+        this.gameObject.GetComponent<RayAbility>().AbilityChengeMenuTime = AbilityMenuTime;      
+        this.gameObject.GetComponent<RayAbility>().AbilityNum = 4;
+        
         
     }
 
@@ -131,8 +147,8 @@ public class GameStageSetting : MonoBehaviour
         ResetFlag = ResetStatus;
         switch (SceneManager.GetActiveScene().name)
         {
-            case "Sample_TeamA":
-                SceneManager.LoadScene("Sample_TeamA");
+            case "SubScene":
+                SceneManager.LoadScene("SubScene");
                 break;
             case "Stage1":
                 SceneManager.LoadScene("Stage1");
@@ -144,5 +160,74 @@ public class GameStageSetting : MonoBehaviour
                 SceneManager.LoadScene("Stage3");
                 break;
         }
+    }
+    public void ClearTimeStop()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "SubScene":
+                this.transform.gameObject.GetComponent<SubSceenTimeManager>().TimeCountEnd();
+                break;
+            case "Stage1":
+                this.transform.gameObject.GetComponent<Stage1TimeManager>().TimeCountEnd();
+                break;
+            case "Stage2":
+                this.transform.gameObject.GetComponent<Stage2TimeManager>().TimeCountEnd();
+                break;
+            case "Stage3":
+                this.transform.gameObject.GetComponent<Stage3TimeManager>().TimeCountEnd();
+                break;
+        }
+    }
+    public void ClearLoad()
+    {
+        StartCoroutine("LoadScene"); 
+    }
+    void GameOverLoad() {
+        StartCoroutine("LoadSceneGameOver");
+    }
+    protected IEnumerator LoadScene()
+    {
+        var async = SceneManager.LoadSceneAsync("Result");
+        
+        async.allowSceneActivation = false;   
+        yield return new WaitForSeconds(ClearLoadWaitTime);
+        async.allowSceneActivation = true;
+    }
+    protected IEnumerator LoadSceneGameOver()
+    {
+        var async = SceneManager.LoadSceneAsync("Title");
+
+        async.allowSceneActivation = false;
+        yield return new WaitForSeconds(GameOverLoadWaitTime);
+        async.allowSceneActivation = true;
+    }
+
+    /*
+    void DGoal()
+    {
+        GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker1();
+        GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker2();
+        GameObject.Find("GameObjectMaker").gameObject.GetComponent<StegeMakerScript>().StageMaker3();
+        GameObject Picture = GameObject.Find("picture");
+        Picture.transform.position = new Vector3(765, 1180, 0);
+        Picture.transform.rotation = new Quaternion(-0.3f, 0.7f, 0.3f, 0.7f);
+    }
+    */
+    public void GAMEOVER()
+    {
+        ClearTimeStop();
+        GameOverLoad();
+        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        Player.GetComponent<PlayerController>().enabled = false;
+        Destroy(GameObject.Find("footCanvas"));
+        GameObject cam = GameObject.Find("FPSCamera");
+        Destroy(cam.GetComponent<FPSCameraController>());
+        cam.AddComponent<GameOverCam>();
+        GameObject.Find("UICanvas").transform.GetChild(12).GetChild(0).gameObject.SetActive(false);
+        GameObject.Find("UICanvas").GetComponent<Canvas>().enabled = false;
+        gameObject.GetComponent<CursorColtroll>().enabled = false;
+        gameObject.GetComponent<RayAbility>().enabled = false;
+        Destroy(GameObject.Find("CursolCanvas"));
     }
 }

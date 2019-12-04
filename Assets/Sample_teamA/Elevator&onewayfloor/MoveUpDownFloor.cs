@@ -11,6 +11,7 @@ public class MoveUpDownFloor : MonoBehaviour
     bool Flag;
     float time=0;
     bool TimeStopFlag = true;
+    public bool MoveFlag = false;
     void Start()
     {
         GameObject WayTrigger;
@@ -52,8 +53,10 @@ public class MoveUpDownFloor : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player") { 
             col.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            col.gameObject.GetComponent<PlayerController>().Ground = true;
+    }
     }
     private void OnTriggerExit(Collider col)
     {
@@ -91,6 +94,7 @@ public class MoveUpDownFloor : MonoBehaviour
 
     void Update()
     {
+        if(MoveFlag)
         if (TimeStopFlag)
         {
             time += Time.deltaTime * 50;

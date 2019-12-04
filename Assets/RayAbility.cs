@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +10,19 @@ using UnityEngine.UI;
 public class RayAbility : MonoBehaviour
 {
     bool MouseControl;
+
+    //音声ファイル格納用変数
+    AudioSource audioSource;
+    //audioSource = GetComponent<AudioSource>();
+    //audioSource.PlayOneShot(stopSE);
+    
+    public AudioClip tameSE;
+    public AudioClip worpSE;
+    public AudioClip stopSE;
+    public AudioClip hakaiSE;
+    public AudioClip kirikaeSE;
+
+    
     public GameObject Player;
     public GameObject CircleWarp;  //チャージカーソル用
     public GameObject CircleStop;  //チャージカーソル用
@@ -23,6 +38,8 @@ public class RayAbility : MonoBehaviour
     clockScript col;//リセット能力の視界濁らせる用
 
     public GameObject exploision;
+    public GameObject CFX2_PickupDiamond2;
+    public GameObject CFX_Explosion_B_Smoke;
     public GameObject WarpLoad;
     public GameObject WarpGeat;
     CursorColtroll carsor;
@@ -40,10 +57,16 @@ public class RayAbility : MonoBehaviour
     bool WarpParticleFlag;
     GameObject Instance;
     GameObject InstanceGeat;
+
+    public bool EyeLongFlag;//アイテム取ったときレイを伸ばす。
+
     public bool AbilityStopEmissionFlag;
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         MouseControl = GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MouseMode;
+        CFX2_PickupDiamond2 = (GameObject)Resources.Load("CFX2_PickupDiamond2");
+        CFX_Explosion_B_Smoke = (GameObject)Resources.Load("CFX_Explosion_B_Smoke+Text");
         col = GameObject.Find("UICanvas").GetComponent<clockScript>();
         carsor = gameObject.transform.GetComponent<CursorColtroll>();
         center = new Vector3(Screen.width / 2, Screen.height / 2);
@@ -59,6 +82,7 @@ public class RayAbility : MonoBehaviour
         WarpParticleFlag = false;
         AbilityMenuOpenFlag = false;
         AbilityStopEmissionFlag = false;
+        EyeLongFlag = false;
     }
 
     // Update is called once per frame
@@ -78,6 +102,8 @@ public class RayAbility : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
             KeyQTime = 0;
+        //audioSource.PlayOneShot(kirikaeSE);
+
         if (Input.GetKey(KeyCode.Q))
             KeyQTime += Time.deltaTime;
 
@@ -155,6 +181,7 @@ public class RayAbility : MonoBehaviour
     void AbilityAction()
     {
         Charge(AbilityTriggerTime);
+
         //Ability4(リセット)
         if (AbilityNow == 4)
         {
@@ -170,11 +197,13 @@ public class RayAbility : MonoBehaviour
                 {
                     AbilityPenalty(ResetAbilityPenaltyTime);
                     Player.GetComponent<PlayerController>().ResetFlag = true;
+                    
                 }
                 else
                 {
                     col.RayAbilityWhiteOut(0, false, false);
                     AbilityTriggerTime = 0;
+                    
                 }
             }
         }
@@ -191,16 +220,15 @@ public class RayAbility : MonoBehaviour
             }
             else
             {
-                raylong = 1000f;
+                if (!EyeLongFlag)
+                    raylong = 1000f;
+                else
+                    raylong = 1500;
                 carsor.handflag = false;
             }
 
             if (Physics.Raycast(ray, out hit, raylong))
-            {
-                //位置座標を取得してみている
-                //Debug.Log(hit.collider.gameObject.transform.position);
-                //Debug.Log((int)AbilityTriggerTime);
-                
+            {                
                 reticleAction(hit.normal, hit.point);
                 if (AbilityNow != 1 && WarpParticleFlag)
                 {
@@ -242,6 +270,7 @@ public class RayAbility : MonoBehaviour
                                 {
                                     if (Input.GetKeyDown(KeyCode.E))
                                     {
+                                        audioSource.PlayOneShot(worpSE);
                                         Player.transform.position = hit.point + (hit.normal * Player.transform.localScale.x);
                                         AbilityNow = 0;
                                     }
@@ -276,16 +305,18 @@ public class RayAbility : MonoBehaviour
                                         if (Input.GetKeyDown(KeyCode.E))
                                         {
                                             hit.collider.gameObject.SendMessage("CollStop");
+                                            Instantiate(CFX2_PickupDiamond2, hit.point + (hit.normal * 3), Quaternion.identity);
+                                            audioSource.PlayOneShot(stopSE);
                                             if (StopObjectName == null)
                                             {
                                                 StopObjectName = hit.collider.gameObject.transform.root.name;
-                                                //hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                                               
                                                 AbilityStopEmissionFlag = true;
                                             }
                                             else
                                             {
                                                 StopObjectName = null;
-                                                //hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                                               
                                                 AbilityStopEmissionFlag = false;
                                             }
                                             AbilityNow = 0;
@@ -305,6 +336,8 @@ public class RayAbility : MonoBehaviour
                                         if (Input.GetKeyDown(KeyCode.E))
                                         {
                                             hit.collider.gameObject.SendMessage("CollStop");
+                                            Instantiate(CFX2_PickupDiamond2, hit.point + (hit.normal * 3), Quaternion.identity);
+                                            audioSource.PlayOneShot(stopSE);
                                             if (StopObjectName == null)
                                             {
                                                 StopObjectName = hit.collider.gameObject.transform.root.name;
@@ -349,10 +382,11 @@ public class RayAbility : MonoBehaviour
                                     if (Input.GetKeyDown(KeyCode.E))
                                     {
                                         hit.collider.gameObject.SendMessage("CollBreak");
+                                        audioSource.PlayOneShot(hakaiSE);
                                         AbilityNow = 0;
                                         AbilityPenalty(BreakAbilityPenaltyTime);
                                         NextUseTime = 10;
-                                        Instantiate(exploision, hit.point + (hit.normal * 3), Quaternion.identity);
+                                        Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }
                                 }
                                 else
@@ -376,13 +410,15 @@ public class RayAbility : MonoBehaviour
                                         }
                                         else
                                         {
+                                            hit.collider.gameObject.GetComponent<BoxCollider>().enabled = false;
+                                            hit.collider.gameObject.GetComponent<CapsuleCollider>().enabled = false;
                                             hit.collider.gameObject.GetComponent<MeshCollider>().enabled = false;
                                             hit.collider.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
                                         }
                                         AbilityNow = 0;
                                         AbilityPenalty(BreakAbilityPenaltyTime);
                                         NextUseTime = 10;
-                                        Instantiate(exploision, hit.point + (hit.normal * 3), Quaternion.identity);
+                                        Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }
                                 }
                                 else
@@ -424,19 +460,19 @@ public class RayAbility : MonoBehaviour
             case 1:
                 reticleWarp.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 reticleWarp.transform.position = point + (normal * 5);
-                CircleWarp.transform.rotation = Quaternion.LookRotation(normal);
+                CircleWarp.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 CircleWarp.transform.position = point + (normal * 5);
                 break;
             case 2:
                 reticleStop.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 reticleStop.transform.position = point + (normal * 5);
-                CircleStop.transform.rotation = Quaternion.LookRotation(normal);
+                CircleStop.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 CircleStop.transform.position = point + (normal * 5);
                 break;
             case 3:
                 reticleBreak.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 reticleBreak.transform.position = point + (normal * 5);
-                CircleBreak.transform.rotation = Quaternion.LookRotation(normal);
+                CircleBreak.transform.rotation = Quaternion.LookRotation(normal + Camera.main.transform.up * 0.01f);
                 CircleBreak.transform.position = point + (normal * 5);
                 break;
         }
@@ -469,12 +505,14 @@ public class RayAbility : MonoBehaviour
             case 0:break;
             case 1:
                 CircleWarp.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
-                    break;
+                
+                break;
             case 2:
                 CircleStop.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
                 break;
             case 3:
                 CircleBreak.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
+     
                 break;
             }
     }
@@ -494,6 +532,12 @@ public class RayAbility : MonoBehaviour
                 Stage3TimeManager.PenaltyTime(time);
                 break;
         }
+    }
+
+    //モノクル入手
+    void GetMonocle()
+    {
+        EyeLongFlag = true;
     }
 }
 

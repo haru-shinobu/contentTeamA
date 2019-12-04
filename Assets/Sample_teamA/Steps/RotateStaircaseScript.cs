@@ -62,10 +62,10 @@ public class RotateStaircaseScript : MonoBehaviour
         //底板
         Vector3 pos;
         if (Pass)
-            pos = transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y;
+            pos = transform.position - transform.forward * transform.lossyScale.z + transform.up * transform.lossyScale.y;
         else
         {
-            pos = transform.position + transform.forward * transform.localScale.z * (Steps + 1.5f) * 2;// + transform.up * transform.localScale.y;
+            pos = transform.position + transform.forward * transform.lossyScale.z * (Steps + 1.5f) * 2;
         }
 
         Instantiate(CreateStep, pos, Quaternion.identity, transform);
@@ -80,37 +80,37 @@ public class RotateStaircaseScript : MonoBehaviour
         while (0 < CreateNum)
         {
             if (Pass)
-                pos = transform.GetChild(Childnum + num).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y * 0.7f;
+                pos = transform.GetChild(Childnum + num).transform.position - transform.forward * transform.lossyScale.z + transform.up * transform.lossyScale.y * 0.7f;
             else
-                pos = transform.GetChild(Childnum + num).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y * 0.7f;
+                pos = transform.GetChild(Childnum + num).transform.position - transform.forward * transform.lossyScale.z + transform.up * transform.lossyScale.y * 0.7f;
             Instantiate(transform.GetChild(Childnum).gameObject, pos, Quaternion.identity, transform);
             num++;
             CreateNum--;
         }
-        
+
         //欄干の柱
-        if(Pass)
-        pos = transform.position + transform.up * transform.localScale.y * 5 + transform.right * transform.localScale.x * 0.5f;
+        if (Pass)
+            pos = transform.position + transform.up * transform.lossyScale.y * 5 + transform.right * transform.lossyScale.x * 0.5f;
         else
-            pos = transform.position + transform.forward * transform.localScale.z * (Steps + 1.5f) * 2 + transform.up * transform.localScale.y * 5 + transform.right * transform.localScale.x * 0.5f;
+            pos = transform.position + transform.forward * transform.lossyScale.z * (Steps + 1.5f) * 2 + transform.up * transform.lossyScale.y * 5 + transform.right * transform.lossyScale.x * 0.5f;
         
         Instantiate(transform.GetChild(Childnum+num), pos, Quaternion.identity, transform);
         Destroy(transform.GetChild(Childnum+num + 1).GetComponent<RotateStaircaseScript>());
         transform.GetChild(Childnum+num + 1).transform.localScale = transform.right * transform.GetChild(Childnum+num + 1).transform.localScale.x * 0.05f + transform.up * transform.GetChild(num + 1).transform.localScale.y * 10 + transform.forward * transform.GetChild(num + 1).transform.localScale.z * 0.2f;
 
         if (Pass)
-            pos = transform.position + transform.up * transform.localScale.y * 5 - transform.right * transform.localScale.x * 0.5f;
+            pos = transform.position + transform.up * transform.lossyScale.y * 5 - transform.right * transform.lossyScale.x * 0.5f;
         else
-            pos = transform.position + transform.forward * transform.localScale.z * (Steps + 1.5f) * 2+ transform.up * transform.localScale.y * 5 - transform.right * transform.localScale.x * 0.5f;
+            pos = transform.position + transform.forward * transform.lossyScale.z * (Steps + 1.5f) * 2+ transform.up * transform.lossyScale.y * 5 - transform.right * transform.lossyScale.x * 0.5f;
         Instantiate(transform.GetChild(Childnum+num), pos, Quaternion.identity, transform.GetChild(Childnum+num + 1).transform);
 
         CreateNum = Steps + 1;
         while (0 < CreateNum)
         {
             if (Pass)
-                pos = transform.GetChild(Childnum + num + 1).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y * 0.7f;
+                pos = transform.GetChild(Childnum + num + 1).transform.position - transform.forward * transform.lossyScale.z + transform.up * transform.lossyScale.y * 0.7f;
             else
-                pos = transform.GetChild(Childnum + num + 1).transform.position - transform.forward * transform.localScale.z + transform.up * transform.localScale.y * 0.7f;
+                pos = transform.GetChild(Childnum + num + 1).transform.position - transform.forward * transform.lossyScale.z + transform.up * transform.lossyScale.y * 0.7f;
             Instantiate(transform.GetChild(Childnum+num + 1).gameObject, pos, Quaternion.identity, transform);
             num++;
             CreateNum--;

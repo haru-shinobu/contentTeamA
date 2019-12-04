@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Stage2TimeManager : MonoBehaviour
 {
-    public static int ClearTime = 0;
+    public static int ClearTime2 = 0;
     float LimitedTime = 0;
-
+    private bool ClearLoadFlag;
+    string scene = null;
+    string nowscene;
     void Start()
     {
-        ClearTime = 0;
+        ClearTime2 = 0;
+        ClearLoadFlag = true;
+        nowscene = "Stage2";
     }
 
     // Update is called once per frame
@@ -20,25 +24,43 @@ public class Stage2TimeManager : MonoBehaviour
          * したほうがいいかも？
          * あるいはプレイヤーの初期操作以降…
          */
-        ClearTime = (int)Time.time;
-        if (LimitedTime < ClearTime)
-            Debug.Log("GameOver");
+        if (scene == nowscene)
+        {
+                LimitedTime -= Time.deltaTime;
+            if (0 < LimitedTime)
+            {
+                if (ClearLoadFlag)
+                {
+                    ClearTime2 = (int)LimitedTime;
+                }
+            }
+            else
+            {
+                Debug.Log("GameOver");
+            }
+            gameObject.transform.GetComponent<GameTimerDirector>().NowTime = LimitedTime;
+        }
     }
     public static void PenaltyTime(int time)
     {
-        ClearTime -= time;
+        ClearTime2 -= time;
     }
-    public void LimitTime(int time)
+    public void LimitTime(int time, string scenename)
     {
-        LimitedTime = time;   
+        LimitedTime = time;
+        scene = scenename;
     }
     public static int GetTime()
     {
-        return ClearTime;
+        return ClearTime2;
     }
     public static void ResetTime()
     {
-        ClearTime = 0;
+        ClearTime2 = 0;
+    }
+    public void TimeCountEnd()
+    {
+        ClearLoadFlag = false;
     }
 }
 

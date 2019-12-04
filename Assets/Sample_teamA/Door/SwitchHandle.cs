@@ -5,7 +5,7 @@ using UnityEngine;
 public class SwitchHandle : MonoBehaviour
 {
     public GameObject Target;
-    bool Flag = false;
+    public bool Flag = false;
     float rottt = 45;
     float Sub = -2f;
     float targetrotate = 90;
