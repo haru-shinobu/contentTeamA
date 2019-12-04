@@ -28,7 +28,7 @@ public class BollsScript : MonoBehaviour
     {
         if(col.gameObject.tag == "Floor" || col.gameObject.tag == "wall")
         {
-            gameObject.transform.root.SendMessage("Del");
+            gameObject.transform.parent.SendMessage("Del");
             Destroy(gameObject);
         }
     }
@@ -43,7 +43,7 @@ public class BollsScript : MonoBehaviour
 
     void CollStop()
     {
-        gameObject.transform.root.gameObject.SendMessage("CollStop");
+        gameObject.transform.parent.gameObject.SendMessage("CollStop");
         if (rb.velocity.x != 0 && rb.velocity.y != 0 && rb.velocity.z != 0)
         {
             ni = rb.velocity;

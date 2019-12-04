@@ -96,6 +96,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //画面外落下でシーンリロード.ResetPosから再開
+
+        if (transform.position.y < -50)
+            Setting.ReStartScene();
         if (Sky)
             rb.AddForce(-transform.up);
         if (Sky && Ground)
@@ -129,11 +133,7 @@ public class PlayerController : MonoBehaviour
                 localScale.x / lossScale.x * defaultScale.x,
                 localScale.y / lossScale.y * defaultScale.y,
                 localScale.z / lossScale.z * defaultScale.z);
-
-
-        //画面外落下でシーンリロード.ResetPosから再開
-        if (transform.position.y < -50)
-            Setting.ReStartScene();
+        
     }
 
     void FixedUpdate()
@@ -185,7 +185,6 @@ public class PlayerController : MonoBehaviour
             audioSource.enabled = false;
             wolkflag = false;
         }
-        
     }
 
     private void JumpProcess()

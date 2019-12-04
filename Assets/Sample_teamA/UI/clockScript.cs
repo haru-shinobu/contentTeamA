@@ -52,9 +52,10 @@ public class clockScript : MonoBehaviour
 
     //道開きメッセージ用
     public bool OpenRootFlag;
-
+    ParticleSystem ClockParticle;
     void Start()
     {
+        ClockParticle = gameObject.transform.GetChild(12).GetChild(0).GetComponent<ParticleSystem>();
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         GameMaster = GameObject.Find("GameMaster");
         GNTimer = GameMaster.GetComponent<GameTimerDirector>();
@@ -123,6 +124,7 @@ public class clockScript : MonoBehaviour
     void FixedUpdate()
     {
         int Second = (int)GNTimer.NowTime;
+        if(Second == 60) ClockParticle.startColor = Color.red;
         if (Flag)//シーン読み込み直後
         {
             ResetTimer += Time.deltaTime;

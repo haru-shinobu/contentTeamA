@@ -54,7 +54,7 @@ public class MoveUpDownFloor : MonoBehaviour
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player") { 
-            col.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+//            col.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             col.gameObject.GetComponent<PlayerController>().Ground = true;
     }
     }
@@ -62,7 +62,7 @@ public class MoveUpDownFloor : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+  //          col.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             floorCollider.isTrigger = false;
             Flag = true;
         }
