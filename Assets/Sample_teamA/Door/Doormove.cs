@@ -140,7 +140,7 @@ public class Doormove : MonoBehaviour
     }
     //スイッチ式からの入力
     void SwichChange()
-    {
+    {//  SwichChange
         OpenFlag = true;
         
     }
