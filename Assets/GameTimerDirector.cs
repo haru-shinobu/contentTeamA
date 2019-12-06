@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [DefaultExecutionOrder(-2)]//スクリプト実行順
 public class GameTimerDirector : MonoBehaviour
 {
+    public string sqriptname;
     GameObject timerText;
     RectTransform rect;
     float Limittimer;
@@ -15,7 +16,12 @@ public class GameTimerDirector : MonoBehaviour
     public float NowTime;
     public bool GameCrearLoadFlag;
     private bool GameOverFlag;
-
+    private bool DoorPassFlag;
+    public float timers;
+    float onetimechecker;
+    GameObject TimeIns;
+    GameObject InsOnetime;
+    private bool OnetimeFlag;
     void Start()
     {
         this.Limittimer = gameObject.GetComponent<GameStageSetting>().NowStageTimeLimit;
@@ -26,6 +32,8 @@ public class GameTimerDirector : MonoBehaviour
         timepos = rect.transform.localPosition;
         GameCrearLoadFlag = false;
         GameOverFlag = false;
+        TimeIns = Resources.Load<GameObject>("InstantDoorTrueTime");
+        OnetimeFlag = false;
     }
 
     // Update is called once per frame
@@ -35,9 +43,29 @@ public class GameTimerDirector : MonoBehaviour
 
         if (!GameCrearLoadFlag)
         {
-            rect.sizeDelta = TextSpace;
-            rect.localPosition = timepos;
-            timerText.GetComponent<Text>().text = ("TimeLimit") + ("\n") + (Limittimer).ToString("F0") + (" sec");
+            if (DoorPassFlag)
+            {
+                OnetimeFlag = true;
+                InsOnetime = Instantiate(TimeIns);
+                DoorPassFlag = false;
+            }
+            else
+            {
+                if (OnetimeFlag)
+                {
+                    InsOnetime.transform.GetChild(0).GetComponent<Text>().text = ("のこり時間") + (onetime).ToString("F0") + ("秒");
+                    if (onetime <= onetimechecker - 3)
+                    {
+                        OnetimeFlag = false;
+                        Destroy(InsOnetime);
+                    }
+                }
+                else
+                    onetimechecker = onetime;
+                rect.sizeDelta = TextSpace;
+                rect.localPosition = timepos;
+                timerText.GetComponent<Text>().text = ("TimeLimit") + ("\n") + (Limittimer).ToString("F0") + (" sec");
+            }
         }
         else
         {
@@ -51,5 +79,9 @@ public class GameTimerDirector : MonoBehaviour
                 gameObject.GetComponent<GameStageSetting>().GAMEOVER();
                 GameOverFlag = true;
             }
+    }
+    public void DoorPass()
+    {
+        DoorPassFlag = true;
     }
 }

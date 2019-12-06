@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ClearLoadScript : MonoBehaviour
 {
-    bool Flag, Flag2,Flag3;
+    public bool Flag, Flag2,Flag3;
     GameTimerDirector GTD;
     GameStageSetting GSS;
     GameObject Player , Picture , obj;
@@ -23,7 +23,7 @@ public class ClearLoadScript : MonoBehaviour
         Particle.Stop();
         count = 0;
         Picture = GameObject.Find("picture");
-        picpos = Picture.transform.position;
+        picpos = Picture.transform.position - Vector3.up * 397 + Picture.transform.forward * 352;
         StormEria = GameObject.Find("StormEria").GetComponent<StormScript>();
         StormEria.ActiveFlag = false;
         Clear = GameObject.Find("GoalParticleFlag").GetComponent<ClearLoadScript>();
@@ -47,28 +47,29 @@ public class ClearLoadScript : MonoBehaviour
             if (col.gameObject.tag == "Player")
             {
                 Flag = false;
-                if (gameObject.name != "TimeCountStop")
+                if (gameObject.name != "TimeCountStop")//20/157//1358
                 {
-                    Picture.transform.position = picpos - Picture.transform.up * 374 + Picture.transform.forward * 255;
-                    Picture.transform.rotation = Quaternion.Euler(-45, 180, 0);
-
+                    Picture.transform.position = picpos;
+                    Picture.transform.rotation = new Quaternion(0, 0.9f, 0.5f, 0);
                     textFlag.OpenRootFlag = true;
                     StormEria.ActiveFlag = true;
-                    Clear.FlagON();
-                    Destroy(gameObject);
                     Flag3 = true;
+                    Destroy(gameObject);
                 }
             }
         }
         else
         {
             if (Flag3)
-                if (count++ > 500)
+            {
+                if (count++ > 5)
                 {
                     textFlag.OpenRootFlag = false;
                     Flag3 = false;
                 }
+            }
         }
+        
         if (Flag2)
             if (col.gameObject.tag == "Player")
             {

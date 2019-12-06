@@ -36,6 +36,7 @@ public class clockScript : MonoBehaviour
     static public bool ResetFlag = false;
     static public bool GameProgressionFlag = true;
     float RestSecond;
+    Color colers;
     //text
     Text AbilityText;
 
@@ -51,10 +52,10 @@ public class clockScript : MonoBehaviour
 
     //道開きメッセージ用
     public bool OpenRootFlag;
-
+    ParticleSystem ClockParticle;
     void Start()
     {
-
+        ClockParticle = gameObject.transform.GetChild(12).GetChild(0).GetComponent<ParticleSystem>();
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         GameMaster = GameObject.Find("GameMaster");
         GNTimer = GameMaster.GetComponent<GameTimerDirector>();
@@ -122,7 +123,8 @@ public class clockScript : MonoBehaviour
     //タイム処理
     void FixedUpdate()
     {
-        float Second = GNTimer.NowTime;
+        int Second = (int)GNTimer.NowTime;
+        if(Second == 60) ClockParticle.startColor = Color.red;
         if (Flag)//シーン読み込み直後
         {
             ResetTimer += Time.deltaTime;
@@ -156,7 +158,7 @@ public class clockScript : MonoBehaviour
             {
                 CountTimer -= 1.0f;                
                 if (RestSecond - Second >= 0)
-                    clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (int)Second);
+                    clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * Second);
             }
         }
     }

@@ -28,8 +28,8 @@ public class Doormove : MonoBehaviour
     public int PerceptionTime;
     //ドア通過判定後のプレイヤー保存
     GameObject Player;
-    
-    // Start is called before the first frame update
+
+    GameTimerDirector TimeDirec;
     void Start()
     {
 
@@ -65,6 +65,8 @@ public class Doormove : MonoBehaviour
         posR = transform.position + transform.right * DoorRight.transform.localScale.x;
         posL = transform.position - transform.right * DoorRight.transform.localScale.x;
         Vector3 rotangle = Rota.eulerAngles;
+
+        TimeDirec = GameObject.Find("GameMaster").GetComponent<GameTimerDirector>();
     }
 
     
@@ -86,8 +88,6 @@ public class Doormove : MonoBehaviour
                 DoorLeft.transform.RotateAround(posL, transform.up, -Time.deltaTime * speed);
             else
             {
-                
-
                 OpenFlag = !OpenFlag;
                 thruFlag = true;
                 PerceptionFlag = false;
@@ -121,6 +121,7 @@ public class Doormove : MonoBehaviour
             {
                 Timer = 0;
                 CloseSwitch();
+                TimeDirec.DoorPass();//時間表示用フラグ
             }
         }
         if (PerceptionFlag)
@@ -134,13 +135,13 @@ public class Doormove : MonoBehaviour
         OpenFlag = true;
     }
     public void TriggerOn()
-    {
+    {       //  TriggerOn
         audioSource.PlayOneShot(doaSE);
         OpenFlag = true;
     }
     //スイッチ式からの入力
     void SwichChange()
-    {
+    {//  SwichChange
         OpenFlag = true;
         
     }
@@ -158,6 +159,7 @@ public class Doormove : MonoBehaviour
 
     public void CloseSwitch()
     {
+        
         CloseFlag = !CloseFlag;
     }
     public void Pass()

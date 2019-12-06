@@ -4,10 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
-{
-    
-
-    
+{    
     public Vector3 defaultScale = Vector3.zero;
     private float JumpVertical;
     public float moveSpeed;
@@ -61,6 +58,7 @@ public class PlayerController : MonoBehaviour
         {
             ResetPos = transform.position;
         }
+        SavePoint(gameObject.transform.position, new Vector3(0, 0, 0));
         defaultScale = transform.lossyScale;
         PlayerWalk = false;
     }
@@ -96,6 +94,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //画面外落下でシーンリロード.ResetPosから再開
+
+        if (transform.position.y < -50)
+            Setting.ReStartScene();
         if (Sky)
             rb.AddForce(-transform.up);
         if (Sky && Ground)
@@ -105,6 +107,21 @@ public class PlayerController : MonoBehaviour
         if (GetComponent<Rigidbody>().isKinematic && Input.anyKeyDown)
             GetComponent<Rigidbody>().isKinematic = false;
 
+       
+
+        
+        Vector3 lossScale = transform.lossyScale;
+        Vector3 localScale = transform.localScale;
+
+        transform.localScale = new Vector3(
+                localScale.x / lossScale.x * defaultScale.x,
+                localScale.y / lossScale.y * defaultScale.y,
+                localScale.z / lossScale.z * defaultScale.z);
+        
+    }
+
+    void FixedUpdate()
+    {
         if (!PlayerAbility)//能力使用時の入力制限
         {
             //EditのProjectSettings...でInput項目Verticalをupとｗ以外消去しておく
@@ -121,23 +138,8 @@ public class PlayerController : MonoBehaviour
         }
         FallProcess();
 
-        
-        Vector3 lossScale = transform.lossyScale;
-        Vector3 localScale = transform.localScale;
-
-        transform.localScale = new Vector3(
-                localScale.x / lossScale.x * defaultScale.x,
-                localScale.y / lossScale.y * defaultScale.y,
-                localScale.z / lossScale.z * defaultScale.z);
 
 
-        //画面外落下でシーンリロード.ResetPosから再開
-        if (transform.position.y < -50)
-            Setting.ReStartScene();
-    }
-
-    void FixedUpdate()
-    {
         float vert = 0;
         if (Ground)
         {
@@ -185,7 +187,6 @@ public class PlayerController : MonoBehaviour
             audioSource.enabled = false;
             wolkflag = false;
         }
-        
     }
 
     private void JumpProcess()

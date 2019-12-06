@@ -96,6 +96,7 @@
     <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\DownloadAsset\RunemarkStudio\DarkFantasyKit [Free]\Readme\Parts\Readme.cs" />
+    <Compile Include="Assets\ElevetorScript.cs" />
     <Compile Include="Assets\GameOverCam.cs" />
     <Compile Include="Assets\gameoverScript.cs" />
     <Compile Include="Assets\GameTimerDirector.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Assets\SarfaceSkinChangeScript.cs" />
     <Compile Include="Assets\Script\EffectDeleteScript.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\CreditScene.cs" />
+    <Compile Include="Assets\Script\SceneChengeScript\FadeControllerScript.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\ResultScene.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\RuleScene.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\Stage1Scene.cs" />
