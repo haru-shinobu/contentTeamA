@@ -121,7 +121,7 @@ public class RotateStaircaseScript : MonoBehaviour
 
         while (0 < CreateNum)
         {
-            pos = transform.GetChild(Childnum+num + 1).transform.position + transform.up * transform.GetChild(Childnum+num + 1).transform.lossyScale.y * 0.5f;
+            pos = transform.GetChild(Childnum + num +1).transform.position + transform.up * transform.GetChild(Childnum + num + 1).transform.lossyScale.y * 0.5f;
             Instantiate(transform.GetChild(Childnum + num + 1).gameObject, pos, Quaternion.identity, transform.GetChild(Childnum+num + 1));
             transform.GetChild(Childnum+num + 1).gameObject.transform.GetChild(1).transform.localScale = transform.right * 1 + transform.up * 0.1f + transform.forward * 5;
             transform.GetChild(Childnum+num + 1).gameObject.transform.GetChild(1).transform.rotation = Quaternion.Euler(0.8f, 0, 0);

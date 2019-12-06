@@ -11,6 +11,8 @@ public class ClearTimeManager : MonoBehaviour
     public Text finishTime;  // FinishTimeテキストの変数
     public Text bestTime; // BestTimeテキストの変数
     public GameObject finishUI; // Finishオブジェクトの変数
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,20 +25,22 @@ public class ClearTimeManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("ScoreTime"))
         {
+            
 
             bestScore = PlayerPrefs.GetInt("ScoreTime");
+
         }
         else
         {
-            bestScore = 999999;
+            bestScore = 9999;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ScoreTime > 0) {
-            // Finishを表示
+        if (Input.anyKeyDown)
+        {
             finishUI.SetActive(true);
 
             // クリア時間を整数にしてscoreに格納
@@ -54,13 +58,14 @@ public class ClearTimeManager : MonoBehaviour
             }
         }
     }
-
+    
     void ResultTime()
     {
         Debug.Log(ScoreTime);
     }
     public void OnRetry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Title");
+        
     }
 }

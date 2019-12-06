@@ -78,19 +78,3 @@ public class FPSCameraController : MonoBehaviour
         
     }
 }
-/*
-■□□
-柱を見立てよ
-紋を見立てよ
-輝く緑となりて
-冬を象る
-木とならん
-□□■
-天の炎陣の
-内に潜む
-輪の内にて
-見上げん
-△
-□■□
-
-*/
