@@ -50,6 +50,7 @@ public class PushSwitchScript : MonoBehaviour
 
     void TriggerOn()
     {
+        Sub = -Sub;
         mat.EnableKeyword("_EMISSION");
         Flag = true;
     }

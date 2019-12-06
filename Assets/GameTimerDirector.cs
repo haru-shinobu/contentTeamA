@@ -15,7 +15,7 @@ public class GameTimerDirector : MonoBehaviour
     public float NowTime;
     public bool GameCrearLoadFlag;
     private bool GameOverFlag;
-
+    private bool DoorPassFlag;
     void Start()
     {
         this.Limittimer = gameObject.GetComponent<GameStageSetting>().NowStageTimeLimit;
@@ -35,9 +35,18 @@ public class GameTimerDirector : MonoBehaviour
 
         if (!GameCrearLoadFlag)
         {
-            rect.sizeDelta = TextSpace;
-            rect.localPosition = timepos;
-            timerText.GetComponent<Text>().text = ("TimeLimit") + ("\n") + (Limittimer).ToString("F0") + (" sec");
+            if (DoorPassFlag)
+            {
+                rect.sizeDelta = TextSpace;
+                rect.localPosition = timepos;
+                timerText.GetComponent<Text>().text = ("のこり時間") + ("\n") + (Limittimer).ToString("F0") + ("秒");
+            }
+            else
+            {
+                rect.sizeDelta = TextSpace;
+                rect.localPosition = timepos;
+                timerText.GetComponent<Text>().text = ("TimeLimit") + ("\n") + (Limittimer).ToString("F0") + (" sec");
+            }
         }
         else
         {

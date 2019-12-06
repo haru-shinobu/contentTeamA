@@ -2500,6 +2500,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7361201998482379022, guid: a451d20001d02924f922a797da38bedc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 6494603979329648667, guid: a451d20001d02924f922a797da38bedc,
         type: 3}
       propertyPath: m_Name
@@ -2639,11 +2644,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7361201998482379022, guid: a451d20001d02924f922a797da38bedc,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a451d20001d02924f922a797da38bedc, type: 3}
@@ -3015,7 +3015,7 @@ PrefabInstance:
     - target: {fileID: 7957954740608120936, guid: 2a70aef1060e12a4ba0b0c28551ab5c6,
         type: 3}
       propertyPath: m_Text
-      value: "\u25A1\u25A0\u25A1\n\u79C1\u306F\u5168\u3066\u306E\u3082\u306E\n26\u306E\u59CB\u307E\u308A\u306E\n\u5F71\u306A\u308B\u3082\u306E\n\u9854\u306B\u3055\u308C\u308B\u3082\u306E"
+      value: "\u25A1\u25A0\u25A1\n\u79C1\u306F\u5168\u3066\u306E\u3082\u306E\n26\u306E\u59CB\u307E\u308A\u306E\n\u5F71\u306A\u308B\u3082\u306E\n\u9854\u306B\u73FE\u308C\u308B\u3082\u306E"
       objectReference: {fileID: 0}
     - target: {fileID: 7957954740906092519, guid: 2a70aef1060e12a4ba0b0c28551ab5c6,
         type: 3}
