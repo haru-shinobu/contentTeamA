@@ -10,6 +10,8 @@ public class SarfaceSkinChangeScript : MonoBehaviour
     MeshRenderer mat;
     private int index;
     private int Num;
+   
+
     void Start()
     {
         tag = "Switch";
@@ -39,11 +41,13 @@ public class SarfaceSkinChangeScript : MonoBehaviour
     }
     void TriggerOn()
     {
-        Num++;
-        if (6 <= Num + index)
-            Num -= 6;
-        mat.material = _MatNumList[Num + index];
-
-        script.HitCheck(gameObject.name, Num + index);
+        if (script.LockOpen())
+        {
+            Num++;
+            if (6 <= Num + index)
+                Num -= 6;
+            mat.material = _MatNumList[Num + index];
+            script.HitCheck(gameObject.name, Num + index);                
+        }
     }
 }

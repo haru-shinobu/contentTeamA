@@ -17,7 +17,8 @@ public class NumberSwitchScript : MonoBehaviour
 
     public List<Material> _MatNumList;
     TextMesh tex;
-
+    bool Flag;
+    private bool OpenStop;
     void Start()
     {   
         NumSarface1 = gameObject.transform.GetChild(0).gameObject;
@@ -25,10 +26,13 @@ public class NumberSwitchScript : MonoBehaviour
         NumSarface3 = gameObject.transform.GetChild(2).gameObject;
         tex = gameObject.transform.GetChild(4).GetComponent<TextMesh>();
         tex.text = "CLOSE";
+        Flag = false;
+        OpenStop = true;
     }
 
     public void HitCheck(string name, int val)
     {
+        Flag = !Flag;
         if (NumSarface1.name == name)
         {
             if (HitNumber1 == val)
@@ -53,14 +57,24 @@ public class NumberSwitchScript : MonoBehaviour
         if (LockPass[0] == 1 && LockPass[1] == 1 && LockPass[2] == 1)
         {
             tex.text = "OPEN";
+            tex.color = new Color(0, 255, 0, 255);
             if (Target)
                 Target.SendMessage("TriggerOn");
             else
                 tex.text = "無駄無駄ぁ！つながっていない！";
+            OpenStop = false;
         }
         else
         {
-            tex.text = "ERROR";
+            if (Flag)
+                tex.text = "ERROR";
+            else
+                tex.text = "FUMBLE";
+            OpenStop = true;
         }
+    }
+    public bool LockOpen()
+    {
+        return OpenStop;
     }
 }

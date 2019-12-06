@@ -5,24 +5,35 @@ using UnityEngine.UI;
 
 public class ClearLoadScript : MonoBehaviour
 {
-    bool Flag;
-    bool Flag2;
+    public bool Flag, Flag2,Flag3;
     GameTimerDirector GTD;
     GameStageSetting GSS;
-    GameObject Player;
-    GameObject obj;
+    GameObject Player , Picture , obj;
     public GameObject sulewall;
     Canvas PrefabCanvas;
+    StormScript StormEria;
+    ClearLoadScript Clear;
+    clockScript textFlag;
+    Vector3 picpos;
+    float count;
+    ParticleSystem Particle;
     void Start()
     {
+        Particle = GameObject.Find("GoalEffect").GetComponent<ParticleSystem>();
+        Particle.Stop();
+        count = 0;
+        Picture = GameObject.Find("picture");
+        picpos = Picture.transform.position - Vector3.up * 397 + Picture.transform.forward * 352;
+        StormEria = GameObject.Find("StormEria").GetComponent<StormScript>();
+        StormEria.ActiveFlag = false;
+        Clear = GameObject.Find("GoalParticleFlag").GetComponent<ClearLoadScript>();
         Player = GameObject.Find("Player");
-        Flag = false;
-        Flag2 = false;
+        Flag = Flag2 = Flag3 = false;
         obj = GameObject.Find("GameMaster");
         GTD = obj.gameObject.GetComponent<GameTimerDirector>();
         GSS = obj.gameObject.GetComponent<GameStageSetting>();
-
-        if (gameObject.name == "GoalParticleFlag")
+        textFlag = GameObject.Find("UICanvas").GetComponent<clockScript>();
+        if (gameObject.name != "TimeCountStop")
             Flag2 = false;
         else
             Flag2 = true;
@@ -36,14 +47,36 @@ public class ClearLoadScript : MonoBehaviour
             if (col.gameObject.tag == "Player")
             {
                 Flag = false;
-                if (gameObject.name == "GoalParticleFlag")
+                if (gameObject.name != "TimeCountStop")//20/157//1358
+                {
+                    Picture.transform.position = picpos;
+                    Picture.transform.rotation = new Quaternion(0, 0.9f, 0.5f, 0);
+                    textFlag.OpenRootFlag = true;
+                    StormEria.ActiveFlag = true;
+                    Flag3 = true;
                     Destroy(gameObject);
+                }
             }
         }
+        else
+        {
+            if (Flag3)
+            {
+                if (count++ > 5)
+                {
+                    textFlag.OpenRootFlag = false;
+                    Flag3 = false;
+                }
+            }
+        }
+        
         if (Flag2)
             if (col.gameObject.tag == "Player")
             {
-                sulewall.transform.GetChild(0).GetComponent<MeshCollider>().enabled = false;
+                Particle.Play();
+                if (sulewall.transform.GetChild(0).GetComponent<MeshCollider>()) {
+                        sulewall.transform.GetChild(0).GetComponent<MeshCollider>().enabled = false;
+                }
                 GTD.GameCrearLoadFlag = true;
                 GSS.ClearTimeStop();
                 GSS.ClearLoad();
@@ -61,6 +94,10 @@ public class ClearLoadScript : MonoBehaviour
             }
     }
     public void FlagON()
+    {
+        Flag = true;
+    }
+    public void TriggerOn()
     {
         Flag = true;
     }

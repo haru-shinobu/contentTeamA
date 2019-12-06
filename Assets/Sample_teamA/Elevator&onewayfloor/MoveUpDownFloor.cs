@@ -20,7 +20,7 @@ public class MoveUpDownFloor : MonoBehaviour
         Vector3 Create = new Vector3(transform.position.x, transform.position.y - transform.localScale.y/2, transform.position.z);
         Instantiate(WayTrigger, Create, Quaternion.identity,transform);
         transform.GetChild(0).gameObject.name = "OneWayBox";
-        transform.GetChild(0).gameObject.tag = "Untagged";
+        transform.GetChild(0).gameObject.tag = "Floor&Stop";
         transform.GetChild(0).gameObject.transform.localScale = new Vector3(1,1,1);
         Destroy(transform.GetChild(0).gameObject.GetComponent<MeshRenderer>());
         transform.GetChild(0).gameObject.GetComponent<BoxCollider>().isTrigger = true;
@@ -54,7 +54,7 @@ public class MoveUpDownFloor : MonoBehaviour
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player") { 
-            col.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+//            col.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             col.gameObject.GetComponent<PlayerController>().Ground = true;
     }
     }
@@ -62,7 +62,7 @@ public class MoveUpDownFloor : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+  //          col.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             floorCollider.isTrigger = false;
             Flag = true;
         }

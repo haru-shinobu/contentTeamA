@@ -133,9 +133,14 @@ public class Doormove : MonoBehaviour
         audioSource.PlayOneShot(doaSE);
         OpenFlag = true;
     }
+    public void TriggerOn()
+    {
+        audioSource.PlayOneShot(doaSE);
+        OpenFlag = true;
+    }
     //スイッチ式からの入力
     void SwichChange()
-    {
+    {//  SwichChange
         OpenFlag = true;
         
     }

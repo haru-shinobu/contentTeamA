@@ -22,7 +22,7 @@ public class clockScript : MonoBehaviour
     RayAbility Abilitycontroller;
     Vector2 StandardTearPos;
 
-    GameObject clockParticleBlock;
+    
     ParticleSystem clockside;
     Vector3 StartPos;
     Vector3 pos, handpos;
@@ -36,6 +36,7 @@ public class clockScript : MonoBehaviour
     static public bool ResetFlag = false;
     static public bool GameProgressionFlag = true;
     float RestSecond;
+    Color colers;
     //text
     Text AbilityText;
 
@@ -51,9 +52,11 @@ public class clockScript : MonoBehaviour
 
     //道開きメッセージ用
     public bool OpenRootFlag;
-
+    ParticleSystem ClockParticle;
     void Start()
     {
+        ClockParticle = gameObject.transform.GetChild(12).GetChild(0).GetComponent<ParticleSystem>();
+        gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         GameMaster = GameObject.Find("GameMaster");
         GNTimer = GameMaster.GetComponent<GameTimerDirector>();
         //clock関係
@@ -120,29 +123,21 @@ public class clockScript : MonoBehaviour
     //タイム処理
     void FixedUpdate()
     {
-        //if(GameProgressionFlag)========================================
+        int Second = (int)GNTimer.NowTime;
+        if(Second == 60) ClockParticle.startColor = Color.red;
         if (Flag)//シーン読み込み直後
         {
             ResetTimer += Time.deltaTime;
 
             RayAbilityWhiteOut(ResetTimer, true, true);
-            if (ResetTimer < 3)//3秒間画面中央で針回し
+            if (ResetTimer < 2.5f)//2.5秒間画面中央で針回し
                 CallResetScene();
-            else if (2 <= ResetTimer && ResetTimer < 2.1f)
-            {//針を向けてる
-                //clockhand.eulerAngles = new Vector3(0, 0, 180);
-                float Second = GNTimer.NowTime;
-                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond*/ - Second));
-                if (!GameStartFlag) GameStartFlag = true;
-            }
             else
             {
                 clocker.localPosition = Vector3.Lerp(clocker.localPosition, StartPos, Time.deltaTime);
                 clockertop.localPosition = clocker.localPosition - pos;
                 clockhand.localPosition = clocker.localPosition - handpos;
-                float Second = GNTimer.NowTime;
-                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond*/ - Second));
-
+                clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (-Second));
                 if (StartPos.x - clocker.localPosition.x < 1f)
                 {
                     ResetTimer = 0;
@@ -159,12 +154,11 @@ public class clockScript : MonoBehaviour
         else//通常
         {
             CountTimer += Time.deltaTime;
-            if (CountTimer > 1)
+            if (CountTimer >= 1)
             {
-                CountTimer -= 1.0f;
-                float Second = GNTimer.NowTime;
+                CountTimer -= 1.0f;                
                 if (RestSecond - Second >= 0)
-                    clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * (/*RestSecond -*/ Second));
+                    clockhand.localEulerAngles = new Vector3(0, 0, 180 - 6 * Second);
             }
         }
     }

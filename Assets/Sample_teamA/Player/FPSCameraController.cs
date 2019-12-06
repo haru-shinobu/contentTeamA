@@ -68,7 +68,7 @@ public class FPSCameraController : MonoBehaviour
         }
         else
         {
-            goalpos = GameObject.Find("GoalWatchPointer").transform.position;
+            goalpos = GameObject.Find("GoalwatchPointer").transform.position;
             gameObject.transform.LookAt(goalpos, Vector3.right);
             gameObject.transform.LookAt(goalpos, Vector3.up);   
         }
@@ -78,4 +78,3 @@ public class FPSCameraController : MonoBehaviour
         
     }
 }
-
