@@ -4,10 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
-{
-    
-
-    
+{    
     public Vector3 defaultScale = Vector3.zero;
     private float JumpVertical;
     public float moveSpeed;
@@ -61,6 +58,7 @@ public class PlayerController : MonoBehaviour
         {
             ResetPos = transform.position;
         }
+        SavePoint(gameObject.transform.position, new Vector3(0, 0, 0));
         defaultScale = transform.lossyScale;
         PlayerWalk = false;
     }

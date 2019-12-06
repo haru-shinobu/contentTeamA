@@ -195,7 +195,7 @@ public class RayAbility : MonoBehaviour
             {
                 if (3 <= AbilityTriggerTime)
                 {
-                    AbilityPenalty(ResetAbilityPenaltyTime);
+                    //AbilityPenalty(ResetAbilityPenaltyTime);
                     Player.GetComponent<PlayerController>().ResetFlag = true;
                     
                 }
@@ -384,7 +384,7 @@ public class RayAbility : MonoBehaviour
                                         hit.collider.gameObject.SendMessage("CollBreak");
                                         audioSource.PlayOneShot(hakaiSE);
                                         AbilityNow = 0;
-                                        AbilityPenalty(BreakAbilityPenaltyTime);
+                                        //AbilityPenalty(BreakAbilityPenaltyTime);
                                         NextUseTime = 10;
                                         Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }
@@ -416,7 +416,7 @@ public class RayAbility : MonoBehaviour
                                             hit.collider.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
                                         }
                                         AbilityNow = 0;
-                                        AbilityPenalty(BreakAbilityPenaltyTime);
+                                        //AbilityPenalty(BreakAbilityPenaltyTime);
                                         NextUseTime = 10;
                                         Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }

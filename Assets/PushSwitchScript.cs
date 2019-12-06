@@ -10,6 +10,7 @@ public class PushSwitchScript : MonoBehaviour
     float ButtonPushmove;
     float Sub = -2f;
     Material mat;
+    Vector3 parent;
     void Start()
     {
         tag = "Switch";
@@ -18,6 +19,7 @@ public class PushSwitchScript : MonoBehaviour
         ButtonPushmove = 0;
         mat = gameObject.GetComponent<MeshRenderer>().material;
         mat.DisableKeyword("_EMISSION");
+        parent = gameObject.transform.parent.forward;
     }
 
     // Update is called once per frame
@@ -28,9 +30,9 @@ public class PushSwitchScript : MonoBehaviour
             if (0 < Sub)
             {
                 if (ButtonPushmove++ < 5)
-                    transform.localPosition -= transform.up;
-                else
-                    transform.localPosition += transform.up;
+                    transform.position -= parent;
+                else          
+                    transform.position += parent;
 
                 if (10 <= ButtonPushmove)
                 {

@@ -34,7 +34,7 @@ public class SarfaceSkinChangeScript : MonoBehaviour
         _MatNumList = script._MatNumList;
         mat = gameObject.GetComponent<MeshRenderer>();
         index = Random.Range(0,6);
-        if (index == Number)
+        while (index == Number)
             index = Random.Range(0, 6);
         mat.material = _MatNumList[index];
         
