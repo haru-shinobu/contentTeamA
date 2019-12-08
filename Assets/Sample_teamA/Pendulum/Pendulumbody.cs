@@ -35,7 +35,7 @@ public class Pendulumbody : MonoBehaviour
         High = transform.root.GetComponent<Pendulum>().PendulumHigh;
     }
 
-    void Update()
+    void a()
     {
         targetPos = Shaft.transform.position;
         transform.position = targetPos - Shaft.transform.up * (High*0.8f);

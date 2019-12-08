@@ -22,8 +22,8 @@ public class RotateStaircaseScript : MonoBehaviour
         Steps = CreateStepNum;
     }
 
-    // Update is called once per frame
-    void Update()
+    // a is called once per frame
+    void a()
     {
         if (CreateFlag)
             if (Flag)

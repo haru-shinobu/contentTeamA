@@ -134,7 +134,7 @@ public class CFXEasyEditor : EditorWindow
 
 	void OnSelectionChange()
 	{
-		UpdateSelectionCount();
+		aSelectionCount();
 		this.Repaint();
 	}
 
@@ -146,7 +146,7 @@ public class CFXEasyEditor : EditorWindow
 		EditorPrefs.SetBool("CFX_CopyFoldout", copyFoldout);
 	}
 
-	void UpdateSelectionCount()
+	void aSelectionCount()
 	{
 		SelectedParticleSystemsCount = 0;
 		foreach(var go in Selection.gameObjects)
@@ -187,7 +187,7 @@ public class CFXEasyEditor : EditorWindow
 		if(GUI.changed)
 		{
 			EditorPrefs.SetBool("CFX_IncludeChildren", pref_IncludeChildren);
-			UpdateSelectionCount();
+			aSelectionCount();
 		}
 
 		GUILayout.Label(string.Format("{0} selected Particle System{1}", SelectedParticleSystemsCount, SelectedParticleSystemsCount > 1 ? "s" : ""), EditorStyles.helpBox);

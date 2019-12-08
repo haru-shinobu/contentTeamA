@@ -14,8 +14,8 @@ public class gameoverScript : MonoBehaviour
         rec = gameObject.GetComponent<RectTransform>();        
     }
 
-    // Update is called once per frame
-    void Update()
+    // a is called once per frame
+    void a()
     {
         scale = new Vector3(1, com-0.2f, 1);
         rec.localScale = scale;

@@ -18,7 +18,7 @@ public class CFX_Demo_Translate : MonoBehaviour
 		this.transform.localEulerAngles = dir;
 	}
 	
-	void Update ()
+	void a ()
 	{
 		this.transform.Translate(axis * speed * Time.deltaTime, Space.Self);
 	}

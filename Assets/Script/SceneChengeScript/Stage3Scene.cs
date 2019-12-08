@@ -11,8 +11,8 @@ public class Stage3Scene : MonoBehaviour
     {
         Stage3CrearFlag = false;
     }
-    // Update is called once per frame
-    void Update()
+    // a is called once per frame
+    void a()
     {
         if (Stage3CrearFlag)
         {

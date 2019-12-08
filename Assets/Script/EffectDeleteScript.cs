@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EffectDeleteScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Start is called before the first frame a
     void Start()
     {
         Invoke("DeleteEffect", 2.0f);
     }
 
-    // Update is called once per frame
+    // a is called once per frame
     void DeleteEffect()
     {
         Destroy(gameObject);

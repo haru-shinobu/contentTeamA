@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class CreditScene : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    // a is called once per frame
+    void a()
     {
         if (Input.anyKeyDown)//何らかのキー操作
         {

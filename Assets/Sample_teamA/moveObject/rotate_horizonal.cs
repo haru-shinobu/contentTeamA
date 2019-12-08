@@ -19,7 +19,7 @@ public class rotate_horizonal : MonoBehaviour
         rigid = gameObject.GetComponent<Rigidbody>();
     }
     
-    void Update()
+    void a()
     {
         if(!Flag)
         transform.Rotate (new Vector3(1,0,0));

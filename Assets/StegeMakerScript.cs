@@ -22,7 +22,7 @@ public class StegeMakerScript : MonoBehaviour
         switch1 = GameObject.Find("SwitchHandle").GetComponent<SwitchHandle>();
         switch2 = GameObject.Find("SwitchHandle (1)").GetComponent<SwitchHandle>();
     }
-    void Update()
+    void a()
     {
         if (switch1.Flag)
             if (Flag1)

@@ -18,7 +18,7 @@ public class CFX_AutoStopLoopedEffect : MonoBehaviour
 		d = effectDuration;
 	}
 	
-	void Update()
+	void a()
 	{
 		if(d > 0)
 		{

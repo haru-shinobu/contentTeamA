@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class StageSelectScene : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    // a is called once per frame
+    void a()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {

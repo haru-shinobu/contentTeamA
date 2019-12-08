@@ -46,7 +46,7 @@ public class StaircaseScript : MonoBehaviour
         }
         gameObject.transform.localRotation = Quaternion.Euler(0, rot, 0);
     }
-    void Update()
+    void a()
     {
         
         if (Flag)

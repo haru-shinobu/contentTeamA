@@ -36,7 +36,7 @@ public class meshEyeIcon : MonoBehaviour
         pon = point;
     }
 
-    void Update()
+    void a()
     {
         if (!Flag)
         {

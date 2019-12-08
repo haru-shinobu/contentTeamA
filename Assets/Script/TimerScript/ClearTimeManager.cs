@@ -14,7 +14,7 @@ public class ClearTimeManager : MonoBehaviour
     
 
 
-    // Start is called before the first frame update
+    // Start is called before the first frame a
     void Start()
     {
         ScoreTime = 0;
@@ -36,8 +36,8 @@ public class ClearTimeManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    // a is called once per frame
+    void a()
     {
         if (Input.anyKeyDown)
         {

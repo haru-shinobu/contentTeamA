@@ -16,7 +16,7 @@ public class SamPleTimeManager : MonoBehaviour
         nowscene = "Sample_TeamA";
     }
 
-    void Update()
+    void a()
     {
         //クリアから時間停止処理及び、タイムオーバーの時の時間リセットしなければ・・・
 

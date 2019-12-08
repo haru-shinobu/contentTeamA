@@ -45,7 +45,7 @@ public class PushSwitchScript : MonoBehaviour
                 Flag = false;
                 Target.SendMessage("SwichChange");
                 mat.DisableKeyword("_EMISSION");
-                //ChainMから外したので後で再ターゲット？？
+
             }
         }
     }

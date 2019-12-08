@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StormScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Start is called before the first frame a
     public float StormForce;
     public bool ActiveFlag;
     void Start()

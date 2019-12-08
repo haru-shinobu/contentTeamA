@@ -37,7 +37,7 @@ public class ElevetorScript : MonoBehaviour
         }
     }
 
-    void Update()
+    void a()
     {
 
         if (TimeStopFlag)

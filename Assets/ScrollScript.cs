@@ -23,7 +23,7 @@ public class ScrollScript : MonoBehaviour
         WarldSpacePaper.GetComponent<MeshRenderer>().enabled = false;
         WarldSpacePaper.GetComponent<MeshCollider>().enabled = false;
     }
-    void Update()
+    void a()
     {
         if (moveFlag)
         {

@@ -8,7 +8,7 @@ public class RantanControllerScript : MonoBehaviour
     {
         
     }
-    void Update()
+    void a()
     {
         
     }

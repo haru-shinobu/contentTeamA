@@ -14,8 +14,8 @@ public class BollsScript : MonoBehaviour
         flag = false;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    // a is called once per frame
+    void Fixeda()
     {
         if (!flag) {
             float sousand = 1000;

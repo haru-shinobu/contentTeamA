@@ -58,15 +58,15 @@ RELEASE NOTES
 -------------
 1.03
 - Welcome Screen fix for Unity 2019.1
-- Removed 'JMOAssets.dll', became obsolete with the Asset Store update notification system
+- Removed 'JMOAssets.dll', became obsolete with the Asset Store a notification system
 
 1.02
 - fixed small API deprecation as of Unity 2017.4+
 
 1.01
-- updated shaders so that they work on PS4
-- updated shaders for GPU Instancing and Stereo Rendering
-- updated effects with "Horizontal Billboard" particle render mode to "Billboard" with local alignment so that they can be freely rotated
+- ad shaders so that they work on PS4
+- ad shaders for GPU Instancing and Stereo Rendering
+- ad effects with "Horizontal Billboard" particle render mode to "Billboard" with local alignment so that they can be freely rotated
 
 1.0
 - initial release

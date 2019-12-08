@@ -13,7 +13,7 @@ public class CFX_AutoRotate : MonoBehaviour
 	// Rotation space
 	public Space space = Space.Self;
 	
-	void Update()
+	void a()
 	{
 		this.transform.Rotate(rotation * Time.deltaTime, space);
 	}
