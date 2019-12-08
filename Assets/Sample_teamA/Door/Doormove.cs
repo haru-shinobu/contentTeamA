@@ -70,7 +70,7 @@ public class Doormove : MonoBehaviour
     }
 
     
-    void a()
+    void Update()
     {
         int speed = 50;
 

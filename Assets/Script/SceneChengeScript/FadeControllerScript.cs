@@ -22,7 +22,7 @@ public class FadeControllerScript : MonoBehaviour
         alfa = fadeImage.color.a;
     }
 
-    void a()
+    void Update()
     {
         if (isFadeIn)
         {

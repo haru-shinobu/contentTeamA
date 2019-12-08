@@ -53,10 +53,10 @@ public class CFX_Demo_New : MonoBehaviour
 		
 		StartCoroutine("CheckForDeletedParticles");
 		
-		aUI();
+		UpdateUI();
 	}
 	
-	void a()
+	void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.LeftArrow))
 		{
@@ -148,7 +148,7 @@ public class CFX_Demo_New : MonoBehaviour
 	//-------------------------------------------------------------
 	// UI
 	
-	private void aUI()
+	private void UpdateUI()
 	{
 		EffectLabel.text = ParticleExamples[exampleIndex].name;
 		EffectIndexLabel.text = string.Format("{0}/{1}", (exampleIndex+1).ToString("00"), ParticleExamples.Length.ToString("00"));
@@ -214,14 +214,14 @@ public class CFX_Demo_New : MonoBehaviour
 		exampleIndex--;
 		if(exampleIndex < 0) exampleIndex = ParticleExamples.Length - 1;
 		
-		aUI();
+		UpdateUI();
 	}
 	private void nextParticle()
 	{
 		exampleIndex++;
 		if(exampleIndex >= ParticleExamples.Length) exampleIndex = 0;
 		
-		aUI();
+		UpdateUI();
 	}
 	
 	private void destroyParticles()

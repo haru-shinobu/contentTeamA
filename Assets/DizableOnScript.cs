@@ -6,7 +6,7 @@ public class DizableOnScript : MonoBehaviour
 {
     [SerializeField]
     Material mat;
-    protected float clossover;
+    private float clossover;
     private bool Flag;
     public int BurnDelay = 2;
     void Start()
@@ -17,13 +17,13 @@ public class DizableOnScript : MonoBehaviour
         mat.SetFloat("_Progress", clossover);
     }
 
-    // a is called once per frame
+    // Update is called once per frame
     void TriggerOn()
     {
         Flag = true;
     }
 
-    void a()
+    void Update()
     {
         if (Flag)
         {

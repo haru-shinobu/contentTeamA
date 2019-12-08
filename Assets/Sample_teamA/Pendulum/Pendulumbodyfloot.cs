@@ -10,7 +10,7 @@ public class Pendulumbodyfloot : MonoBehaviour
         transform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
         Flag = false;
     }
-    // Start is called before the first frame a
+    // Start is called before the first frame update
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
@@ -28,8 +28,8 @@ public class Pendulumbodyfloot : MonoBehaviour
             Flag = false;
         }
     }
-    // a is called once per frame
-    void a()
+    // Update is called once per frame
+    void Update()
     {
         transform.position = transform.root.GetChild(0).GetChild(2).gameObject.transform.position;
         if (Flag)

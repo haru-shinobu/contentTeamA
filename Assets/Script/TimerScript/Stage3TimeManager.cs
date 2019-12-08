@@ -16,8 +16,8 @@ public class Stage3TimeManager : MonoBehaviour
         nowscene = "Stage3";
     }
 
-    // a is called once per frame
-    void a()
+    // Update is called once per frame
+    void Update()
     {
         /*if文などでフェード終了とかから
          * 計測できるようにするとか

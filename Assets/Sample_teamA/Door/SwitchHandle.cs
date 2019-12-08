@@ -22,7 +22,7 @@ public class SwitchHandle : MonoBehaviour
     }
 
 
-    void a()
+    void Update()
     {
         if (!UseButtonType)
         {

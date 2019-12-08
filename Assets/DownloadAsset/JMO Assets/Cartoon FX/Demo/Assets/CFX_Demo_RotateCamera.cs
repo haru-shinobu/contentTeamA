@@ -10,7 +10,7 @@ public class CFX_Demo_RotateCamera : MonoBehaviour
 	public float speed = 30.0f;
 	public Transform rotationCenter;
 	
-	void a ()
+	void Update ()
 	{
 		if(rotating)
 			transform.RotateAround(rotationCenter.position, Vector3.up, speed*Time.deltaTime);

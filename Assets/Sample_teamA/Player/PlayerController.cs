@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {    
     public Vector3 defaultScale = Vector3.zero;
-    //[SerializeField] プライベートの変数の数値をエディタで表示できる
     private float JumpVertical;
     public float moveSpeed;
     public float JumpForce; // 145で身長と同じくらい。Scaley=150。
@@ -21,9 +20,6 @@ public class PlayerController : MonoBehaviour
     float skyY;
     public bool UseLongJump;
     public bool PlayerWalk;
-    private bool DashFlag;
-    private float DashTimer;
-    private int DashFlagTime = 1;
 
     float inputVertical;
     Rigidbody rb;
@@ -36,7 +32,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip yarinaosiSE;
     public AudioClip walkingSE;
     GameStageSetting Setting;
-    
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -66,7 +61,6 @@ public class PlayerController : MonoBehaviour
         SavePoint(gameObject.transform.position, new Vector3(0, 0, 0));
         defaultScale = transform.lossyScale;
         PlayerWalk = false;
-        DashFlag = false;
     }
 
     void OnTriggerEnter(Collider col)
@@ -110,16 +104,12 @@ public class PlayerController : MonoBehaviour
             if (skyY - 1 > transform.position.y)
                 Ground = Sky = false;
 
-        //if (GetComponent<Rigidbody>().isKinematic && Input.anyKeyDown)
-        //    GetComponent<Rigidbody>().isKinematic = false;
+        if (GetComponent<Rigidbody>().isKinematic && Input.anyKeyDown)
+            GetComponent<Rigidbody>().isKinematic = false;
 
+       
 
-        if (rb.isKinematic && Input.anyKeyDown)
-            rb.isKinematic = false;
-
-
-
-
+        
         Vector3 lossScale = transform.lossyScale;
         Vector3 localScale = transform.localScale;
 
@@ -134,6 +124,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!PlayerAbility)//能力使用時の入力制限
         {
+            //EditのProjectSettings...でInput項目Verticalをupとｗ以外消去しておく
             inputVertical = Input.GetAxisRaw("Vertical");
             JumpProcess();
         }
@@ -156,7 +147,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            DashFlag = false;
             vert = JumpVertical * PlayerScale;
         }
         if(vert != 0)PlayerWalk = true;

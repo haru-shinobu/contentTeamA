@@ -35,7 +35,7 @@ public class rotate_vertical : MonoBehaviour
         }
     }
 
-    void a()
+    void Update()
     {
         if (!StopFlag)
         {

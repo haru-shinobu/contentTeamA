@@ -124,8 +124,7 @@ public class clockScript : MonoBehaviour
     void FixedUpdate()
     {
         int Second = (int)GNTimer.NowTime;
-        if(Second == 60)
-            ClockParticle.startColor = Color.red;
+        if(Second == 60) ClockParticle.startColor = Color.red;
         if (Flag)//シーン読み込み直後
         {
             ResetTimer += Time.deltaTime;

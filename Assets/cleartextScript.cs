@@ -23,7 +23,7 @@ public class cleartextScript : MonoBehaviour
     }
 
     
-    void a()
+    void Update()
     {
         if (timer < 3)
             timer += Time.deltaTime;

@@ -32,7 +32,7 @@ public class CFX_LightFlicker : MonoBehaviour
 		maxIntensity = minIntensity + addIntensity;
 	}
 	
-	void a ()
+	void Update ()
 	{
 		GetComponent<Light>().intensity = Mathf.Lerp(minIntensity, maxIntensity, Mathf.PerlinNoise(Time.time * smoothFactor, 0f));
 	}

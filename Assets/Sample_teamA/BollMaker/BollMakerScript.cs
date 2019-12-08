@@ -24,7 +24,7 @@ public class BollMakerScript : MonoBehaviour
         Flag = false;
     }
 
-    void a()
+    void Update()
     {
         if (Flag) {
             if (RemakeFlag)

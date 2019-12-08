@@ -5,24 +5,18 @@ using UnityEngine;
 public class BreakpopItemScript : MonoBehaviour
 {
     GameObject Instantobj;
-    private bool flag;
     void Start()
     {
-        tag = "BreakItem";//"Untagged";
+        tag = "Untagged";
         foreach (Transform childTransform in gameObject.transform)
-            childTransform.tag = "BreakItem";//"Untagged";
+            childTransform.tag = "Untagged";
         Instantobj = (GameObject)Resources.Load("monocle");
-        flag = true;
     }
-
-
     void OnTriggerEnter(Collider col)
     {
-        if (!(col.tag == "Player" || col.tag == "Break&Wall"))
+        if (col.gameObject.tag == "Floor")
         {
-            if (!flag)
-                Instantiate(Instantobj, transform.position + Vector3.up * 100, Quaternion.identity);
-            flag = false;
+            Instantiate(Instantobj, transform.position + Vector3.up*100, Quaternion.identity);
             Destroy(gameObject);
         }
     }

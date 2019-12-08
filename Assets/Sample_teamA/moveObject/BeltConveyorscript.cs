@@ -27,7 +27,7 @@ public class BeltConveyorscript : MonoBehaviour
             Flag = false;
     }
 
-    void a()
+    void Update()
     {
         if (moveFlag)
             if (Flag)

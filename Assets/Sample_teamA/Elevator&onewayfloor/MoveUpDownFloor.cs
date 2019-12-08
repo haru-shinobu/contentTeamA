@@ -92,7 +92,7 @@ public class MoveUpDownFloor : MonoBehaviour
         }
     }
 
-    void a()
+    void Update()
     {
         if(MoveFlag)
         if (TimeStopFlag)

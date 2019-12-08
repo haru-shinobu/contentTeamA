@@ -22,7 +22,7 @@ public class GameOverCam : MonoBehaviour
         //Instantiate(Resources.Load<Canvas>("GameOverDissolve"));
     }
 
-    void a()
+    void Update()
     {
         float Rot = transform.localRotation.eulerAngles.z;
 

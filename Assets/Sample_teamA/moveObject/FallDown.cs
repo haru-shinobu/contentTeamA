@@ -44,7 +44,7 @@ public class FallDown : MonoBehaviour
         }
     }
 
-    void a()
+    void Update()
     {
         if (0 < CountTimer)
         {

@@ -11,7 +11,7 @@ public class ClearPlayerMoving : MonoBehaviour
         SceneEndPos = GameObject.Find("GoalwatchPointer").transform.position;
         rb = gameObject.GetComponent<Rigidbody>();
     }
-    void a()
+    void Update()
     {
         float ANum = Time.deltaTime;
         transform.position = Vector3.Lerp(transform.position, SceneEndPos, ANum*0.05f);

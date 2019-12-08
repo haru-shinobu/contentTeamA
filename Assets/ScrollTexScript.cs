@@ -30,7 +30,7 @@ public class ScrollTexScript : MonoBehaviour
             box.enabled = false;
         }
     }
-    void a()
+    void Update()
     {
         if (moveFlag)
         {

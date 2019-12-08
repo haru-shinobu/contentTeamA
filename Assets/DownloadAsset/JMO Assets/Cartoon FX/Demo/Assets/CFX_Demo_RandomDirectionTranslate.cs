@@ -18,7 +18,7 @@ public class CFX_Demo_RandomDirectionTranslate : MonoBehaviour
 		dir += baseDir;
 	}
 	
-	void a ()
+	void Update ()
 	{
 		this.transform.Translate(dir * speed * Time.deltaTime);
 		

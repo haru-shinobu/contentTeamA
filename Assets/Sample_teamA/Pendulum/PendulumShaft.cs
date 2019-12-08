@@ -23,8 +23,8 @@ public class PendulumShaft : MonoBehaviour
         }
     }
 
-    // a is called once per frame
-    void a()
+    // Update is called once per frame
+    void Update()
     {
         if (!StopFlag)
         {

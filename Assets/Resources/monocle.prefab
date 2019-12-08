@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 570368621544857778}
   - component: {fileID: 4796597432659057621}
   - component: {fileID: 4796597432659057622}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: monocle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 8035693817916535690}
   - component: {fileID: 7333061376311781209}
   - component: {fileID: 2082605527257189289}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: monocle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

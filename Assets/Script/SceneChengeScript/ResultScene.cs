@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ResultScene : MonoBehaviour
 {
-    void a()
+    void Update()
     {
         //if (Input.anyKeyDown)
         //{

@@ -38,7 +38,7 @@ public class CFX_LightIntensityFade : MonoBehaviour
 		if(delay > 0) GetComponent<Light>().enabled = false;
 	}
 	
-	void a ()
+	void Update ()
 	{
 		if(p_delay > 0)
 		{
