@@ -10,12 +10,14 @@ public class SeasawZ : MonoBehaviour
     void Start()
     {
         tag = "Floor&Stop";
-        gameObject.AddComponent<Rigidbody>();
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<Rigidbody>().angularDrag = 40.0f;
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition |
-        RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        if (!gameObject.GetComponent<Rigidbody>())
+            gameObject.AddComponent<Rigidbody>().useGravity = false;
         rigid = gameObject.GetComponent<Rigidbody>();
+        rigid.useGravity = false;
+        rigid.angularDrag = 40.0f;
+        rigid.constraints = RigidbodyConstraints.FreezePosition |
+        RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        
     }
     
     //角度制限をつけたいシーソー。
@@ -29,9 +31,9 @@ public class SeasawZ : MonoBehaviour
     {
         Flag = !Flag;
         if (Flag)
-            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            rigid.constraints = RigidbodyConstraints.FreezeAll;
         else
-            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition |
+            rigid.constraints = RigidbodyConstraints.FreezePosition |
             RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
 
     }
