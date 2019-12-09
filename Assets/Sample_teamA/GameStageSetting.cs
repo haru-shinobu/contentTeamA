@@ -68,6 +68,10 @@ public class GameStageSetting : MonoBehaviour
         Ability();//能力設定
         Setting();
 
+        //カーソル非表示・カーソルを画面中央にロック
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         switch (SceneManager.GetActiveScene().name)
         {
             case "Stage1":

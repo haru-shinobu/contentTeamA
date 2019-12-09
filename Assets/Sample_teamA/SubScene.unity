@@ -4982,11 +4982,26 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1297744666}
+    - target: {fileID: 7361201998482379023, guid: a451d20001d02924f922a797da38bedc,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7361201998531306580, guid: a451d20001d02924f922a797da38bedc,
         type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: 9dc7e810a87b444ab96919f3215c2fe5, type: 2}
+    - target: {fileID: 7361201998482379120, guid: a451d20001d02924f922a797da38bedc,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361201998482379121, guid: a451d20001d02924f922a797da38bedc,
+        type: 3}
+      propertyPath: m_IgnoreReversedGraphics
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a451d20001d02924f922a797da38bedc, type: 3}
 --- !u!1 &7770848588772989080
