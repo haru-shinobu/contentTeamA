@@ -25,6 +25,8 @@ public class RayAbility : MonoBehaviour
     public GameObject CircleWarp;  //チャージカーソル用
     public GameObject CircleStop;  //チャージカーソル用
     public GameObject CircleBreak; //チャージカーソル用
+    public GameObject CoolTimeCircle;//クールタイム表示用
+    Image coolcircle;
 
     public GameObject reticleWarp;  //カーソル用
     public GameObject reticleStop;  //カーソル用
@@ -51,6 +53,7 @@ public class RayAbility : MonoBehaviour
     float AbilityTriggerTime = 0;       //各種能力発動までのカウント用
     public string StopObjectName;    //Stop能力で別オブジェクトが反応しないようにするため
     public int AbilityNow;              //現在発動中の能力0～4
+    public float BreakEyeCoolTime;
     float NextUseTime = 0;//クールタイム用
     bool MouseButtonFlag;
     bool Ability4KEYFlag;
@@ -83,8 +86,10 @@ public class RayAbility : MonoBehaviour
         AbilityMenuOpenFlag = false;
         AbilityStopEmissionFlag = false;
         EyeLongFlag = false;
+        KeyQTime = 0;
         MouseButtonFlag = false;
         Ability4KEYFlag = false;
+        coolcircle = CoolTimeCircle.GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -102,14 +107,17 @@ public class RayAbility : MonoBehaviour
             NextUseTime -= Time.deltaTime;
 
 
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetMouseButtonDown(0))
-        {
+        if (Input.GetKeyDown(KeyCode.Q))
             KeyQTime = 0;
+        else
+        if (Input.GetMouseButtonDown(0))
+        {
             MouseButtonFlag = true;
+            KeyQTime = 0;
         }
         //audioSource.PlayOneShot(kirikaeSE);
 
-        if (MouseButtonFlag)
+        if (MouseButtonFlag || Input.GetKey(KeyCode.Q))
             KeyQTime += Time.deltaTime;
 
         if (AbilityChengeMenuTime < KeyQTime)//MenuOpenしてるときの処理
@@ -390,7 +398,7 @@ public class RayAbility : MonoBehaviour
                                         audioSource.PlayOneShot(hakaiSE);
                                         AbilityNow = 0;
                                         //AbilityPenalty(BreakAbilityPenaltyTime);
-                                        NextUseTime = 10;
+                                        NextUse();
                                         Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }
                                 }
@@ -422,7 +430,7 @@ public class RayAbility : MonoBehaviour
                                         }
                                         AbilityNow = 0;
                                         //AbilityPenalty(BreakAbilityPenaltyTime);
-                                        NextUseTime = 10;
+                                        NextUse();
                                         Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }
                                 }
@@ -506,18 +514,17 @@ public class RayAbility : MonoBehaviour
     //能力発動用チャージ用
     void Charge(float ATime)
     {
+        coolcircle.fillAmount = 1.0f / BreakEyeCoolTime * (NextUseTime);
         switch (AbilityNow) {
-            case 0:break;
+            case 0: break;
             case 1:
                 CircleWarp.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
-                
                 break;
             case 2:
                 CircleStop.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
                 break;
             case 3:
                 CircleBreak.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
-     
                 break;
             }
     }
@@ -543,6 +550,11 @@ public class RayAbility : MonoBehaviour
     void GetMonocle()
     {
         EyeLongFlag = true;
+    }
+    //破壊能力クールタイム
+    void NextUse()
+    {
+        NextUseTime = BreakEyeCoolTime;
     }
 }
 

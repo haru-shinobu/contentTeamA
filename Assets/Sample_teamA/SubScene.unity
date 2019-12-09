@@ -3164,6 +3164,51 @@ PrefabInstance:
       propertyPath: Loop
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4444761206145847294, guid: aad4bfc4bb51f284da1dcd263a772d8d,
+        type: 3}
+      propertyPath: ResetAbilityPenalty
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444761206145847294, guid: aad4bfc4bb51f284da1dcd263a772d8d,
+        type: 3}
+      propertyPath: BreakAbilityPenalty
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444761206145847294, guid: aad4bfc4bb51f284da1dcd263a772d8d,
+        type: 3}
+      propertyPath: LightStrong
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724209985886136981, guid: aad4bfc4bb51f284da1dcd263a772d8d,
+        type: 3}
+      propertyPath: ResetAbilityPenaltyTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724209985886136981, guid: aad4bfc4bb51f284da1dcd263a772d8d,
+        type: 3}
+      propertyPath: BreakAbilityPenaltyTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724209985886136981, guid: aad4bfc4bb51f284da1dcd263a772d8d,
+        type: 3}
+      propertyPath: CoolTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724209985886136981, guid: aad4bfc4bb51f284da1dcd263a772d8d,
+        type: 3}
+      propertyPath: BreakEyeCoolTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724209985886136981, guid: aad4bfc4bb51f284da1dcd263a772d8d,
+        type: 3}
+      propertyPath: AbilityStopEmissionFlag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724209985886136981, guid: aad4bfc4bb51f284da1dcd263a772d8d,
+        type: 3}
+      propertyPath: CoolTimeCircle
+      value: 
+      objectReference: {fileID: 1846784408}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aad4bfc4bb51f284da1dcd263a772d8d, type: 3}
 --- !u!1001 &1707202560
@@ -3536,6 +3581,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83318d3eea68d7045bde88498c33a111, type: 3}
+--- !u!1 &1846784408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2694989576524883268, guid: a451d20001d02924f922a797da38bedc,
+    type: 3}
+  m_PrefabInstance: {fileID: 7361201997801289167}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1852044791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5001,6 +5052,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IgnoreReversedGraphics
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 94426595383086075, guid: a451d20001d02924f922a797da38bedc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 94426595383086075, guid: a451d20001d02924f922a797da38bedc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 94426595383086075, guid: a451d20001d02924f922a797da38bedc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 94426595383086075, guid: a451d20001d02924f922a797da38bedc,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a451d20001d02924f922a797da38bedc, type: 3}

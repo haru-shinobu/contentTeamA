@@ -55,12 +55,12 @@ public class clockScript : MonoBehaviour
     ParticleSystem ClockParticle;
     void Start()
     {
-        ClockParticle = gameObject.transform.GetChild(12).GetChild(0).GetComponent<ParticleSystem>();
+        ClockParticle = gameObject.transform.GetChild(13).GetChild(0).GetComponent<ParticleSystem>();
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         GameMaster = GameObject.Find("GameMaster");
         GNTimer = GameMaster.GetComponent<GameTimerDirector>();
         //clock関係
-        col = transform.GetChild(11).gameObject.GetComponent<Image>();//ホワイトアウト用
+        col = transform.GetChild(12).gameObject.GetComponent<Image>();//ホワイトアウト用
         col.enabled = true;
         clockhand = GameObject.Find("ClockhandImage").GetComponent<RectTransform>();
         clocker = GameObject.Find("ClockImage").GetComponent<RectTransform>();

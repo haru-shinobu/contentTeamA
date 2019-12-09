@@ -13,7 +13,6 @@ public class GameStageSetting : MonoBehaviour
     AudioSource audioSource;
     //
     //
-
     public AudioClip yarinaosiSE;
     //マウス操作かキー操作か
     public bool MouseMode;
@@ -21,7 +20,7 @@ public class GameStageSetting : MonoBehaviour
     public float LightStrong = 0.3f;
     //リセット能力及び画面外用
     static public bool ResetFlag = false;
-    static public int ResetStageDiv;
+    //static public int ResetStageDiv;
     public bool ResetStatus;
     //プレイヤーの能力変更メニュー開くために必要な時間。０以上であること
     public float AbilityMenuTime;
@@ -232,7 +231,7 @@ public class GameStageSetting : MonoBehaviour
         GameObject cam = GameObject.Find("FPSCamera");
         Destroy(cam.GetComponent<FPSCameraController>());
         cam.AddComponent<GameOverCam>();
-        GameObject.Find("UICanvas").transform.GetChild(12).GetChild(0).gameObject.SetActive(false);
+        GameObject.Find("UICanvas").transform.GetChild(13).GetChild(0).gameObject.SetActive(false);
         GameObject.Find("UICanvas").GetComponent<Canvas>().enabled = false;
         gameObject.GetComponent<CursorColtroll>().enabled = false;
         gameObject.GetComponent<RayAbility>().enabled = false;
