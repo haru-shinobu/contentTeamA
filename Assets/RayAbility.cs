@@ -25,7 +25,7 @@ public class RayAbility : MonoBehaviour
     public GameObject CircleWarp;  //チャージカーソル用
     public GameObject CircleStop;  //チャージカーソル用
     public GameObject CircleBreak; //チャージカーソル用
-    public GameObject CoolTimeCircle;//クールタイム表示用
+    //public GameObject CoolTimeCircle;//クールタイム表示用
     Image coolcircle;
 
     public GameObject reticleWarp;  //カーソル用
@@ -89,7 +89,7 @@ public class RayAbility : MonoBehaviour
         KeyQTime = 0;
         MouseButtonFlag = false;
         Ability4KEYFlag = false;
-        coolcircle = CoolTimeCircle.GetComponent<Image>();
+        coolcircle = /*CoolTimeCircle*/GameObject.Find("Rechage").GetComponent<Image>();
     }
 
     // Update is called once per frame
