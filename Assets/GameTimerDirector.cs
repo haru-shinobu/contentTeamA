@@ -53,7 +53,8 @@ public class GameTimerDirector : MonoBehaviour
             {
                 if (OnetimeFlag)
                 {
-                    InsOnetime.transform.GetChild(0).GetComponent<Text>().text = ("のこり時間") + (onetime).ToString("F0") + ("秒");
+                    InsOnetime.transform.GetChild(0).GetComponent<Text>().text = ("のこり時間") 
+                        + (onetime).ToString("F0") + ("秒");
                     if (onetime <= onetimechecker - 3)
                     {
                         OnetimeFlag = false;

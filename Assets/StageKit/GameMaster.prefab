@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4444761206145847293
+--- !u!1 &1362520783201251111
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4444761206145847295}
-  - component: {fileID: 4444761206145847294}
-  - component: {fileID: 4444761206145847288}
-  - component: {fileID: 1724209985886136981}
-  - component: {fileID: 4444761206145847289}
-  - component: {fileID: 4444761206145847290}
+  - component: {fileID: 4004083731868574108}
+  - component: {fileID: 6910323076731490293}
+  - component: {fileID: 8216954003090378109}
+  - component: {fileID: 384628786072363759}
+  - component: {fileID: 7341752765299055129}
+  - component: {fileID: 5929586508421915647}
   m_Layer: 0
-  m_Name: GameMaster 1
+  m_Name: GameMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4444761206145847295
+--- !u!4 &4004083731868574108
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4444761206145847293}
+  m_GameObject: {fileID: 1362520783201251111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 654, y: 469, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4444761206145847294
+--- !u!114 &6910323076731490293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4444761206145847293}
+  m_GameObject: {fileID: 1362520783201251111}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02e4f8cbe105ce74fab3da8cdff79e66, type: 3}
@@ -49,11 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yarinaosiSE: {fileID: 8300000, guid: 8d1b3275371673a479f20769f110e406, type: 3}
   MouseMode: 1
-  LightStrong: 0.4
+  LightStrong: 0.6
   ResetStatus: 0
   AbilityMenuTime: 1
-  BreakAbilityPenalty: 10
-  ResetAbilityPenalty: 10
+  BreakAbilityPenalty: 0
+  ResetAbilityPenalty: 0
   PlayerSizeX: 50
   PlayerSizeY: 150
   PlayerSizeZ: 50
@@ -72,14 +72,13 @@ MonoBehaviour:
     type: 3}
   ClearLoadWaitTime: 5
   GameOverLoadWaitTime: 7
-  DGoalFlag: 0
---- !u!114 &4444761206145847288
+--- !u!114 &8216954003090378109
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4444761206145847293}
+  m_GameObject: {fileID: 1362520783201251111}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ec0d5cf8e29ec847b205dcf3b256d6f, type: 3}
@@ -95,13 +94,13 @@ MonoBehaviour:
   Pointercursor: {fileID: 0}
   AbilityTrigger: 0
   handflag: 0
---- !u!114 &1724209985886136981
+--- !u!114 &384628786072363759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4444761206145847293}
+  m_GameObject: {fileID: 1362520783201251111}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edf15588301a28548b45ae56c2df44ca, type: 3}
@@ -119,8 +118,8 @@ MonoBehaviour:
   reticleWarp: {fileID: 0}
   reticleStop: {fileID: 0}
   reticleBreak: {fileID: 0}
-  BreakAbilityPenaltyTime: 10
-  ResetAbilityPenaltyTime: 10
+  BreakAbilityPenaltyTime: 0
+  ResetAbilityPenaltyTime: 0
   exploision: {fileID: 0}
   CFX2_PickupDiamond2: {fileID: 0}
   CFX_Explosion_B_Smoke: {fileID: 0}
@@ -131,29 +130,32 @@ MonoBehaviour:
   AbilityMenuOpenFlag: 0
   StopObjectName: 
   AbilityNow: 0
+  BreakEyeCoolTime: 10
   EyeLongFlag: 0
   AbilityStopEmissionFlag: 0
---- !u!114 &4444761206145847289
+--- !u!114 &7341752765299055129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4444761206145847293}
+  m_GameObject: {fileID: 1362520783201251111}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f28a73171c9cbb64eaf5d8543b40b833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sqriptname: 
   NowTime: 0
   GameCrearLoadFlag: 0
---- !u!82 &4444761206145847290
+  timers: 0
+--- !u!82 &5929586508421915647
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4444761206145847293}
+  m_GameObject: {fileID: 1362520783201251111}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
