@@ -9,7 +9,7 @@ public class RuleScene : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene("TiTleSelect");//シーン名が入る 
+            SceneManager.LoadScene("TiTle");//シーン名が入る 
         }
     }    
 }
