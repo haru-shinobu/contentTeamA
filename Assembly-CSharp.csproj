@@ -57,6 +57,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Aohara\BackTitle.cs" />
+    <Compile Include="Assets\Aohara\CreditScene.cs" />
+    <Compile Include="Assets\Aohara\RuruBack.cs" />
+    <Compile Include="Assets\Aohara\Sound.cs" />
+    <Compile Include="Assets\Aohara\SoundLoop.cs" />
+    <Compile Include="Assets\Aohara\Stage1.cs" />
+    <Compile Include="Assets\Aohara\Stage2.cs" />
+    <Compile Include="Assets\Aohara\Stage3.cs" />
+    <Compile Include="Assets\Aohara\Start.cs" />
+    <Compile Include="Assets\Aohara\Tutorial.cs" />
     <Compile Include="Assets\BreakpopItemScript.cs" />
     <Compile Include="Assets\CamWayScript.cs" />
     <Compile Include="Assets\ClearLoadScript.cs" />
@@ -171,6 +181,7 @@
     <None Include="Assets\DownloadAsset\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
     <None Include="Assets\DownloadAsset\Dissolve Edge by Moonflower Carnivore\Shaders\Transparent_Unlit_DissolveEdge.shader" />
     <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_SDF (UIShiny).shader" />
+    <None Include="Assets\Aohara\kumori.shader" />
     <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_Sprite (UIDissolve).shader" />
     <None Include="Assets\DownloadAsset\Coffee\UIExtensions\UIEffect\ForTMPro\Shaders\TMP_Sprite (UIShiny).shader" />
     <None Include="Assets\DownloadAsset\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
