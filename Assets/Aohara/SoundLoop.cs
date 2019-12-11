@@ -5,7 +5,6 @@ public class SoundLoop : MonoBehaviour
 {
     public bool DontDestroyEnabled = true;
 
-    // Use this for initialization
     void Start()
     {
         if (DontDestroyEnabled)
@@ -15,14 +14,4 @@ public class SoundLoop : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-//    void Update()
-//    {
-//        if (Input.GetKeyDown(KeyCode.A) == true)
-//        {
-// //           Debug.Log("Now scene is " + Application.loadedLevelName);
-//            // Aキーを押すとシーンが遷移する
-//            Application.LoadLevel("StageSellect");
-//        }
-//    }
 }

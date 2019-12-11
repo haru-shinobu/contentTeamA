@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1732,7 +1732,7 @@ PrefabInstance:
     - target: {fileID: 6913056911473947829, guid: 238b7507a14378142b9b14cf17d0fdfb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6913056911473947829, guid: 238b7507a14378142b9b14cf17d0fdfb,
         type: 3}
@@ -9206,6 +9206,11 @@ PrefabInstance:
       propertyPath: Loop
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4444761206145847294, guid: aad4bfc4bb51f284da1dcd263a772d8d,
+        type: 3}
+      propertyPath: Stage3TimeLimit
+      value: 10000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aad4bfc4bb51f284da1dcd263a772d8d, type: 3}
 --- !u!1001 &900199313
@@ -10989,7 +10994,7 @@ PrefabInstance:
     - target: {fileID: 8506026157361268009, guid: d1526a6c8e23a164d89571ebb67213c3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8506026157361268009, guid: d1526a6c8e23a164d89571ebb67213c3,
         type: 3}
@@ -18743,7 +18748,7 @@ PrefabInstance:
     - target: {fileID: 6913056911473947829, guid: 238b7507a14378142b9b14cf17d0fdfb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6913056911473947829, guid: 238b7507a14378142b9b14cf17d0fdfb,
         type: 3}
@@ -28561,9 +28566,9 @@ Transform:
   - {fileID: 2047171696}
   - {fileID: 6511633461166090244}
   - {fileID: 1182161321}
-  - {fileID: 1670520242}
   - {fileID: 290439993}
   - {fileID: 1753435373}
+  - {fileID: 1670520242}
   - {fileID: 1095556954}
   - {fileID: 870730392}
   - {fileID: 1821081477}
