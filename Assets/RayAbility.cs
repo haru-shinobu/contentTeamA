@@ -564,7 +564,7 @@ public class RayAbility : MonoBehaviour
     {
         NextUseTime = BreakEyeCoolTime;
     }
-    public bool Monocle()
+    public bool LostMonocle()
     {
         if (0 < MonocleCount)
             return true;
