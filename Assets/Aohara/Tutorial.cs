@@ -10,7 +10,5 @@ public class Tutorial : MonoBehaviour
     {
         SceneManager.LoadScene("GameRule");//シーン名が入る
     }
-
-
 }
 

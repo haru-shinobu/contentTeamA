@@ -22,11 +22,13 @@ public class monoclescript : MonoBehaviour
     void Update()
     {
         if (Flag)
-        {
+        {//取得時
             if (Rays.AbilityNow != 0 && Rays.AbilityNow != 4)
             {
                 gameObject.transform.position = FPSCamera.transform.position + FPSCamera.transform.right * -4 + FPSCamera.transform.up * 3 + FPSCamera.transform.forward * 3;
                 gameObject.transform.rotation = FPSCamera.transform.rotation;
+                if (!Rays.LostMonocle())
+                    Destroy(gameObject);
             }
             else
             {
@@ -35,9 +37,8 @@ public class monoclescript : MonoBehaviour
             }
         }
         else
-        {
+        {//取得してない時
             time += (Time.deltaTime * 15);
-            //if (Limit * 2 <= time) time = 0;
             transform.Rotate(Vector3.up * Time.deltaTime*30);
             transform.position = pos + transform.up * Mathf.PingPong(time, Limit);
         }

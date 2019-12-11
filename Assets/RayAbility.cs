@@ -62,6 +62,7 @@ public class RayAbility : MonoBehaviour
     GameObject InstanceGeat;
 
     public bool EyeLongFlag;//アイテム取ったときレイを伸ばす。
+    private int MonocleCount;
 
     public bool AbilityStopEmissionFlag;
     void Start()
@@ -90,6 +91,7 @@ public class RayAbility : MonoBehaviour
         MouseButtonFlag = false;
         Ability4KEYFlag = false;
         coolcircle = /*CoolTimeCircle*/GameObject.Find("Rechage").GetComponent<Image>();
+        MonocleCount = 0;
     }
 
     // Update is called once per frame
@@ -286,6 +288,7 @@ public class RayAbility : MonoBehaviour
                                         audioSource.PlayOneShot(worpSE);
                                         Player.transform.position = hit.point + (hit.normal * Player.transform.localScale.x);
                                         AbilityNow = 0;
+                                        MonocleCount--;
                                     }
                                 }
                                 else
@@ -332,6 +335,7 @@ public class RayAbility : MonoBehaviour
                                                
                                                 AbilityStopEmissionFlag = false;
                                             }
+                                            MonocleCount--;
                                             AbilityNow = 0;
                                         }
                                     }
@@ -365,6 +369,7 @@ public class RayAbility : MonoBehaviour
                                                     hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
                                                 AbilityStopEmissionFlag = false;
                                             }
+                                            MonocleCount--;
                                             AbilityNow = 0;
                                         }
                                     }
@@ -399,6 +404,7 @@ public class RayAbility : MonoBehaviour
                                         AbilityNow = 0;
                                         //AbilityPenalty(BreakAbilityPenaltyTime);
                                         NextUse();
+                                        MonocleCount--;
                                         Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }
                                 }
@@ -409,7 +415,7 @@ public class RayAbility : MonoBehaviour
                                 }
                             }
                             else
-                                 if (hit.collider.gameObject.tag == "BreakItem")
+                            if (hit.collider.gameObject.tag == "BreakItem")
                             {
                                 AbilityTriggerTime += Time.deltaTime;
                                 if (3 <= AbilityTriggerTime)
@@ -431,6 +437,7 @@ public class RayAbility : MonoBehaviour
                                         AbilityNow = 0;
                                         //AbilityPenalty(BreakAbilityPenaltyTime);
                                         NextUse();
+                                        MonocleCount--;
                                         Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }
                                 }
@@ -550,11 +557,19 @@ public class RayAbility : MonoBehaviour
     void GetMonocle()
     {
         EyeLongFlag = true;
+        MonocleCount = 3;
     }
     //破壊能力クールタイム
     void NextUse()
     {
         NextUseTime = BreakEyeCoolTime;
+    }
+    public bool LostMonocle()
+    {
+        if (0 < MonocleCount)
+            return true;
+        EyeLongFlag = false;
+        return false;
     }
 }
 
