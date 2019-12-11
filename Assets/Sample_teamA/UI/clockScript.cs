@@ -193,7 +193,7 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
                     EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
                     EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
-                    AbilityText.text = ("魔眼を使うときは動けなくなる。");
+                    AbilityText.text = ("魔眼を使おうとすると動けなくなるようだ、移動時は使わないでおこう");
                     break;
                 case 1:
                     EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
@@ -201,7 +201,7 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
                     EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
                     EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
-                    AbilityText.text = ("転移の魔眼。とある物を見つめ続けたらEで跳ぶことができる");
+                    AbilityText.text = ("転移の魔眼　特定の物に対して飛べそうだ見つめ続けてEで発動");
                     break;
                 case 2:
                     EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
@@ -209,7 +209,7 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.localPosition = StandardTearPos;
                     EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
                     EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
-                    AbilityText.text = ("停止の魔眼。見つめ続けた動くものをEで止められるが、解除しないと次が使えない");
+                    AbilityText.text = ("停止の魔眼　動いている物を止めれそうだ、だけど止めるのは一つが限界だ");
                     break;
                 case 3:
                     EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -445), ANum);
@@ -217,7 +217,7 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
                     EyeAbilityExplosion.localPosition = StandardTearPos;
                     EyeAbilityReset.localPosition = Vector2.Lerp(EyeAbilityReset.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
-                    AbilityText.text = ("破壊の魔眼。見つめ続けたひび割れた物体をEで破壊できる");
+                    AbilityText.text = ("破壊の魔眼　物を破壊して跡形も無くしてしまう、これで道を開けそうだ");
                     break;
                 case 4:
                     EyeAbilityNormal.localPosition = Vector2.Lerp(EyeAbilityNormal.localPosition, StandardTearPos + new Vector2(0, -230), ANum);
@@ -225,7 +225,7 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.localPosition = Vector2.Lerp(EyeAbilityStop.localPosition, StandardTearPos + new Vector2(0, -660), ANum);
                     EyeAbilityExplosion.localPosition = Vector2.Lerp(EyeAbilityExplosion.localPosition, StandardTearPos + new Vector2(0, -875), ANum);
                     EyeAbilityReset.localPosition = StandardTearPos;
-                    AbilityText.text = ("初見の魔眼。力(E)を溜めると使えるリセット能力。");
+                    AbilityText.text = ("時戻しの魔眼　力(E)を溜めて解き放つ（Eを離す）と時間が巻き戻る");
                     break;
             }
         }
@@ -253,7 +253,7 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
                     EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
                     EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
-                    AbilityText.text = ("Qで魔眼を使う。目に集中するので動けない");
+                    AbilityText.text = ("魔眼を使おうとすると動けなくなるようだ、移動時は使わないでおこう");
                     if (OpenRootFlag)
                         AbilityText.text = ("風の音がする…どこかに道が開いたようだ");
                     break;
@@ -263,7 +263,7 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
                     EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
                     EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
-                    AbilityText.text = ("転移の魔眼。とある物を見つめ続けたらEで跳ぶことができる");
+                    AbilityText.text = ("転移の魔眼　特定の物に対して飛べそうだ見つめ続けてEで発動");
                     break;
                 case 2:
                     EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
@@ -271,7 +271,7 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.gameObject.GetComponent<Image>().enabled = true;
                     EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
                     EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
-                    AbilityText.text = ("停止の魔眼。見つめ続けた動くものをEで止められるが、解除しないと次が使えない");
+                    AbilityText.text = ("停止の魔眼　動いている物を止めれそうだ、だけど止めるのは一つが限界だ");
                     break;
                 case 3:
                     EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
@@ -279,7 +279,7 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
                     EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = true;
                     EyeAbilityReset.gameObject.GetComponent<Image>().enabled = false;
-                    AbilityText.text = ("破壊の魔眼。見つめ続けたひび割れた物体をEで破壊できる");
+                    AbilityText.text = ("破壊の魔眼　物を破壊して跡形も無くしてしまう、これで道を開けそうだ");
                     break;
                 case 4:
                     EyeAbilityNormal.gameObject.GetComponent<Image>().enabled = false;
@@ -287,14 +287,14 @@ public class clockScript : MonoBehaviour
                     EyeAbilityStop.gameObject.GetComponent<Image>().enabled = false;
                     EyeAbilityExplosion.gameObject.GetComponent<Image>().enabled = false;
                     EyeAbilityReset.gameObject.GetComponent<Image>().enabled = true;
-                    AbilityText.text = ("初見の魔眼。力(E)を溜めると使えるリセット能力。");
+                    AbilityText.text = ("時戻しの魔眼　力(E)を溜めて解き放つ（Eを離す）と時間が巻き戻る");
                     break;
             }
 
             if (!GameStartFlag)
             {
                 CountTimer = Time.time;
-                AbilityText.text = ("制限時間までに出口を探せ！");
+                AbilityText.text = ("制限時間までに出口を探せ");
                 if (4 < CountTimer)//***********************************************注意
                     GameStartFlag = true;
             }
