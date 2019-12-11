@@ -34,6 +34,7 @@ public class GameTimerDirector : MonoBehaviour
         GameOverFlag = false;
         TimeIns = Resources.Load<GameObject>("InstantDoorTrueTime");
         OnetimeFlag = false;
+        InsOnetime = null;
     }
 
     // Update is called once per frame
@@ -46,7 +47,8 @@ public class GameTimerDirector : MonoBehaviour
             if (DoorPassFlag)
             {
                 OnetimeFlag = true;
-                InsOnetime = Instantiate(TimeIns);
+                if (InsOnetime == null)
+                    InsOnetime = Instantiate(TimeIns);
                 DoorPassFlag = false;
             }
             else
@@ -58,10 +60,18 @@ public class GameTimerDirector : MonoBehaviour
                     {
                         OnetimeFlag = false;
                         Destroy(InsOnetime);
+                        InsOnetime = null;
                     }
                 }
                 else
+                if (InsOnetime != null)
+                {
+                    Destroy(InsOnetime);
+                    InsOnetime = null;
+                }
+                else
                     onetimechecker = onetime;
+
                 rect.sizeDelta = TextSpace;
                 rect.localPosition = timepos;
                 timerText.GetComponent<Text>().text = ("TimeLimit") + ("\n") + (Limittimer).ToString("F0") + (" sec");
