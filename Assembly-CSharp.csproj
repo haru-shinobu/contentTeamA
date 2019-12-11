@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Assets\Aohara\BackTitle.cs" />
     <Compile Include="Assets\Aohara\CreditScene.cs" />
+    <Compile Include="Assets\Aohara\Rule2.cs" />
     <Compile Include="Assets\Aohara\RuruBack.cs" />
     <Compile Include="Assets\Aohara\Sound.cs" />
     <Compile Include="Assets\Aohara\SoundLoop.cs" />
