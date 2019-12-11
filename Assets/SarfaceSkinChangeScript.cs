@@ -15,7 +15,7 @@ public class SarfaceSkinChangeScript : MonoBehaviour
     void Start()
     {
         tag = "Switch";
-        script = gameObject.transform.root.GetComponent<NumberSwitchScript>();
+        script = gameObject.transform.parent.GetComponent<NumberSwitchScript>();
         switch (gameObject.name)
         {
             case "NumberPlate1":

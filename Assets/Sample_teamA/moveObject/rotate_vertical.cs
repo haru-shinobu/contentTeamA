@@ -7,7 +7,7 @@ public class rotate_vertical : MonoBehaviour
 
     Vector3 pos;
     bool StopFlag = false;
-    public bool Flag;
+    public bool Flag = false;
     
 
     void Start()
@@ -21,8 +21,11 @@ public class rotate_vertical : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.transform.SetParent(transform);
-            Flag = true;
+            if (col.transform.parent == null)
+            {
+                col.gameObject.transform.SetParent(transform);
+                Flag = true;
+            }
         }
     }
     void OnTriggerExit(Collider col)
@@ -42,9 +45,8 @@ public class rotate_vertical : MonoBehaviour
             transform.Rotate(new Vector3(0, 0.2f, 0));
         }
         if (Flag)
-        {
+            if(transform.GetChild(0))
             transform.GetChild(0).gameObject.transform.rotation = transform.rotation;
-        }
     }
 
     void CollReSet()

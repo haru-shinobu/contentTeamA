@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     GameStageSetting Setting;
     void Start()
     {
+        if (!GetComponent<AudioSource>())
+            gameObject.AddComponent<AudioSource>();
         audioSource = GetComponent<AudioSource>();
        
         ResetFlag = false;

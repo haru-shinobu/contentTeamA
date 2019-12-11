@@ -1,6 +1,4 @@
-﻿
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +25,8 @@ public class RayAbility : MonoBehaviour
     public GameObject CircleWarp;  //チャージカーソル用
     public GameObject CircleStop;  //チャージカーソル用
     public GameObject CircleBreak; //チャージカーソル用
+    //public GameObject CoolTimeCircle;//クールタイム表示用
+    Image coolcircle;
 
     public GameObject reticleWarp;  //カーソル用
     public GameObject reticleStop;  //カーソル用
@@ -53,12 +53,16 @@ public class RayAbility : MonoBehaviour
     float AbilityTriggerTime = 0;       //各種能力発動までのカウント用
     public string StopObjectName;    //Stop能力で別オブジェクトが反応しないようにするため
     public int AbilityNow;              //現在発動中の能力0～4
+    public float BreakEyeCoolTime;
     float NextUseTime = 0;//クールタイム用
+    bool MouseButtonFlag;
+    bool Ability4KEYFlag;
     bool WarpParticleFlag;
     GameObject Instance;
     GameObject InstanceGeat;
 
     public bool EyeLongFlag;//アイテム取ったときレイを伸ばす。
+    private int MonocleCount;
 
     public bool AbilityStopEmissionFlag;
     void Start()
@@ -83,6 +87,11 @@ public class RayAbility : MonoBehaviour
         AbilityMenuOpenFlag = false;
         AbilityStopEmissionFlag = false;
         EyeLongFlag = false;
+        KeyQTime = 0;
+        MouseButtonFlag = false;
+        Ability4KEYFlag = false;
+        coolcircle = /*CoolTimeCircle*/GameObject.Find("Rechage").GetComponent<Image>();
+        MonocleCount = 0;
     }
 
     // Update is called once per frame
@@ -102,9 +111,15 @@ public class RayAbility : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
             KeyQTime = 0;
+        else
+        if (Input.GetMouseButtonDown(0))
+        {
+            MouseButtonFlag = true;
+            KeyQTime = 0;
+        }
         //audioSource.PlayOneShot(kirikaeSE);
 
-        if (Input.GetKey(KeyCode.Q))
+        if (MouseButtonFlag || Input.GetKey(KeyCode.Q))
             KeyQTime += Time.deltaTime;
 
         if (AbilityChengeMenuTime < KeyQTime)//MenuOpenしてるときの処理
@@ -161,11 +176,12 @@ public class RayAbility : MonoBehaviour
         if (AbilityNow < 0) AbilityNow = AbilityNum;
 
 
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyUp(KeyCode.Q) || Input.GetMouseButtonUp(0))
         {
             KeyQTime = 0;
             AbilityTriggerTime = 0;
             AbilityMenuOpenFlag = false;//MenuCloseフラグ
+            MouseButtonFlag = false;
         }
 
         if (AbilityNow != 0)
@@ -185,25 +201,24 @@ public class RayAbility : MonoBehaviour
         //Ability4(リセット)
         if (AbilityNow == 4)
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1)) Ability4KEYFlag = true;
+            if(Ability4KEYFlag)
             {
-                AbilityTriggerTime += Time.deltaTime;
-                
+                AbilityTriggerTime += Time.deltaTime;   
                 col.RayAbilityWhiteOut(AbilityTriggerTime, true, false);
             }
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.E) || Input.GetMouseButtonDown(0))
             {
+                Ability4KEYFlag = false;
                 if (3 <= AbilityTriggerTime)
                 {
                     //AbilityPenalty(ResetAbilityPenaltyTime);
                     Player.GetComponent<PlayerController>().ResetFlag = true;
-                    
                 }
                 else
                 {
-                    col.RayAbilityWhiteOut(0, false, false);
                     AbilityTriggerTime = 0;
-                    
+                    col.RayAbilityWhiteOut(0, false, false);
                 }
             }
         }
@@ -242,7 +257,7 @@ public class RayAbility : MonoBehaviour
                             if (hit.collider.gameObject.tag == "Switch")
                             {
                                 carsor.handflag = true;
-                                if (Input.GetKeyDown(KeyCode.E))
+                                if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                 {
                                     hit.collider.gameObject.SendMessage("TriggerOn");
                                     AbilityNow = 0;
@@ -268,16 +283,17 @@ public class RayAbility : MonoBehaviour
 
                                 if (3 <= AbilityTriggerTime)
                                 {
-                                    if (Input.GetKeyDown(KeyCode.E))
+                                    if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                     {
                                         audioSource.PlayOneShot(worpSE);
                                         Player.transform.position = hit.point + (hit.normal * Player.transform.localScale.x);
                                         AbilityNow = 0;
+                                        MonocleCount--;
                                     }
                                 }
                                 else
                                 {
-                                    if (Input.GetKeyDown(KeyCode.E))
+                                    if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                         AbilityTriggerTime = 0;
                                 }
                             }
@@ -302,7 +318,7 @@ public class RayAbility : MonoBehaviour
                                     AbilityTriggerTime += Time.deltaTime;
                                     if (3 <= AbilityTriggerTime)
                                     {
-                                        if (Input.GetKeyDown(KeyCode.E))
+                                        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                         {
                                             hit.collider.gameObject.SendMessage("CollStop");
                                             Instantiate(CFX2_PickupDiamond2, hit.point + (hit.normal * 3), Quaternion.identity);
@@ -319,12 +335,13 @@ public class RayAbility : MonoBehaviour
                                                
                                                 AbilityStopEmissionFlag = false;
                                             }
+                                            MonocleCount--;
                                             AbilityNow = 0;
                                         }
                                     }
                                     else
                                     {
-                                        if (Input.GetKeyDown(KeyCode.E))
+                                        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                             AbilityTriggerTime = 0;
                                     }
                                 }
@@ -333,7 +350,7 @@ public class RayAbility : MonoBehaviour
                                     AbilityTriggerTime += Time.deltaTime;
                                     if (3 <= AbilityTriggerTime)
                                     {
-                                        if (Input.GetKeyDown(KeyCode.E))
+                                        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                         {
                                             hit.collider.gameObject.SendMessage("CollStop");
                                             Instantiate(CFX2_PickupDiamond2, hit.point + (hit.normal * 3), Quaternion.identity);
@@ -352,12 +369,13 @@ public class RayAbility : MonoBehaviour
                                                     hit.collider.gameObject.transform.root.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
                                                 AbilityStopEmissionFlag = false;
                                             }
+                                            MonocleCount--;
                                             AbilityNow = 0;
                                         }
                                     }
                                     else
                                     {
-                                        if (Input.GetKeyDown(KeyCode.E))
+                                        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                             AbilityTriggerTime = 0;
                                     }
                                 }
@@ -379,29 +397,30 @@ public class RayAbility : MonoBehaviour
                                 AbilityTriggerTime += Time.deltaTime;
                                 if (3 <= AbilityTriggerTime)
                                 {
-                                    if (Input.GetKeyDown(KeyCode.E))
+                                    if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                     {
                                         hit.collider.gameObject.SendMessage("CollBreak");
                                         audioSource.PlayOneShot(hakaiSE);
                                         AbilityNow = 0;
                                         //AbilityPenalty(BreakAbilityPenaltyTime);
-                                        NextUseTime = 10;
+                                        NextUse();
+                                        MonocleCount--;
                                         Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }
                                 }
                                 else
                                 {
-                                    if (Input.GetKeyDown(KeyCode.E))
+                                    if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                         AbilityTriggerTime = 0;
                                 }
                             }
                             else
-                                 if (hit.collider.gameObject.tag == "BreakItem")
+                            if (hit.collider.gameObject.tag == "BreakItem")
                             {
                                 AbilityTriggerTime += Time.deltaTime;
                                 if (3 <= AbilityTriggerTime)
                                 {
-                                    if (Input.GetKeyDown(KeyCode.E))
+                                    if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                     {
                                         if (hit.collider.gameObject.GetComponent<MeshRenderer>())
                                         {
@@ -417,13 +436,14 @@ public class RayAbility : MonoBehaviour
                                         }
                                         AbilityNow = 0;
                                         //AbilityPenalty(BreakAbilityPenaltyTime);
-                                        NextUseTime = 10;
+                                        NextUse();
+                                        MonocleCount--;
                                         Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }
                                 }
                                 else
                                 {
-                                    if (Input.GetKeyDown(KeyCode.E))
+                                    if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                         AbilityTriggerTime = 0;
                                 }
                             }
@@ -501,18 +521,17 @@ public class RayAbility : MonoBehaviour
     //能力発動用チャージ用
     void Charge(float ATime)
     {
+        coolcircle.fillAmount = 1.0f / BreakEyeCoolTime * (NextUseTime);
         switch (AbilityNow) {
-            case 0:break;
+            case 0: break;
             case 1:
                 CircleWarp.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
-                
                 break;
             case 2:
                 CircleStop.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
                 break;
             case 3:
                 CircleBreak.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
-     
                 break;
             }
     }
@@ -538,6 +557,19 @@ public class RayAbility : MonoBehaviour
     void GetMonocle()
     {
         EyeLongFlag = true;
+        MonocleCount = 3;
+    }
+    //破壊能力クールタイム
+    void NextUse()
+    {
+        NextUseTime = BreakEyeCoolTime;
+    }
+    public bool Monocle()
+    {
+        if (0 < MonocleCount)
+            return true;
+        EyeLongFlag = false;
+        return false;
     }
 }
 
