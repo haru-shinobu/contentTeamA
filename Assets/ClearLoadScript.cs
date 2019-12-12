@@ -40,7 +40,7 @@ public class ClearLoadScript : MonoBehaviour
         PrefabCanvas = Resources.Load<Canvas>("ClearCanvas" );
         
     }
-    void Update() { Debug.Log(Picture.transform.localRotation); }
+
     void OnTriggerEnter(Collider col)
     {
         if (Flag)
