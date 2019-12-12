@@ -24,15 +24,4 @@ public class SoundLoop : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
-
-    // Update is called once per frame
-//    void Update()
-//    {
-//        if (Input.GetKeyDown(KeyCode.A) == true)
-//        {
-// //           Debug.Log("Now scene is " + Application.loadedLevelName);
-//            // Aキーを押すとシーンが遷移する
-//            Application.LoadLevel("StageSellect");
-//        }
-//    }
 }
