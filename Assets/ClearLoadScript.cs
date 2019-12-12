@@ -38,8 +38,9 @@ public class ClearLoadScript : MonoBehaviour
         else
             Flag2 = true;
         PrefabCanvas = Resources.Load<Canvas>("ClearCanvas" );
+        
     }
-    
+    void Update() { Debug.Log(Picture.transform.localRotation); }
     void OnTriggerEnter(Collider col)
     {
         if (Flag)
@@ -50,7 +51,8 @@ public class ClearLoadScript : MonoBehaviour
                 if (gameObject.name != "TimeCountStop")//20/157//1358
                 {
                     Picture.transform.position = picpos;
-                    Picture.transform.rotation = new Quaternion(0, 0.9f, 0.5f, 0);
+                    //Picture.transform.rotation = new Quaternion(0, 0.9f, 0.5f, 0);
+                    Picture.transform.localRotation= new Quaternion(0, 0.5f, 0.9f, 0);
                     textFlag.OpenRootFlag = true;
                     StormEria.ActiveFlag = true;
                     Flag3 = true;
@@ -84,7 +86,7 @@ public class ClearLoadScript : MonoBehaviour
                 Player.AddComponent<ClearPlayerMoving>();
                 Destroy(GameObject.Find("footCanvas"));
                 GameObject.Find("FPSCamera").GetComponent<FPSCameraController>().CamControllFlag = false;
-                GameObject.Find("UICanvas").transform.GetChild(12).GetChild(0).gameObject.SetActive(false);
+                GameObject.Find("UICanvas").transform.GetChild(13).GetChild(0).gameObject.SetActive(false);
                 GameObject.Find("UICanvas").GetComponent<Canvas>().enabled = false;
                 obj.GetComponent<CursorColtroll>().enabled = false;
                 obj.GetComponent<RayAbility>().enabled = false;
@@ -94,6 +96,10 @@ public class ClearLoadScript : MonoBehaviour
             }
     }
     public void FlagON()
+    {
+        Flag = true;
+    }
+    void SwichChange()
     {
         Flag = true;
     }

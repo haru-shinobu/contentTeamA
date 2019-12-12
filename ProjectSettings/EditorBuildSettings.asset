@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/ALLScene/Title.unity
     guid: 3c100f6f8bc108042910535aee83679f
   - enabled: 1
-    path: Assets/ALLScene/TitleSelect.unity
+    path: Assets/ALLScene/GameRule2.unity
     guid: 8e487cf8539c59e4d82e67b7594ddc59
   - enabled: 1
     path: Assets/ALLScene/StageSelect.unity

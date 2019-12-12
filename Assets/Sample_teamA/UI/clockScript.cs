@@ -459,33 +459,42 @@ public class clockScript : MonoBehaviour
             
             foreach (GameObject gameObj in stopObjects)
             {
+                MeshRenderer mesh = null;
+                if (gameObj.GetComponent<MeshRenderer>())
+                    mesh = gameObj.GetComponent<MeshRenderer>();
                 if (gameObj.transform.root.name != stopname)
                 {
-                    gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                    mesh.material.DisableKeyword("_EMISSION");
                 }
                 else
                 {
-                    gameObj.GetComponent<MeshRenderer>().material.SetTexture("_EmissionMap", texture);
-                    gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 1, 0.06542563f));
-                    gameObj.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                    mesh.material.SetTexture("_EmissionMap", texture);
+                    mesh.material.SetColor("_EmissionColor", new Color(0, 1, 0.06542563f));
+                    mesh.material.EnableKeyword("_EMISSION");
                 }
             }
             foreach (GameObject gameObj in stopObjects2)
             {
                 if (gameObj)
                 {
+                    MeshRenderer mesh = null;
+                    if (gameObj.GetComponent<MeshRenderer>())
+                        mesh = gameObj.GetComponent<MeshRenderer>();
                     if (gameObj.transform.root.name != stopname)
-                    {//
+                    {
                         if (gameObj.transform.name == "PendulumPoleShaft")
                             gameObj.transform.GetComponent<PendulumShaft>().StopTexChange(texture2, false, new Color(0, 1, 0.06542563f));
-                        if (gameObj.GetComponent<MeshRenderer>())
-                            gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                        if (mesh != null) 
+                            mesh.material.DisableKeyword("_EMISSION");
                     }
                     else
                     {
-                        gameObj.GetComponent<MeshRenderer>().material.SetTexture("_EmissionMap", texture);
-                        gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 1, 0.06542563f));
-                        gameObj.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                        if (mesh != null)
+                        {
+                            mesh.material.SetTexture("_EmissionMap", texture);
+                            mesh.material.SetColor("_EmissionColor", new Color(0, 1, 0.06542563f));
+                            mesh.material.EnableKeyword("_EMISSION");
+                        }
                         if (gameObj.transform.name == "PendulumPoleShaft")
                             gameObj.transform.GetComponent<PendulumShaft>().StopTexChange(texture, true, new Color(0, 1, 0.06542563f));
                     }
@@ -494,15 +503,18 @@ public class clockScript : MonoBehaviour
             //*****
             foreach (GameObject gameObj in stopObjects3)
             {
+                MeshRenderer mesh = null;
+                if (gameObj.GetComponent<MeshRenderer>())
+                    mesh = gameObj.GetComponent<MeshRenderer>();
                 if (gameObj.transform.root.name != stopname)
                 {
-                    gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                    mesh.material.DisableKeyword("_EMISSION");
                 }
                 else
                 {
-                    gameObj.GetComponent<MeshRenderer>().material.SetTexture("_EmissionMap", texture);
-                    gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 1, 0.06542563f));
-                    gameObj.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+                    mesh.material.SetTexture("_EmissionMap", texture);
+                    mesh.material.SetColor("_EmissionColor", new Color(0, 1, 0.06542563f));
+                    mesh.material.EnableKeyword("_EMISSION");
                 }
             }
         }

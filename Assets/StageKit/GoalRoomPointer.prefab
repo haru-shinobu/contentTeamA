@@ -22791,6 +22791,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a6601840274074db9354c6582f64cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Flag: 0
+  Flag2: 0
+  Flag3: 0
   sulewall: {fileID: 3298021016848335717}
 --- !u!65 &5302507939919441528
 BoxCollider:
@@ -23326,6 +23329,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a6601840274074db9354c6582f64cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Flag: 0
+  Flag2: 0
+  Flag3: 0
   sulewall: {fileID: 3298021016848335717}
 --- !u!65 &3685620914504935238
 BoxCollider:
@@ -23928,7 +23934,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.0000002, y: 0.1, z: 0.30000013}
-  m_Center: {x: 0, y: 0.2, z: -0.16}
+  m_Center: {x: 0, y: 0.14, z: -0.16}
 --- !u!1 &6817597234263630330
 GameObject:
   m_ObjectHideFlags: 0
