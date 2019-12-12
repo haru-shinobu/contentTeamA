@@ -1772,9 +1772,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2130106046}
-  - component: {fileID: 2130106045}
   - component: {fileID: 2130106047}
-  - component: {fileID: 2130106048}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1782,18 +1780,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2130106045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130106044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5e814d621effc64d90130e648cf3b48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2130106046
 Transform:
   m_ObjectHideFlags: 0
@@ -1818,17 +1804,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0929ac8ea9aa1c4c850dc78599b665f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2130106048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130106044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92038b368f389a4aa96a909af724a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

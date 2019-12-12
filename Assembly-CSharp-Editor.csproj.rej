@@ -1,0 +1,24 @@
+diff a/Assembly-CSharp-Editor.csproj b/Assembly-CSharp-Editor.csproj	(rejected hunks)
+@@ -4,20 +4,18 @@
+     <LangVersion>latest</LangVersion>
+     <CscToolPath>C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Tools\RoslynScripts</CscToolPath>
+     <CscToolExe>unity_csc.bat</CscToolExe>
+-    <TargetFrameworkProfile />
+   </PropertyGroup>
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+     <ProductVersion>10.0.20506</ProductVersion>
+     <SchemaVersion>2.0</SchemaVersion>
+-    <RootNamespace>
+-    </RootNamespace>
++    <RootNamespace></RootNamespace>
+     <ProjectGuid>{92894C1E-4E43-7B09-3322-F156525A3371}</ProjectGuid>
+     <OutputType>Library</OutputType>
+     <AppDesignerFolder>Properties</AppDesignerFolder>
+     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+     <BaseDirectory>.</BaseDirectory>
+   </PropertyGroup>

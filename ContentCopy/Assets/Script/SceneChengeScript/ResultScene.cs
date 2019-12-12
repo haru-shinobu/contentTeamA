@@ -7,9 +7,9 @@ public class ResultScene : MonoBehaviour
 {
     void Update()
     {
-        //if (Input.anyKeyDown)
-        //{
-        //    SceneManager.LoadScene("TiTleSelect");//シーン名が入る 
-        //}
+        if (Input.anyKeyDown)
+        {
+            SceneManager.LoadScene("TiTle");//シーン名が入る 
+        }
     }
 }

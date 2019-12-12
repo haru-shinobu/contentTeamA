@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +18,8 @@ public class RotateStaircaseScript : MonoBehaviour
         CreateFlag = false;
         Flag = true;
         Childnum = 0;
-        CreateStep = gameObject;
+        CreateStep = (GameObject)Resources.Load("StairStep");//gameObject;
+        CreateStep.transform.localRotation = Quaternion.AngleAxis(transform.parent.localRotation.y,CreateStep.transform.up);
         away = transform.localRotation;        
         Steps = CreateStepNum;
     }
@@ -102,7 +104,7 @@ public class RotateStaircaseScript : MonoBehaviour
             pos = transform.position + transform.up * transform.lossyScale.y * 5 - transform.right * transform.lossyScale.x * 0.5f;
         else
             pos = transform.position + transform.forward * transform.lossyScale.z * (Steps + 1.5f) * 2+ transform.up * transform.lossyScale.y * 5 - transform.right * transform.lossyScale.x * 0.5f;
-        Instantiate(transform.GetChild(Childnum+num), pos, Quaternion.identity, transform.GetChild(Childnum+num + 1).transform);
+        Instantiate(transform.GetChild(Childnum+num), pos , Quaternion.identity, transform.GetChild(Childnum+num + 1).transform);
 
         CreateNum = Steps + 1;
         while (0 < CreateNum)
@@ -118,17 +120,23 @@ public class RotateStaircaseScript : MonoBehaviour
         //欄干
         num -= Steps + 1;
         CreateNum = Steps + 2;
-
+        bool bflag = true;
+       
+        if (gameObject.transform.parent.localRotation != Quaternion.Euler(0, 0, 0))
+            bflag = false;
         while (0 < CreateNum)
         {
-            pos = transform.GetChild(Childnum + num +1).transform.position + transform.up * transform.GetChild(Childnum + num + 1).transform.lossyScale.y * 0.5f;
+            if (bflag)
+                pos = transform.GetChild(Childnum + num + 1).transform.position + transform.up * transform.GetChild(Childnum + num + 1).transform.lossyScale.y * 0.5f;
+            else
+                pos = transform.GetChild(Childnum + num + 1).transform.position + transform.up * transform.GetChild(Childnum + num + 1).transform.lossyScale.y * 0.5f+ (-transform.right * transform.lossyScale.x);
             Instantiate(transform.GetChild(Childnum + num + 1).gameObject, pos, Quaternion.identity, transform.GetChild(Childnum+num + 1));
             transform.GetChild(Childnum+num + 1).gameObject.transform.GetChild(1).transform.localScale = transform.right * 1 + transform.up * 0.1f + transform.forward * 5;
-            transform.GetChild(Childnum+num + 1).gameObject.transform.GetChild(1).transform.rotation = Quaternion.Euler(0.8f, 0, 0);
+            transform.GetChild(Childnum + num + 1).gameObject.transform.GetChild(1).transform.localRotation = Quaternion.AngleAxis(0.8f, transform.right);//.Euler(0.8f, 0, 0);
             num++;
             CreateNum--;
         }
-
+        
         if (Pass)
         {
             transform.localRotation = away;

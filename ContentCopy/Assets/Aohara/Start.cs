@@ -10,6 +10,4 @@ public class Start : MonoBehaviour
     {
         SceneManager.LoadScene("StageSelect");//シーン名が入る
     }
-
-
 }
