@@ -43,12 +43,12 @@ public class FPSCameraController : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.A))
                     {
-                        InputX = -1;
+                        InputX = 1;
                     }
                     else
                     if (Input.GetKey(KeyCode.D))
                     {
-                        InputX = 1;
+                        InputX = -1;
                     }
                     else
                     if (Input.GetKey(KeyCode.W))
@@ -64,7 +64,7 @@ public class FPSCameraController : MonoBehaviour
             }
             else
             {
-                InputX = -Input.GetAxisRaw("Mouse X");
+                InputX = +Input.GetAxisRaw("Mouse X");
                 InputY = -Input.GetAxisRaw("Mouse Y");
             }
         }

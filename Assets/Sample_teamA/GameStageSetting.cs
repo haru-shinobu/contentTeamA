@@ -197,9 +197,11 @@ public class GameStageSetting : MonoBehaviour
     protected IEnumerator LoadScene()
     {
         var async = SceneManager.LoadSceneAsync("Result");
-        
+
         async.allowSceneActivation = false;   
         yield return new WaitForSeconds(ClearLoadWaitTime);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         async.allowSceneActivation = true;
     }
     protected IEnumerator LoadSceneGameOver()
@@ -208,6 +210,8 @@ public class GameStageSetting : MonoBehaviour
 
         async.allowSceneActivation = false;
         yield return new WaitForSeconds(GameOverLoadWaitTime);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         async.allowSceneActivation = true;
     }
 

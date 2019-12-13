@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stage1TimeManager : MonoBehaviour
 {
-    private static int ClearTime1 = 0;
+    public static int ClearTime1 = 0;
     float LimitedTime = 0;
     private bool ClearLoadFlag;
     string scene = null;
