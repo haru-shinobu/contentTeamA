@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4444761206145847289}
   - component: {fileID: 4444761206145847290}
   m_Layer: 0
-  m_Name: GameMaster 1
+  m_Name: GameMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,9 +59,9 @@ MonoBehaviour:
   PlayerSizeZ: 50
   MoveSpeed: 10
   JampForce: 145
-  Stage1TimeLimit: 100
-  Stage2TimeLimit: 100
-  Stage3TimeLimit: 100
+  Stage1TimeLimit: 500
+  Stage2TimeLimit: 1100
+  Stage3TimeLimit: 1800
   NowStageTimeLimit: 250
   StormForce: 50
   Explotion: {fileID: 7045615772519737080, guid: 1b24b299692bd3e418c41073d267b4ad,
@@ -72,7 +72,6 @@ MonoBehaviour:
     type: 3}
   ClearLoadWaitTime: 5
   GameOverLoadWaitTime: 7
-  DGoalFlag: 0
 --- !u!114 &4444761206145847288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +130,7 @@ MonoBehaviour:
   AbilityMenuOpenFlag: 0
   StopObjectName: 
   AbilityNow: 0
+  BreakEyeCoolTime: 0
   EyeLongFlag: 0
   AbilityStopEmissionFlag: 0
 --- !u!114 &4444761206145847289
@@ -145,8 +145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28a73171c9cbb64eaf5d8543b40b833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sqriptname: 
   NowTime: 0
   GameCrearLoadFlag: 0
+  timers: 0
 --- !u!82 &4444761206145847290
 AudioSource:
   m_ObjectHideFlags: 0
