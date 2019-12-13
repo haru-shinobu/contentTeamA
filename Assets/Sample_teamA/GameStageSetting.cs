@@ -52,8 +52,9 @@ public class GameStageSetting : MonoBehaviour
   
     void Awake()
     {
+        Instantiate((GameObject)Resources.Load("GameBGM"));
+        
         audioSource = GetComponent<AudioSource>();
-
         ResetStatus = ResetFlag;
         if (ResetFlag)
         {

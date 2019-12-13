@@ -10,6 +10,8 @@ public class FPSCameraController : MonoBehaviour
     bool SceneEndFlag;
     bool MouseControl;
     public bool CamControllFlag;
+    float AngleY;
+    float AngleX;
     Vector3 goalpos;
     void Start()
     {
@@ -62,8 +64,8 @@ public class FPSCameraController : MonoBehaviour
             }
             else
             {
-                InputX = Input.GetAxisRaw("Mouse X");
-                InputY = Input.GetAxisRaw("Mouse Y");
+                InputX = -Input.GetAxisRaw("Mouse X");
+                InputY = -Input.GetAxisRaw("Mouse Y");
             }
         }
         else
@@ -72,9 +74,24 @@ public class FPSCameraController : MonoBehaviour
             gameObject.transform.LookAt(goalpos, Vector3.right);
             gameObject.transform.LookAt(goalpos, Vector3.up);   
         }
+        float MaxLimit = 10, MinLimit = 360 - MaxLimit;
+
+        float deltaAngleX = InputX * Time.deltaTime * 200;
+        float deltaAngleY = InputY * Time.deltaTime * 200;
+        AngleX += deltaAngleX;
+        AngleY += deltaAngleY;
+        //積算角度を制限内にクランプする
+        float clampedAngleY = Mathf.Clamp(AngleY, -80, 80);
+        //クランプ前の角度からクランプ後の角度を引く
+        float overshhotY = AngleY - clampedAngleY;
+        //角度差分だけ回転量調整。制限内に収める
+        //積算角度も調整後の値に上書きする
+        deltaAngleY -= overshhotY;
+        AngleY = clampedAngleY;
         // targetの位置のY軸を中心に、回転（公転）する
-        transform.RotateAround(CameraPos, Vector3.up, InputX * Time.deltaTime * 200f);
-        transform.RotateAround(CameraPos, transform.right, InputY * Time.deltaTime * 200f);
+        transform.RotateAround(CameraPos, Vector3.up, deltaAngleX);
+        transform.RotateAround(CameraPos, transform.right, deltaAngleY);
+        
         
     }
 }
