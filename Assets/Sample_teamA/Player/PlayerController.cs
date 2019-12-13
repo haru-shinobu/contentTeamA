@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         PlayerWalk = false;
     }
 
-    void OnTriggerStay(Collider col)
+    void OnTriggerEnter(Collider col)
     {
         if (!JumpEnd)
             JumpVertical = 0;
