@@ -32,7 +32,7 @@ public class Doormove : MonoBehaviour
     GameTimerDirector TimeDirec;
     void Start()
     {
-
+        doaSE = (AudioClip)Resources.Load("doa-kaihei");
         audioSource = GetComponent<AudioSource>();
 
         Player = GameObject.Find("Player");
@@ -142,6 +142,7 @@ public class Doormove : MonoBehaviour
     //スイッチ式からの入力
     void SwichChange()
     {//  SwichChange
+        audioSource.PlayOneShot(doaSE);
         OpenFlag = true;
         
     }
@@ -161,6 +162,7 @@ public class Doormove : MonoBehaviour
     {
         
         CloseFlag = !CloseFlag;
+        audioSource.PlayOneShot(doaSE);
     }
     public void Pass()
     {
