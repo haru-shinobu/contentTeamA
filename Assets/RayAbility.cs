@@ -243,7 +243,7 @@ public class RayAbility : MonoBehaviour
             }
 
             if (Physics.Raycast(ray, out hit, raylong))
-            {                
+            {
                 reticleAction(hit.normal, hit.point);
                 if (AbilityNow != 1 && WarpParticleFlag)
                 {
@@ -326,13 +326,13 @@ public class RayAbility : MonoBehaviour
                                             if (StopObjectName == null)
                                             {
                                                 StopObjectName = hit.collider.gameObject.transform.root.name;
-                                               
+
                                                 AbilityStopEmissionFlag = true;
                                             }
                                             else
                                             {
                                                 StopObjectName = null;
-                                               
+
                                                 AbilityStopEmissionFlag = false;
                                             }
                                             MonocleCount--;
@@ -439,6 +439,24 @@ public class RayAbility : MonoBehaviour
                                         NextUse();
                                         MonocleCount--;
                                         Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
+                                    }
+                                }
+                                else
+                                if (hit.collider.gameObject.tag == "BreakFloor")
+                                {
+                                    AbilityTriggerTime += Time.deltaTime;
+                                    if (3 <= AbilityTriggerTime)
+                                    {
+                                        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
+                                        {
+                                            hit.collider.gameObject.SendMessage("CollBreak");
+                                            audioSource.PlayOneShot(hakaiSE);
+                                            AbilityNow = 0;
+                                            //AbilityPenalty(BreakAbilityPenaltyTime);
+                                            NextUse();
+                                            MonocleCount--;
+                                            Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
+                                        }
                                     }
                                 }
                                 else

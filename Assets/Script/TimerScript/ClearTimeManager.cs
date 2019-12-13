@@ -12,7 +12,7 @@ public class ClearTimeManager : MonoBehaviour
     public Text bestTime; // BestTimeテキストの変数
     public GameObject finishUI; // Finishオブジェクトの変数
     public Image Panel;                //透明度を変更するパネルのイメージ
-
+    
 
     float fadeSpeed = 0.01f;        //透明度が変わるスピードを管理
     
@@ -20,7 +20,6 @@ public class ClearTimeManager : MonoBehaviour
 
     public bool isFadeOut = false;  //フェードアウト処理の開始、完了を管理するフラグ
     public bool isFadeIn = false;   //フェードイン処理の開始、完了を管理するフラグ
-
     
 
     // Start is called before the first frame update

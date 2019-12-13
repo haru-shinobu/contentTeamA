@@ -46,7 +46,9 @@ public class clockScript : MonoBehaviour
     GameObject[] stopObjects;
     GameObject[] stopObjects2;
     GameObject[] stopObjects3;
+    GameObject[] breakObjects4;
     GameObject[] breakObjects;
+    GameObject[] breakObjects2;
     public Texture texture;
     public Texture texture2;
 
@@ -363,7 +365,9 @@ public class clockScript : MonoBehaviour
         /*GameObject[]*/ stopObjects  = GameObject.FindGameObjectsWithTag("move&Stop");
         /*GameObject[]*/ stopObjects2 = GameObject.FindGameObjectsWithTag("Floor&Stop");
         /*GameObject[]*/ breakObjects = GameObject.FindGameObjectsWithTag("Break&Wall");
+        /*GameObject[]*/ breakObjects2 = GameObject.FindGameObjectsWithTag("BreakItem");
         /*GameObject[]*/ stopObjects3 = GameObject.FindGameObjectsWithTag("SpiralSteps");
+        /*GameObject[]*/ breakObjects4 = GameObject.FindGameObjectsWithTag("BreakFloor");
         foreach (GameObject gameObj in warpObjects)
             gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));//r, g, b
         foreach (GameObject gameObj in stopObjects)
@@ -381,6 +385,18 @@ public class clockScript : MonoBehaviour
             gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
             gameObj.GetComponent<MeshRenderer>().material.SetTexture("_EmissionMap", texture2); 
         }
+        foreach (GameObject gameObj in breakObjects2)
+            if (gameObj.GetComponent<MeshRenderer>())
+                gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
+            else
+                gameObj.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
+        foreach (GameObject gameObj in breakObjects4)
+            if (gameObj.GetComponent<MeshRenderer>())
+                gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
+            else
+                gameObj.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
+        
+
     }
     //能力選択時の光る枠をセット、アクティブ
     void Tagname(int Anow)
