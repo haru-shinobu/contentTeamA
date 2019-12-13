@@ -65,9 +65,10 @@ public class PlayerController : MonoBehaviour
         PlayerWalk = false;
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerStay(Collider col)
     {
-        JumpVertical = 0;
+        if (!JumpEnd)
+            JumpVertical = 0;
         if (col.gameObject.tag == "Floor" ||
             col.gameObject.tag == "Floor&Stop"||
             col.gameObject.tag == "Move&Stop" ||
