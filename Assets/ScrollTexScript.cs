@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ScrollTexScript : MonoBehaviour
 {
     public GameObject WarldSpaceText;
@@ -14,6 +14,7 @@ public class ScrollTexScript : MonoBehaviour
     float mtime;
     BoxCollider box;
     bool Flag;
+    Canvas canvas;
     void Start()
     {
         moveFlag = false;
@@ -25,7 +26,8 @@ public class ScrollTexScript : MonoBehaviour
         qua = WarldSpaceText.transform.localRotation;
         scaler = WarldSpaceText.transform.localScale;
 
-        WarldSpaceText.GetComponent<Canvas>().enabled = false;
+        canvas = WarldSpaceText.GetComponent<Canvas>();
+        canvas.enabled = false;
         Flag = false;
         if (WarldSpaceText.transform.GetChild(0).GetComponent<BoxCollider>())
         {
@@ -51,11 +53,12 @@ public class ScrollTexScript : MonoBehaviour
         }
     }
     void TriggerOn()
-    {   audioSource.PlayOneShot(scrollSE);
+    {
+        audioSource.PlayOneShot(scrollSE);
+        canvas.enabled = true;
         WarldSpaceText.transform.position = gameObject.transform.position;
         WarldSpaceText.transform.localScale = new Vector3(0, 0, 0);
         WarldSpaceText.transform.rotation = Player.transform.localRotation;
-        WarldSpaceText.GetComponent<Canvas>().enabled = true;
         moveFlag = true;
         if (Flag)
         {
