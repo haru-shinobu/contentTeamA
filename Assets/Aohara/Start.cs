@@ -5,9 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class Start : MonoBehaviour
 {
+    AudioSource sound;
+    public AudioClip SentakuSE;
+    bool Flag;
+    float timer;
+    void Awake()
+    {
+        Flag = false;
+        timer = 0;
+        SentakuSE = (AudioClip)Resources.Load("sentaku-SE");
+        sound = gameObject.GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        if (Flag)
+            timer += Time.deltaTime;
+        if (timer > 0.5)
+            SceneManager.LoadScene("StageSelect");
+    }
+
 
     public void StartGame()
     {
-        SceneManager.LoadScene("StageSelect");//シーン名が入る
+        sound.PlayOneShot(SentakuSE);
+        Flag = true;
     }
 }
