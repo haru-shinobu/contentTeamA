@@ -11,6 +11,7 @@ public class TimeResetController : MonoBehaviour
         Stage3TimeManager.ResetTime();
         //カーソル表示・カーソルを画面内にロック
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Confined;
     }
 }
