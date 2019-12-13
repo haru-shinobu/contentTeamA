@@ -22,7 +22,8 @@ public class BollsScript : MonoBehaviour
             rb.AddTorque(gameObject.transform.forward * sousand * sousand * 10, ForceMode.Impulse);
             rb.AddForce(-Vector3.up * sousand * sousand, ForceMode.Impulse);
             pos = transform.position;
-        } }
+        }
+    }
 
     void OnTriggerEnter(Collider col)
     {
@@ -37,22 +38,26 @@ public class BollsScript : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
+            float posy = col.transform.position.y;
             col.transform.position += transform.position - pos - transform.localScale*0.9f;
+            col.transform.position = new Vector3(col.transform.position.x, posy, col.transform.position.z);
         }
     }
 
     void CollStop()
     {
         gameObject.transform.parent.gameObject.SendMessage("CollStop");
-        if (rb.velocity.x != 0 && rb.velocity.y != 0 && rb.velocity.z != 0)
+        if (!flag)
         {
             ni = rb.velocity;
             rb.velocity *= 0;
+            rb.isKinematic = true;
             flag = true;
         }
         else
         {
             rb.velocity = ni;
+            rb.isKinematic = false;
             flag = false;
         }
     }

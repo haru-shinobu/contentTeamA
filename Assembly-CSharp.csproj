@@ -153,7 +153,6 @@
     <Compile Include="Assets\SarfaceSkinChangeScript.cs" />
     <Compile Include="Assets\Script\EffectDeleteScript.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\CreditScene.cs" />
-    <Compile Include="Assets\Script\SceneChengeScript\FadeControllerScript.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\ResultScene.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\RuleScene.cs" />
     <Compile Include="Assets\Script\SceneChengeScript\Stage1Scene.cs" />
