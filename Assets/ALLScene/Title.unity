@@ -1681,7 +1681,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30B9\u30BF\u30FC\u30C8"
+  m_Text: 'aaaaaaa
+
+'
 --- !u!222 &2017381490
 CanvasRenderer:
   m_ObjectHideFlags: 0
