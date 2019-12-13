@@ -19,6 +19,7 @@ TagManager:
   - SpiralSteps
   - Explosion
   - BreakItem
+  - BreakFloor
   layers:
   - Default
   - TransparentFX

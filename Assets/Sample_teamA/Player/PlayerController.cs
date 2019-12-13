@@ -71,7 +71,8 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.tag == "Floor" ||
             col.gameObject.tag == "Floor&Stop"||
             col.gameObject.tag == "Move&Stop" ||
-            col.gameObject.tag == "StepFloor"
+            col.gameObject.tag == "StepFloor" ||
+            col.gameObject.tag == "BreakFloor"
             )
         {
             Ground = true;
@@ -84,9 +85,10 @@ public class PlayerController : MonoBehaviour
         if (!UseLongJump)
             JumpEnd = true;
         if (col.gameObject.tag == "Floor" ||
-            col.gameObject.tag == "Floor&Stop"||
-            col.gameObject.tag == "Move&Stop"||
-            col.gameObject.tag == "StepFloor"
+            col.gameObject.tag == "Floor&Stop" ||
+            col.gameObject.tag == "Move&Stop" ||
+            col.gameObject.tag == "StepFloor" ||
+            col.gameObject.tag == "BreakFloor"
             )
         {
             Sky = true;
