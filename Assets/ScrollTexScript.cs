@@ -5,6 +5,8 @@ using UnityEngine;
 public class ScrollTexScript : MonoBehaviour
 {
     public GameObject WarldSpaceText;
+    AudioSource audioSource;
+    public AudioClip scrollSE;
     GameObject Player;
     Vector3 pos, scaler;
     Quaternion qua;
@@ -15,6 +17,8 @@ public class ScrollTexScript : MonoBehaviour
     void Start()
     {
         moveFlag = false;
+        scrollSE = (AudioClip)Resources.Load("scroll-SE");
+        audioSource = gameObject.GetComponent<AudioSource>();
         tag = "Switch";
         Player = GameObject.FindWithTag("Player");
         pos = WarldSpaceText.transform.position;
@@ -35,6 +39,7 @@ public class ScrollTexScript : MonoBehaviour
         if (moveFlag)
         {
             mtime = Time.deltaTime;
+            
             WarldSpaceText.transform.position = Vector3.Lerp(WarldSpaceText.transform.position, pos, mtime);
             WarldSpaceText.transform.localScale = Vector3.Lerp(WarldSpaceText.transform.localScale, scaler, mtime);
             WarldSpaceText.transform.localRotation = Quaternion.Lerp(WarldSpaceText.transform.localRotation, qua, mtime);
@@ -46,7 +51,7 @@ public class ScrollTexScript : MonoBehaviour
         }
     }
     void TriggerOn()
-    {
+    {   audioSource.PlayOneShot(scrollSE);
         WarldSpaceText.transform.position = gameObject.transform.position;
         WarldSpaceText.transform.localScale = new Vector3(0, 0, 0);
         WarldSpaceText.transform.rotation = Player.transform.localRotation;
