@@ -442,21 +442,26 @@ public class RayAbility : MonoBehaviour
                                     }
                                 }
                                 else
-                                if (hit.collider.gameObject.tag == "BreakFloor")
                                 {
-                                    AbilityTriggerTime += Time.deltaTime;
-                                    if (3 <= AbilityTriggerTime)
+                                    if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
+                                        AbilityTriggerTime = 0;
+                                }
+                            }
+                            else
+                            if (hit.collider.gameObject.tag == "BreakFloor")
+                            {
+                                AbilityTriggerTime += Time.deltaTime;
+                                if (3 <= AbilityTriggerTime)
+                                {
+                                    if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                     {
-                                        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
-                                        {
-                                            hit.collider.gameObject.SendMessage("CollBreak");
-                                            audioSource.PlayOneShot(hakaiSE);
-                                            AbilityNow = 0;
-                                            //AbilityPenalty(BreakAbilityPenaltyTime);
-                                            NextUse();
-                                            MonocleCount--;
-                                            Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
-                                        }
+                                        hit.collider.gameObject.SendMessage("CollBreak");
+                                        audioSource.PlayOneShot(hakaiSE);
+                                        AbilityNow = 0;
+                                        //AbilityPenalty(BreakAbilityPenaltyTime);
+                                        NextUse();
+                                        MonocleCount--;
+                                        Instantiate(CFX_Explosion_B_Smoke, hit.point + (hit.normal * 3), Quaternion.identity);
                                     }
                                 }
                                 else

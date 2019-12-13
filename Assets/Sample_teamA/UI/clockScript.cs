@@ -46,9 +46,9 @@ public class clockScript : MonoBehaviour
     GameObject[] stopObjects;
     GameObject[] stopObjects2;
     GameObject[] stopObjects3;
-    GameObject[] breakObjects4;
     GameObject[] breakObjects;
     GameObject[] breakObjects2;
+    GameObject[] breakObjects4;
     public Texture texture;
     public Texture texture2;
 
@@ -395,7 +395,7 @@ public class clockScript : MonoBehaviour
                 gameObj.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
             else
                 gameObj.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", new Color(0, 0, 1));
-        
+
 
     }
     //能力選択時の光る枠をセット、アクティブ
@@ -541,10 +541,34 @@ public class clockScript : MonoBehaviour
             {
                 Emission(gameObj);
             }
+            foreach (GameObject gameObj in breakObjects2)
+            {
+                if (gameObj.GetComponent<MeshRenderer>())
+                    Emission(gameObj);
+            }
+            foreach (GameObject gameObj in breakObjects4)
+            {
+                if (gameObj.GetComponent<MeshRenderer>())
+                    Emission(gameObj);
+            }
         }
         else
         {
             foreach (GameObject gameObj in breakObjects)
+            {
+                if (gameObj.GetComponent<MeshRenderer>())
+                    gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                else
+                    gameObj.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+            }
+            foreach (GameObject gameObj in breakObjects2)
+            {
+                if (gameObj.GetComponent<MeshRenderer>())
+                    gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+                else
+                    gameObj.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+            }
+            foreach (GameObject gameObj in breakObjects4)
             {
                 if (gameObj.GetComponent<MeshRenderer>())
                     gameObj.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
