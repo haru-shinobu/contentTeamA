@@ -64,7 +64,7 @@ public class FPSCameraController : MonoBehaviour
             }
             else
             {
-                InputX = Input.GetAxisRaw("Mouse X");
+                InputX = -Input.GetAxisRaw("Mouse X");
                 InputY = -Input.GetAxisRaw("Mouse Y");
             }
         }
