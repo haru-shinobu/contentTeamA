@@ -512,7 +512,8 @@ public class clockScript : MonoBehaviour
                             mesh.material.EnableKeyword("_EMISSION");
                         }
                         if (gameObj.transform.name == "PendulumPoleShaft")
-                            gameObj.transform.GetComponent<PendulumShaft>().StopTexChange(texture, true, new Color(0, 1, 0.06542563f));
+                            gameObj.transform.GetComponent<
+                                PendulumShaft>().StopTexChange(texture, true, new Color(0, 1, 0.06542563f));
                     }
                 }
             }
