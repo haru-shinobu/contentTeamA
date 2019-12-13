@@ -86,6 +86,7 @@ public class ClearTimeManager : MonoBehaviour
                 PlayerPrefs.SetInt("BestScore", score);
             }
         }
+        // 何かしらKeyを押したら
         if (Input.anyKey)
         {
             alfa -= fadeSpeed;                //a)不透明度を徐々に下げる
