@@ -5,12 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class BackTitle : MonoBehaviour
 {
-
-    public void StartGame()
+    AudioSource sound;
+    public AudioClip SentakuSE;
+    bool Flag;
+    float timer;
+    void Awake()
     {
-        SceneManager.LoadScene("Title");//シーン名が入る
+        Flag = false;
+        timer = 0;
+        SentakuSE = (AudioClip)Resources.Load("scroll-SE");
+        sound = gameObject.GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        if (Flag)
+            timer += Time.deltaTime;
+        if (timer > 0.5)
+            SceneManager.LoadScene("Title");
     }
 
 
+    public void StartGame()
+    {
+        sound.PlayOneShot(SentakuSE);
+        Flag = true;
+    }
 }
-

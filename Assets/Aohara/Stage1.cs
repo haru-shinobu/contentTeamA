@@ -5,10 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class Stage1 : MonoBehaviour
 {
+    AudioSource sound;
+    public AudioClip SentakuSE;
+    bool Flag;
+    float timer;
+    void Awake()
+    {
+        Flag = false;
+        timer = 0;
+        SentakuSE = (AudioClip)Resources.Load("sentaku-SE");
+        sound = gameObject.GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        if (Flag)
+            timer += Time.deltaTime;
+        if (timer > 0.5)
+            SceneManager.LoadScene("Stage1");
+    }
+
+
     public void StartGame()
     {
-        GameObject.Find("SoundLoop").GetComponent<AudioSource>().enabled = false;
-        SceneManager.LoadScene("Stage1");//シーン名が入る
+        sound.PlayOneShot(SentakuSE);
+        Flag = true;
     }
 }
-
