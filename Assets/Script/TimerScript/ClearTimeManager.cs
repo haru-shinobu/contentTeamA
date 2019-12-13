@@ -29,6 +29,7 @@ public class ClearTimeManager : MonoBehaviour
         int t1 = Stage1TimeManager.GetTime();
         int t2 = Stage2TimeManager.GetTime();
         int t3 = Stage3TimeManager.GetTime();
+        
         ScoreTime = t1 + t2 + t3;
 
         if (PlayerPrefs.HasKey("ScoreTime"))
