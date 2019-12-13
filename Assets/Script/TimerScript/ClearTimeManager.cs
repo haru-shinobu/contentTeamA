@@ -11,8 +11,17 @@ public class ClearTimeManager : MonoBehaviour
     public Text finishTime;  // FinishTimeテキストの変数
     public Text bestTime; // BestTimeテキストの変数
     public GameObject finishUI; // Finishオブジェクトの変数
-    
+    public Image Panel;                //透明度を変更するパネルのイメージ
 
+
+    float fadeSpeed = 0.01f;        //透明度が変わるスピードを管理
+    
+    float red, blue, green, alfa;   //パネルの色、不透明度を管理
+
+    public bool isFadeOut = false;  //フェードアウト処理の開始、完了を管理するフラグ
+    public bool isFadeIn = false;   //フェードイン処理の開始、完了を管理するフラグ
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -34,12 +43,19 @@ public class ClearTimeManager : MonoBehaviour
         {
             bestScore = 9999;
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown)
+        alfa += fadeSpeed;         // b)不透明度を徐々にあげる
+        SetAlpha();               // c)変更した透明度をパネルに反映する
+        if (alfa >= 1)
+        {             // d)完全に不透明になったら処理を抜ける
+            isFadeOut = false;
+        }
+        if (isFadeOut == false)
         {
             finishUI.SetActive(true);
 
@@ -59,13 +75,26 @@ public class ClearTimeManager : MonoBehaviour
         }
     }
     
+    void SetAlpha()
+    {
+        Panel.color = new Color(red, green, blue, alfa);
+    }
+
     void ResultTime()
     {
         Debug.Log(ScoreTime);
     }
     public void OnRetry()
     {
-        SceneManager.LoadScene("Title");
-        
+        alfa -= fadeSpeed;                //a)不透明度を徐々に下げる
+        SetAlpha();                      //b)変更した不透明度パネルに反映する
+        if (alfa <= 0)
+        {                    //c)完全に透明になったら処理を抜ける
+            isFadeIn = false;
+        }
+        if (isFadeIn == false)
+        {
+            SceneManager.LoadScene("Title");
+        }
     }
 }
