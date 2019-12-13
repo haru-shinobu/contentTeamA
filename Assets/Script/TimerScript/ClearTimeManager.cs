@@ -29,7 +29,18 @@ public class ClearTimeManager : MonoBehaviour
         int t1 = Stage1TimeManager.GetTime();
         int t2 = Stage2TimeManager.GetTime();
         int t3 = Stage3TimeManager.GetTime();
-        ScoreTime = t1 + t2 + t3;
+        if(t1 > 0)
+        {
+            ScoreTime = t1;
+        }
+        else if (t2 > 0)
+        {
+            ScoreTime = t2;
+        }
+        else if (t3 > 0)
+        {
+            ScoreTime = t3;
+        }
 
         if (PlayerPrefs.HasKey("ScoreTime"))
         {
@@ -40,7 +51,7 @@ public class ClearTimeManager : MonoBehaviour
         }
         else
         {
-            bestScore = 9999;
+            bestScore = 999;
         }
         
     }
@@ -72,6 +83,19 @@ public class ClearTimeManager : MonoBehaviour
                 PlayerPrefs.SetInt("BestScore", score);
             }
         }
+        if (Input.anyKey)
+        {
+            alfa -= fadeSpeed;                //a)不透明度を徐々に下げる
+            SetAlpha();                      //b)変更した不透明度パネルに反映する
+            if (alfa <= 0)
+            {                    //c)完全に透明になったら処理を抜ける
+                isFadeIn = false;
+            }
+            if (isFadeIn == false)
+            {
+                SceneManager.LoadScene("Title");
+            }
+        }
     }
     
     void SetAlpha()
@@ -83,6 +107,7 @@ public class ClearTimeManager : MonoBehaviour
     {
         Debug.Log(ScoreTime);
     }
+
     public void OnRetry()
     {
         alfa -= fadeSpeed;                //a)不透明度を徐々に下げる
