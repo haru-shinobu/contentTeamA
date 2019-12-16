@@ -99,6 +99,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+        float esc =Input.GetAxisRaw("Cancel");
+        if (esc != 0)
+            Setting.GAMEOVER();
         //画面外落下でシーンリロード.ResetPosから再開
 
         if (transform.position.y < -50)
@@ -127,11 +131,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        //bool pobs = Input.GetKeyDown(KeyCode.Space);
+        float pobs = Input.GetAxisRaw("Jump");
         if (!PlayerAbility)//能力使用時の入力制限
         {
             //EditのProjectSettings...でInput項目Verticalをupとｗ以外消去しておく
             inputVertical = Input.GetAxisRaw("Vertical");
-            JumpProcess();
+            JumpProcess(pobs);
         }
         else
         {
@@ -141,7 +147,8 @@ public class PlayerController : MonoBehaviour
                 ReStartPosMem();
             }
         }
-        FallProcess();
+        if (!Ground)
+            FallProcess();
 
 
 
@@ -194,52 +201,52 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void JumpProcess()
+    private void JumpProcess(float pobs)
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Ground)
+        if (pobs != 0 && Ground) 
         {
             JumpVertical = inputVertical;
             Ground = false;
-            JumpTime = 1;
-            if (UseLongJump)
-            {
-                rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
-                GetComponent<Rigidbody>().useGravity = false;
-                JumpEnd = false;
-            }
-            else
-            {
-                rb.AddForce(transform.up * JumpForce*1.5f, ForceMode.Impulse);
-                JumpEnd = true;
-            }
+            //JumpTime = 1;
+            //if (UseLongJump)
+            //{
+            //    rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
+            //    GetComponent<Rigidbody>().useGravity = false;
+            //    JumpEnd = false;
+            //}
+            //else
+            //{
+            rb.AddForce(transform.up * JumpForce * 1.5f, ForceMode.Impulse);
+            JumpEnd = true;
+            //}
         }
         if (Sky && Ground)
             JumpVertical = inputVertical;
     }
     private void FallProcess()
     {
-        if (UseLongJump)
-        {
-            if (!Ground && !JumpEnd)
-            {
-                JumpTime -= Time.deltaTime;
-                if (JumpTime <= 0)
-                {
-                    JumpEnd = true;
-                    JumpTime = 1;
-                }
-            }
-            else
-            {
-                if (!JumpEnd)
-                    JumpEnd = true;
-            }
-            if (Input.GetKeyUp(KeyCode.Space) || JumpEnd)
-            {
-                JumpEnd = true;
-                GetComponent<Rigidbody>().useGravity = true;
-            }
-        }
+    //    if (UseLongJump)
+    //    {
+    //        if (!Ground && !JumpEnd)
+    //        {
+    //            JumpTime -= Time.deltaTime;
+    //            if (JumpTime <= 0)
+    //            {
+    //                JumpEnd = true;
+    //                JumpTime = 1;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (!JumpEnd)
+    //                JumpEnd = true;
+    //        }
+    //        if (Input.GetKeyUp(KeyCode.Space) || JumpEnd)
+    //        {
+    //            JumpEnd = true;
+    //            GetComponent<Rigidbody>().useGravity = true;
+    //        }
+    //    }
         /*
         else
         {

@@ -22,7 +22,10 @@ public class Stage1 : MonoBehaviour
         if (Flag)
             timer += Time.deltaTime;
         if (timer > 0.5)
+        {
+            GameObject.Find("SoundLoop").GetComponent<AudioSource>().Stop();
             SceneManager.LoadScene("Stage1");
+        }
     }
 
 

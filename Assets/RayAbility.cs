@@ -44,6 +44,8 @@ public class RayAbility : MonoBehaviour
     public GameObject WarpGeat;
     CursorColtroll carsor;
 
+    int chargetime;
+
     public float AbilityChengeMenuTime; //メニュー表示用。
     public int AbilityNum;              //能力いくつもってるか
     float KeyQTime = 0;                 //能力メニュー開くための長押し判定用
@@ -67,6 +69,7 @@ public class RayAbility : MonoBehaviour
     public bool AbilityStopEmissionFlag;
     void Start()
     {
+        chargetime = 1;
         audioSource = GetComponent<AudioSource>();
         MouseControl = GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MouseMode;
         CFX2_PickupDiamond2 = (GameObject)Resources.Load("CFX2_PickupDiamond2");
@@ -281,7 +284,7 @@ public class RayAbility : MonoBehaviour
                                     WarpParticleFlag = true;
                                 }
 
-                                if (3 <= AbilityTriggerTime)
+                                if (chargetime <= AbilityTriggerTime)
                                 {
                                     if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                     {
@@ -316,7 +319,7 @@ public class RayAbility : MonoBehaviour
                                 if (hit.collider.gameObject.tag == "move&Stop")
                                 {
                                     AbilityTriggerTime += Time.deltaTime;
-                                    if (3 <= AbilityTriggerTime)
+                                    if (chargetime <= AbilityTriggerTime)
                                     {
                                         if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                         {
@@ -348,7 +351,7 @@ public class RayAbility : MonoBehaviour
                                 else if (hit.collider.gameObject.tag == "Floor&Stop")
                                 {
                                     AbilityTriggerTime += Time.deltaTime;
-                                    if (3 <= AbilityTriggerTime)
+                                    if (chargetime <= AbilityTriggerTime)
                                     {
                                         if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                         {
@@ -395,7 +398,7 @@ public class RayAbility : MonoBehaviour
                             if (hit.collider.gameObject.tag == "Break&Wall")
                             {
                                 AbilityTriggerTime += Time.deltaTime;
-                                if (3 <= AbilityTriggerTime)
+                                if (chargetime <= AbilityTriggerTime)
                                 {
                                     if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                     {
@@ -418,7 +421,7 @@ public class RayAbility : MonoBehaviour
                             if (hit.collider.gameObject.tag == "BreakItem")
                             {
                                 AbilityTriggerTime += Time.deltaTime;
-                                if (3 <= AbilityTriggerTime)
+                                if (chargetime <= AbilityTriggerTime)
                                 {
                                     if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                     {
@@ -451,7 +454,7 @@ public class RayAbility : MonoBehaviour
                             if (hit.collider.gameObject.tag == "BreakFloor")
                             {
                                 AbilityTriggerTime += Time.deltaTime;
-                                if (3 <= AbilityTriggerTime)
+                                if (chargetime <= AbilityTriggerTime)
                                 {
                                     if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                     {
@@ -548,13 +551,13 @@ public class RayAbility : MonoBehaviour
         switch (AbilityNow) {
             case 0: break;
             case 1:
-                CircleWarp.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
+                CircleWarp.GetComponent<Image>().fillAmount = 1.0f / chargetime * ATime;
                 break;
             case 2:
-                CircleStop.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
+                CircleStop.GetComponent<Image>().fillAmount = 1.0f / chargetime * ATime;
                 break;
             case 3:
-                CircleBreak.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
+                CircleBreak.GetComponent<Image>().fillAmount = 1.0f / chargetime * ATime;
                 break;
             }
     }
