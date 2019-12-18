@@ -46,7 +46,7 @@ public class monoclescript : MonoBehaviour
     }
     void OnTriggerEnter(Collider col)
     {
-        if (!Flag)
+        if (!Rays.MonocleCheck())
         {
             if (col.tag == "Player")
             {
