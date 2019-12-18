@@ -760,7 +760,7 @@ PrefabInstance:
     - target: {fileID: 3288469546574199962, guid: 64b68bc93146fe043ba27ad26321cf5b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1185.7
+      value: -1216
       objectReference: {fileID: 0}
     - target: {fileID: 3288469546574199962, guid: 64b68bc93146fe043ba27ad26321cf5b,
         type: 3}
@@ -15177,6 +15177,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7762874065494249936, guid: a181604670e61454ba23bf971db1612d,
+        type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7762874065494249936, guid: a181604670e61454ba23bf971db1612d,
+        type: 3}
+      propertyPath: m_FillOrigin
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7361201998482379022, guid: a181604670e61454ba23bf971db1612d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15287,16 +15297,6 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: 9dc7e810a87b444ab96919f3215c2fe5, type: 2}
-    - target: {fileID: 7762874065494249936, guid: a181604670e61454ba23bf971db1612d,
-        type: 3}
-      propertyPath: m_Type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7762874065494249936, guid: a181604670e61454ba23bf971db1612d,
-        type: 3}
-      propertyPath: m_FillOrigin
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a181604670e61454ba23bf971db1612d, type: 3}
 --- !u!64 &3942692212560458823
