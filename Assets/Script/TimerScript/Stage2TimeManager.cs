@@ -38,10 +38,6 @@ public class Stage2TimeManager : MonoBehaviour
                     ClearTime2 = (int)LimitedTime;
                 }
             }
-            else
-            {
-                Debug.Log("GameOver");
-            }
             gameObject.transform.GetComponent<GameTimerDirector>().NowTime = LimitedTime;
         }
     }
