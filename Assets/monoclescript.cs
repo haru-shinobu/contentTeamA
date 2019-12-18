@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,12 +46,15 @@ public class monoclescript : MonoBehaviour
     }
     void OnTriggerEnter(Collider col)
     {
-        if(col.tag == "Player")
+        if (!Flag)
         {
-            Flag = true;
-            Rays.SendMessage("GetMonocle");
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-            gameObject.transform.parent = FPSCamera.transform;
+            if (col.tag == "Player")
+            {
+                Flag = true;
+                Rays.SendMessage("GetMonocle");
+                gameObject.GetComponent<BoxCollider>().enabled = false;
+                gameObject.transform.parent = FPSCamera.transform;
+            }
         }
     }
 }

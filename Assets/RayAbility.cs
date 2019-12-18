@@ -25,6 +25,7 @@ public class RayAbility : MonoBehaviour
     public GameObject CircleWarp;  //チャージカーソル用
     public GameObject CircleStop;  //チャージカーソル用
     public GameObject CircleBreak; //チャージカーソル用
+    public GameObject CircleReset; //チャージカーソル用
     //public GameObject CoolTimeCircle;//クールタイム表示用
     Image coolcircle;
 
@@ -65,6 +66,7 @@ public class RayAbility : MonoBehaviour
 
     public bool EyeLongFlag;//アイテム取ったときレイを伸ばす。
     private int MonocleCount;
+    Canvas ECanvas;
 
     public bool AbilityStopEmissionFlag;
     void Start()
@@ -83,6 +85,7 @@ public class RayAbility : MonoBehaviour
         CircleWarp  = GameObject.Find("WarpCircleImage");
         CircleStop  = GameObject.Find("StopCircleImage");
         CircleBreak = GameObject.Find("BreakCircleImage");
+        CircleReset = GameObject.Find("ResetCircleImage");
         reticleWarp = GameObject.Find("WarpImage");
         reticleStop = GameObject.Find("StopImage");
         reticleBreak = GameObject.Find("BreakImage");
@@ -95,6 +98,9 @@ public class RayAbility : MonoBehaviour
         Ability4KEYFlag = false;
         coolcircle = /*CoolTimeCircle*/GameObject.Find("Rechage").GetComponent<Image>();
         MonocleCount = 0;
+        ECanvas = Instantiate((GameObject)Resources.Load("ECanvas")).GetComponent<Canvas>();
+        ECanvas.enabled = false;
+
     }
 
     // Update is called once per frame
@@ -115,7 +121,7 @@ public class RayAbility : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
             KeyQTime = 0;
         else
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             MouseButtonFlag = true;
             KeyQTime = 0;
@@ -179,7 +185,7 @@ public class RayAbility : MonoBehaviour
         if (AbilityNow < 0) AbilityNow = AbilityNum;
 
 
-        if (Input.GetKeyUp(KeyCode.Q) || Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(KeyCode.Q) || Input.GetMouseButtonUp(1))
         {
             KeyQTime = 0;
             AbilityTriggerTime = 0;
@@ -234,7 +240,7 @@ public class RayAbility : MonoBehaviour
             float raylong;
             if (0 == AbilityNow)
             {
-                raylong = Player.transform.localScale.x * 2;
+                raylong = Player.transform.localScale.x * 6;
             }
             else
             {
@@ -253,6 +259,7 @@ public class RayAbility : MonoBehaviour
                     Destroy(Instance);
                     Destroy(InstanceGeat);
                 }
+                ECanvas.enabled = false;
                 switch (AbilityNow)
                 {
                     case 0:
@@ -260,14 +267,17 @@ public class RayAbility : MonoBehaviour
                             if (hit.collider.gameObject.tag == "Switch")
                             {
                                 carsor.handflag = true;
+                                ECanvas.enabled = true;
                                 if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
                                 {
                                     hit.collider.gameObject.SendMessage("TriggerOn");
                                     AbilityNow = 0;
+                                    ECanvas.enabled = false;
                                 }
                             }
                             else
                             {
+                                ECanvas.enabled = false;
                                 carsor.handflag = false;
                             }
                         }
@@ -559,7 +569,10 @@ public class RayAbility : MonoBehaviour
             case 3:
                 CircleBreak.GetComponent<Image>().fillAmount = 1.0f / chargetime * ATime;
                 break;
-            }
+            case 4:
+                CircleReset.GetComponent<Image>().fillAmount = 1.0f / 3.0f * ATime;
+                break;
+        }
     }
 
     //能力発動時のペナルティー用
@@ -596,6 +609,10 @@ public class RayAbility : MonoBehaviour
             return true;
         EyeLongFlag = false;
         return false;
+    }
+    public bool MonocleCheck()
+    {
+        return EyeLongFlag;
     }
 }
 
