@@ -99,10 +99,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
-        float esc =Input.GetAxisRaw("Cancel");
-        if (esc != 0)
-            Setting.GAMEOVER();
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         //画面外落下でシーンリロード.ResetPosから再開
 
         if (transform.position.y < -50)

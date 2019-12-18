@@ -48,7 +48,10 @@ public class StaircaseScript : MonoBehaviour
     }
     void Update()
     {
-        
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (Flag)
         {
             for (int num = 0; num < CreateStepNum; num++)

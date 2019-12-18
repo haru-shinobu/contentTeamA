@@ -30,6 +30,10 @@ public class footpointScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         transform.position = Player.transform.position + Distance;
         transform.localRotation = Player.transform.localRotation * new Quaternion(1,0,0,1);
         if (PController.PlayerWalk)

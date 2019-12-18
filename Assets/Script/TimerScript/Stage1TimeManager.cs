@@ -19,6 +19,10 @@ public class Stage1TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (scene == nowscene)
         {
             LimitedTime -= Time.deltaTime;

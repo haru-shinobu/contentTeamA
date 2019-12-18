@@ -39,7 +39,10 @@ public class ElevetorScript : MonoBehaviour
 
     void Update()
     {
-
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (TimeStopFlag)
         {
             time += Time.deltaTime * 50;

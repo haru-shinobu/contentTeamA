@@ -25,6 +25,10 @@ public class DizableOnScript : MonoBehaviour
 
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (Flag)
         {
             clossover -= Time.deltaTime * 0.1f;

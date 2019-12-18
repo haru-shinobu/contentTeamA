@@ -72,6 +72,10 @@ public class Doormove : MonoBehaviour
     
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         int speed = 50;
 
         Quaternion rta = DoorRight.transform.localRotation;

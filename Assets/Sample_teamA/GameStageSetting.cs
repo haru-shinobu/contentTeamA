@@ -76,17 +76,17 @@ public class GameStageSetting : MonoBehaviour
         {
             case "Stage1":
                 NowStageTimeLimit = Stage1TimeLimit;
-                this.transform.gameObject.AddComponent<Stage1TimeManager>().LimitTime(Stage1TimeLimit, SceneManager.GetActiveScene().name);
+                this.transform.gameObject.AddComponent<Stage1TimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 gameObject.GetComponent<GameTimerDirector>().sqriptname= "Stage1TimeManager";
                 break;
             case "Stage2":
                 NowStageTimeLimit = Stage2TimeLimit;
-                this.transform.gameObject.AddComponent<Stage2TimeManager>().LimitTime(Stage2TimeLimit, SceneManager.GetActiveScene().name);
+                this.transform.gameObject.AddComponent<Stage2TimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 gameObject.GetComponent<GameTimerDirector>().sqriptname = "Stage2TimeManager";
                 break;
             case "Stage3":
                 NowStageTimeLimit = Stage3TimeLimit;
-                this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(Stage3TimeLimit, SceneManager.GetActiveScene().name);
+                this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 gameObject.GetComponent<GameTimerDirector>().sqriptname = "Stage3TimeManager";
                 break;
             case "SubScene":

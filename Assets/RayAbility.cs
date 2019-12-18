@@ -106,6 +106,10 @@ public class RayAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         AbilitycodeQ();
         AbilityAction();
     }

@@ -22,6 +22,10 @@ public class monoclescript : MonoBehaviour
 
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (Flag)
         {//取得時
             if (Rays.AbilityNow != 0 && Rays.AbilityNow != 4)

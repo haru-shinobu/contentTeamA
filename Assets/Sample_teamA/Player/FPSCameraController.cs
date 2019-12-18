@@ -13,6 +13,8 @@ public class FPSCameraController : MonoBehaviour
     float AngleY;
     float AngleX;
     Vector3 goalpos;
+    GameObject PauseCanvas;
+    GameObject PauseInstant;
     void Start()
     {
         Player = GameObject.Find("Player");
@@ -24,6 +26,7 @@ public class FPSCameraController : MonoBehaviour
         MouseControl = GameObject.Find("GameMaster").GetComponent<GameStageSetting>().MouseMode;
         CamControllFlag = true;
         //goalpos = GameObject.Find("GoalFootSwitch").transform.position;
+        PauseCanvas = (GameObject)Resources.Load("PauseCanvas");
     }
     // Update is called once per frame
     void Update()
@@ -34,6 +37,22 @@ public class FPSCameraController : MonoBehaviour
 
         float InputX = 0;
         float InputY = 0;
+
+        if (Input.GetKeyDown("p"))
+        {
+            if (PauseInstant == null)
+            {
+                PauseInstant = Instantiate(PauseCanvas);
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Destroy(PauseInstant);
+                Time.timeScale = 1f;
+            }
+        }
         if (CamControllFlag)
         {
             if (!MouseControl)

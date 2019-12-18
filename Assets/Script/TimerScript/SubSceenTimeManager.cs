@@ -19,7 +19,10 @@ public class SubSceenTimeManager : MonoBehaviour
     void Update()
     {
         //クリアから時間停止処理及び、タイムオーバーの時の時間リセットしなければ・・・
-
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (scene == nowscene)
         {
             LimitedTime -= Time.deltaTime;
