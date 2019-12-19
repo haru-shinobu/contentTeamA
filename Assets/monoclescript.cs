@@ -30,7 +30,7 @@ public class monoclescript : MonoBehaviour
         {//取得時
             if (Rays.AbilityNow != 0 && Rays.AbilityNow != 4)
             {
-                gameObject.transform.position = FPSCamera.transform.position + FPSCamera.transform.right * -4 + FPSCamera.transform.up * 3 + FPSCamera.transform.forward * 3;
+                gameObject.transform.position = FPSCamera.transform.position + FPSCamera.transform.right * -4 + FPSCamera.transform.up * 3 + FPSCamera.transform.forward * 4;
                 gameObject.transform.rotation = FPSCamera.transform.rotation;
                 if (!Rays.LostMonocle())
                     Destroy(gameObject);

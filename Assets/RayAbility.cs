@@ -497,6 +497,7 @@ public class RayAbility : MonoBehaviour
             }
             else
             {
+                ECanvas.enabled = false;
                 carsor.handflag = false;
                 AbilityTriggerTime = 0;
                 reticleNoAction();
