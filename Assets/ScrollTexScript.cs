@@ -44,7 +44,7 @@ public class ScrollTexScript : MonoBehaviour
         }
         if (moveFlag)
         {
-            mtime = Time.deltaTime * 0.1f;
+            mtime = Time.deltaTime * 0.5f;
             
             WarldSpaceText.transform.position = Vector3.Lerp(WarldSpaceText.transform.position, pos, mtime);
             WarldSpaceText.transform.localScale = Vector3.Lerp(WarldSpaceText.transform.localScale, scaler, mtime);
