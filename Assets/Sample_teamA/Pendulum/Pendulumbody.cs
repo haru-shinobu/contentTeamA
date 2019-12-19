@@ -37,6 +37,10 @@ public class Pendulumbody : MonoBehaviour
 
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         targetPos = Shaft.transform.position;
         transform.position = targetPos - Shaft.transform.up * (High*0.8f);
     }

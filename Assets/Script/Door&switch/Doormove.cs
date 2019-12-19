@@ -12,6 +12,7 @@ public class Doormove : MonoBehaviour
     public GameObject ThruWallReverse;
     bool OpenFlag;
     bool CloseFlag;
+    bool DoorCheckFlag;
     bool thruFlag;
     float rot;
     int Timer;
@@ -67,11 +68,16 @@ public class Doormove : MonoBehaviour
         Vector3 rotangle = Rota.eulerAngles;
 
         TimeDirec = GameObject.Find("GameMaster").GetComponent<GameTimerDirector>();
+        DoorCheckFlag = false;
     }
 
     
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         int speed = 50;
 
         Quaternion rta = DoorRight.transform.localRotation;
@@ -81,7 +87,7 @@ public class Doormove : MonoBehaviour
 
         if (OpenFlag)
         {
-            
+            DoorCheckFlag = true;
             if (RoAngle.y < 90)
                 DoorRight.transform.RotateAround(posR, transform.up, Time.deltaTime * speed);
             if (270 < LoAngle.y || LoAngle.y < 1)
@@ -166,7 +172,11 @@ public class Doormove : MonoBehaviour
     }
     public void Pass()
     {
-        Timer = 90;
+        if (DoorCheckFlag)
+        {
+            Timer = 90;
+            DoorCheckFlag = false;
+        }
     }
     public void ThruPass(bool bFlag)
     {

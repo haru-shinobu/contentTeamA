@@ -11,7 +11,7 @@ public class FallDown : MonoBehaviour
     bool GravityFlag;
     Rigidbody rb;
     public bool ElevatorFlag;
-    
+    Vector3 vel;
     void Start()
     {
         tag = "Floor&Stop";
@@ -20,11 +20,12 @@ public class FallDown : MonoBehaviour
         rb = gameObject.AddComponent<Rigidbody>();
         gameObject.GetComponent<BoxCollider>().isTrigger = true;
         gameObject.AddComponent<BoxCollider>();
-        GetComponent<Rigidbody>().useGravity = true;
-        GetComponent<Rigidbody>().isKinematic = true;
+        rb.useGravity = true;
+        rb.isKinematic = true;
+        vel = new Vector3(0, 0, 0);
         //GetComponent<Rigidbody>().freezeRotation = true;
         
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | 
+        rb.constraints = RigidbodyConstraints.FreezePositionX | 
             RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         GravityFlag = false;
     }
@@ -34,7 +35,10 @@ public class FallDown : MonoBehaviour
         if (Flag)
         {
             if (col.gameObject.tag == "Player")
+            {
                 CountTimer = FallStartTime;
+                Flag = false;
+            }
         }
         if (col.gameObject.tag != "Player")
         {
@@ -46,20 +50,40 @@ public class FallDown : MonoBehaviour
 
     void Update()
     {
-        if (0 < CountTimer)
+        if (Mathf.Approximately(Time.timeScale, 0f))
         {
-            CountTimer -= Time.deltaTime;
-            if (CountTimer <= 0)
+            return;
+        }
+        if (Flag)
+        {
+            if (0 < CountTimer)
             {
-                GravityFlag = true;
-                GetComponent<Rigidbody>().isKinematic = false;
+                CountTimer -= Time.deltaTime;
+                if (CountTimer <= 0)
+                {
+                    GravityFlag = true;
+                    rb.isKinematic = false;
+                }
+            }
+            if (GravityFlag)
+            {
+                rb.AddForce(-transform.up * 100, ForceMode.Force);
             }
         }
-        if (GravityFlag)
-            rb.AddForce(-transform.up * 100, ForceMode.Force);
+        else
+        {
+            if (GravityFlag)
+            {
+                rb.velocity *= 0;
+            }
+        }
     }
     void CollStop()
     {
         Flag = !Flag;
+        if (GravityFlag)
+            vel = rb.velocity;
+        else
+            rb.velocity = vel;
     }
 }

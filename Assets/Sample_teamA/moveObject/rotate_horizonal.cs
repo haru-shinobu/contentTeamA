@@ -21,8 +21,12 @@ public class rotate_horizonal : MonoBehaviour
     
     void Update()
     {
-        if(!Flag)
-        transform.Rotate (new Vector3(1,0,0));
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
+        if (!Flag)
+            transform.Rotate(new Vector3(1, 0, 0));
     }
 
 

@@ -92,7 +92,11 @@ public class MoveUpDownFloor : MonoBehaviour
 
     void Update()
     {
-        if(MoveFlag)
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
+        if (MoveFlag)
         if (TimeStopFlag)
         {
             time += Time.deltaTime * 50;

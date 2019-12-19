@@ -26,6 +26,10 @@ public class BollMakerScript : MonoBehaviour
 
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (Flag) {
             if (RemakeFlag)
                 TimeCountB += Time.deltaTime;

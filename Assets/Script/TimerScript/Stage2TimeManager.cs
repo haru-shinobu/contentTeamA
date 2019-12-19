@@ -24,6 +24,10 @@ public class Stage2TimeManager : MonoBehaviour
          * したほうがいいかも？
          * あるいはプレイヤーの初期操作以降…
          */
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (scene == nowscene)
         {
                 LimitedTime -= Time.deltaTime;
@@ -33,10 +37,6 @@ public class Stage2TimeManager : MonoBehaviour
                 {
                     ClearTime2 = (int)LimitedTime;
                 }
-            }
-            else
-            {
-                Debug.Log("GameOver");
             }
             gameObject.transform.GetComponent<GameTimerDirector>().NowTime = LimitedTime;
         }

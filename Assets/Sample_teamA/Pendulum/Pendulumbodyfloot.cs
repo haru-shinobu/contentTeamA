@@ -31,6 +31,10 @@ public class Pendulumbodyfloot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         transform.position = transform.root.GetChild(0).GetChild(2).gameObject.transform.position;
         if (Flag)
             transform.GetChild(0).gameObject.transform.rotation = transform.rotation;
