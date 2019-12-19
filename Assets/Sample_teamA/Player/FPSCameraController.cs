@@ -95,8 +95,8 @@ public class FPSCameraController : MonoBehaviour
         }
         float MaxLimit = 10, MinLimit = 360 - MaxLimit;
 
-        float deltaAngleX = InputX * Time.deltaTime * 200;
-        float deltaAngleY = InputY * Time.deltaTime * 200;
+        float deltaAngleX = InputX * Time.deltaTime * 1000;
+        float deltaAngleY = InputY * Time.deltaTime * 1000;
         AngleX += deltaAngleX;
         AngleY += deltaAngleY;
         //積算角度を制限内にクランプする
