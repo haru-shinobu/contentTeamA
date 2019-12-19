@@ -409,6 +409,7 @@ public class RayAbility : MonoBehaviour
                         break;
                     case 3: //break
                         {
+                            Debug.Log(hit.collider.gameObject.name);
                             if (hit.collider.gameObject.tag == "Break&Wall")
                             {
                                 AbilityTriggerTime += Time.deltaTime;
