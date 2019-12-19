@@ -268,6 +268,7 @@ public class RayAbility : MonoBehaviour
                 {
                     case 0:
                         {
+                            Debug.Log(hit.collider.gameObject.name);
                             if (hit.collider.gameObject.tag == "Switch")
                             {
                                 carsor.handflag = true;
