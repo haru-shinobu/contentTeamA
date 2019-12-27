@@ -106,6 +106,10 @@ public class RayAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         AbilitycodeQ();
         AbilityAction();
     }
@@ -264,6 +268,7 @@ public class RayAbility : MonoBehaviour
                 {
                     case 0:
                         {
+                            Debug.Log(hit.collider.gameObject.name);
                             if (hit.collider.gameObject.tag == "Switch")
                             {
                                 carsor.handflag = true;
@@ -405,6 +410,7 @@ public class RayAbility : MonoBehaviour
                         break;
                     case 3: //break
                         {
+                            Debug.Log(hit.collider.gameObject.name);
                             if (hit.collider.gameObject.tag == "Break&Wall")
                             {
                                 AbilityTriggerTime += Time.deltaTime;
@@ -493,6 +499,7 @@ public class RayAbility : MonoBehaviour
             }
             else
             {
+                ECanvas.enabled = false;
                 carsor.handflag = false;
                 AbilityTriggerTime = 0;
                 reticleNoAction();

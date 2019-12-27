@@ -25,9 +25,13 @@ public class ScrollScript : MonoBehaviour
     }
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (moveFlag)
         {
-            mtime = Time.deltaTime;
+            mtime = Time.deltaTime * 0.5f;
             WarldSpacePaper.transform.position = Vector3.Lerp(WarldSpacePaper.transform.position, pos, mtime);
             WarldSpacePaper.transform.localScale = Vector3.Lerp(WarldSpacePaper.transform.localScale, scaler, mtime);
             WarldSpacePaper.transform.localRotation = Quaternion.Lerp(WarldSpacePaper.transform.localRotation, qua, mtime);

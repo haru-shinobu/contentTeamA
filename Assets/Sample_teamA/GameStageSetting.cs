@@ -45,6 +45,7 @@ public class GameStageSetting : MonoBehaviour
     public GameObject Warpgeat;
     //リロード用
     public static int ReLoadPlayerPos;
+    public static float ResetLimitTime;
     //ステージクリアからリザルトへ飛ぶときの待ち時間
     public int ClearLoadWaitTime;
     public int GameOverLoadWaitTime;
@@ -62,7 +63,7 @@ public class GameStageSetting : MonoBehaviour
             audioSource.PlayOneShot(yarinaosiSE);
         }
     
-        ResetFlag = false;
+        
         Destroy(GameObject.Find("Directional Light"));//デフォルト名の環境光を消去
         RenderSetting_Gradient();//環境光設定
         Ability();//能力設定
@@ -75,27 +76,42 @@ public class GameStageSetting : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "Stage1":
-                NowStageTimeLimit = Stage1TimeLimit;
-                this.transform.gameObject.AddComponent<Stage1TimeManager>().LimitTime(Stage1TimeLimit, SceneManager.GetActiveScene().name);
+                if (!ResetFlag)
+                    NowStageTimeLimit = Stage1TimeLimit;
+                else
+                    NowStageTimeLimit = (int)ResetLimitTime;
+                this.transform.gameObject.AddComponent<Stage1TimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 gameObject.GetComponent<GameTimerDirector>().sqriptname= "Stage1TimeManager";
                 break;
             case "Stage2":
-                NowStageTimeLimit = Stage2TimeLimit;
-                this.transform.gameObject.AddComponent<Stage2TimeManager>().LimitTime(Stage2TimeLimit, SceneManager.GetActiveScene().name);
+                if (!ResetFlag)
+                    NowStageTimeLimit = Stage2TimeLimit;
+                else
+                    NowStageTimeLimit = (int)ResetLimitTime;
+
+                this.transform.gameObject.AddComponent<Stage2TimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 gameObject.GetComponent<GameTimerDirector>().sqriptname = "Stage2TimeManager";
                 break;
             case "Stage3":
-                NowStageTimeLimit = Stage3TimeLimit;
-                this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(Stage3TimeLimit, SceneManager.GetActiveScene().name);
+                if (!ResetFlag)
+                    NowStageTimeLimit = Stage3TimeLimit;
+                else
+                    NowStageTimeLimit = (int)ResetLimitTime;
+
+                this.transform.gameObject.AddComponent<Stage3TimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 gameObject.GetComponent<GameTimerDirector>().sqriptname = "Stage3TimeManager";
                 break;
             case "SubScene":
-                NowStageTimeLimit = 65;
+                if (!ResetFlag)
+                    NowStageTimeLimit = 65;
+                else
+                    NowStageTimeLimit = (int)ResetLimitTime;
+
                 this.transform.gameObject.AddComponent<SubSceenTimeManager>().LimitTime(NowStageTimeLimit, SceneManager.GetActiveScene().name);
                 gameObject.GetComponent<GameTimerDirector>().sqriptname = "SubSceenTimeManager";
                 break;
         }
-
+        ResetFlag = false;
     }
 
     void Setting()
@@ -153,6 +169,7 @@ public class GameStageSetting : MonoBehaviour
     public void ReStartScene()
     {
         ResetFlag = ResetStatus;
+        ResetLimitTime = gameObject.GetComponent<GameTimerDirector>().NowTime;
         switch (SceneManager.GetActiveScene().name)
         {
             case "SubScene":
@@ -241,5 +258,6 @@ public class GameStageSetting : MonoBehaviour
         gameObject.GetComponent<CursorColtroll>().enabled = false;
         gameObject.GetComponent<RayAbility>().enabled = false;
         Destroy(GameObject.Find("CursolCanvas"));
+        ResetLimitTime = 0;
     }
 }

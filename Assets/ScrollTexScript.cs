@@ -38,9 +38,13 @@ public class ScrollTexScript : MonoBehaviour
     }
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (moveFlag)
         {
-            mtime = Time.deltaTime;
+            mtime = Time.deltaTime * 0.5f;
             
             WarldSpaceText.transform.position = Vector3.Lerp(WarldSpaceText.transform.position, pos, mtime);
             WarldSpaceText.transform.localScale = Vector3.Lerp(WarldSpaceText.transform.localScale, scaler, mtime);

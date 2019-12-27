@@ -22,11 +22,15 @@ public class monoclescript : MonoBehaviour
 
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (Flag)
         {//取得時
             if (Rays.AbilityNow != 0 && Rays.AbilityNow != 4)
             {
-                gameObject.transform.position = FPSCamera.transform.position + FPSCamera.transform.right * -4 + FPSCamera.transform.up * 3 + FPSCamera.transform.forward * 3;
+                gameObject.transform.position = FPSCamera.transform.position + FPSCamera.transform.right * -4 + FPSCamera.transform.up * 3 + FPSCamera.transform.forward * 4;
                 gameObject.transform.rotation = FPSCamera.transform.rotation;
                 if (!Rays.LostMonocle())
                     Destroy(gameObject);
@@ -46,7 +50,7 @@ public class monoclescript : MonoBehaviour
     }
     void OnTriggerEnter(Collider col)
     {
-        if (!Flag)
+        if (!Rays.MonocleCheck())
         {
             if (col.tag == "Player")
             {

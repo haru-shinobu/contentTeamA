@@ -19,6 +19,10 @@ public class Stage1TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (scene == nowscene)
         {
             LimitedTime -= Time.deltaTime;
@@ -28,10 +32,6 @@ public class Stage1TimeManager : MonoBehaviour
                 {
                     ClearTime1 = (int)LimitedTime;
                 }
-            }
-            else
-            {
-                Debug.Log("GameOver");
             }
             gameObject.transform.GetComponent<GameTimerDirector>().NowTime = LimitedTime;
         }

@@ -40,6 +40,10 @@ public class rotate_vertical : MonoBehaviour
 
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (!StopFlag)
         {
             transform.Rotate(new Vector3(0, 0.2f, 0));

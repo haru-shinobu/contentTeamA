@@ -16,8 +16,7 @@ public class SeasawZ : MonoBehaviour
         rigid.useGravity = false;
         rigid.angularDrag = 40.0f;
         rigid.constraints = RigidbodyConstraints.FreezePosition |
-        RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-        
+        RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;        
     }
     
     //角度制限をつけたいシーソー。
